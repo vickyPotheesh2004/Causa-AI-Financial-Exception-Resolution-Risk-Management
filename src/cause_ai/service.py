@@ -12,6 +12,7 @@ from typing import Any
 from .database import append_audit, connect, now_iso, row_case, row_ticket, verify_password
 from .domain import decide, detect_exceptions, money, risk_assessment, validate_transition
 from .tool_registry import controlled_tool_registry
+from .ai import investigate as ai_investigate
 
 
 class ServiceError(Exception):
@@ -260,6 +261,7 @@ def create_detected_cases(records: list[dict[str, Any]], timing_window_days: int
                                    if prior_cases else None),
                 "category": "Detected from supplied source records", "action_permitted": False,
                 "authority_known": False, "summary": finding["summary"], "evidence": evidence,
+                "registered_at": timestamp,
                 "timeline": [{"time": timestamp, "event": "Exception detected from normalized input", "source": "User-supplied synthetic record preview"}],
                 "detection_run": run_hash,
             }
@@ -608,6 +610,39 @@ def auto_evaluate_pending_cases(tenant_id: str = "DEMO-MERCHANT-01") -> dict[str
         result = evaluate_case(case_id, actor, f"startup-auto-{case_id}")
         outcomes.append({"case_id": case_id, "outcome": result["decision"]["outcome"]})
     return {"evaluated": len(outcomes), "outcomes": outcomes}
+
+
+def investigate_case(case_id: str, actor: dict[str, str]) -> dict[str, Any]:
+    """Generate bounded advisory investigation output from controlled case data."""
+    if actor["role"] not in {"analyst", "admin", "department"}:
+        raise ServiceError("FORBIDDEN", "An authorized workspace role is required", 403)
+    conn = connect()
+    try:
+        conn.execute("BEGIN IMMEDIATE")
+        case = row_case(conn.execute("SELECT data_json FROM cases WHERE id=? AND tenant_id=?", (case_id, actor["tenant_id"])).fetchone())
+        if case is None:
+            raise ServiceError("NOT_FOUND", "Case was not found", 404)
+        existing = case.get("ai_investigation")
+        if existing:
+            return existing
+        policy_id = "DEMO-FEE-003" if case["type"] == "FEE_DISCREPANCY" else "DEMO-STANDARD-001"
+        context = {"exception": {key: case.get(key) for key in ("id", "type", "title", "summary", "payment_id", "amount", "currency", "status")},
+                   "financial_events": [{"id": item.get("financial_event_id"), "source_id": item.get("source_id"), "source_type": item.get("source_type"), "status": item.get("status")} for item in case.get("evidence", [])],
+                   "evidence": case.get("evidence", []), "risk": risk_assessment(case), "policies": [_policy_for(conn, policy_id, actor["tenant_id"])],
+                   "timeline": case.get("timeline", []), "decision": case.get("decision", {})}
+        result = ai_investigate(context).model_dump(mode="json")
+        case["ai_investigation"] = result
+        timestamp = now_iso()
+        case.setdefault("timeline", []).append({"time": timestamp, "event": "Investigation assistance generated", "source": result["provider"]})
+        conn.execute("UPDATE cases SET data_json=?, updated_at=? WHERE id=? AND tenant_id=?", (json.dumps(case), timestamp, case_id, actor["tenant_id"]))
+        _audit(conn, actor, "AI_INVESTIGATION_GENERATED", "case", case_id, result["notice"], {"provider": result["provider"], "status": result["status"], "evidence_ids": result["finding"]["evidence_ids"]})
+        conn.commit()
+        return result
+    except Exception:
+        conn.rollback()
+        raise
+    finally:
+        conn.close()
 
 
 def _ticket_in_tx(conn: sqlite3.Connection, ticket_id: str, tenant_id: str) -> dict[str, Any]:

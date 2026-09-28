@@ -1,0 +1,8 @@
+[project]
+name = "causa-ai-financial-exception"
+version = "1.0.0"
+requires-python = ">=3.11"
+dependencies = ["pydantic>=2.0,<3.0"]
+
+[tool.vercel]
+entrypoint = "api.index:handler"

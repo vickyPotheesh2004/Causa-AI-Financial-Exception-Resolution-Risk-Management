@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_DB = ROOT / "data" / "cause_ai.sqlite3"
+DEFAULT_DB = Path(os.environ.get("CAUSE_AI_DB", str(ROOT / "data" / "cause_ai.sqlite3")))
 DEMO_PASSWORD = "CauseDemo!2026"
 
 
@@ -96,6 +96,9 @@ def seed_cases() -> list[dict[str, Any]]:
             "evidence_status": evidence_status, "status": status, "report_count": reports,
             "department": queue, "category": category, "action_permitted": permitted,
             "authority_known": True, "summary": summary,
+            # This is the source-visible registration timestamp for the synthetic
+            # fixture. Imported cases receive their registration time at ingestion.
+            "registered_at": "2026-09-25T08:45:00+05:30",
             "evidence": _evidence(case_id, records),
             "timeline": [
                 {"time": "2026-09-25T08:45:00+05:30", "event": "Exception detected", "source": "Cause AI detection demo"},
@@ -249,13 +252,18 @@ def initialize(path: str | Path | None = None, reseed: bool = False) -> None:
                 conn.execute("INSERT INTO tickets VALUES(?,?,?,?,?,?,?,?)", (ticket["id"], ticket["case_id"], ticket["status"], ticket["department"], ticket["priority"], json.dumps(ticket), timestamp, timestamp))
         # Enrich existing seeded cases on upgrade; never infer identities for imported cases.
         seeded_identities = {case["id"]: {key: case[key] for key in ("subject_type", "subject_id", "email_id")} for case in seed_cases()}
-        for case_id, data_json in conn.execute("SELECT id,data_json FROM cases").fetchall():
+        for case_id, data_json, created_at in conn.execute("SELECT id,data_json,created_at FROM cases").fetchall():
             identity = seeded_identities.get(case_id)
-            if identity:
-                case_data = json.loads(data_json)
-                if not any(case_data.get(key) for key in identity):
+            case_data = json.loads(data_json)
+            changed = False
+            if identity and not any(case_data.get(key) for key in identity):
                     case_data.update(identity)
-                    conn.execute("UPDATE cases SET data_json=? WHERE id=?", (json.dumps(case_data), case_id))
+                    changed = True
+            if not case_data.get("registered_at"):
+                case_data["registered_at"] = created_at
+                changed = True
+            if changed:
+                conn.execute("UPDATE cases SET data_json=? WHERE id=?", (json.dumps(case_data), case_id))
         conn.commit()
     finally:
         conn.close()

@@ -20,7 +20,7 @@ from .service import (ServiceError, audit_log, authenticate, dashboard, evaluate
                       get_case, list_cases, list_tickets, respond_to_ticket,
                       resolve_ticket, run_reminders, verify_ticket, create_detected_cases,
                       list_policy_proposals, propose_policy, review_policy_proposal, activate_policy_proposal,
-                      audit_integrity_status, auto_evaluate_pending_cases)
+                      audit_integrity_status, auto_evaluate_pending_cases, investigate_case)
 from .tool_registry import controlled_tool_registry
 from . import regulatory, razorpay
 
@@ -341,6 +341,9 @@ class CauseAIHandler(BaseHTTPRequestHandler):
                 if idem and any(ord(ch) < 33 or ord(ch) > 126 for ch in idem):
                     raise ServiceError("VALIDATION_ERROR", "Idempotency-Key contains invalid characters")
                 return self._json(evaluate_case(case_id, actor, idem))
+            if path.startswith("/api/cases/") and path.endswith("/ai-investigation"):
+                case_id = unquote(path.removeprefix("/api/cases/").removesuffix("/ai-investigation").strip("/"))
+                return self._json({"investigation": investigate_case(case_id, actor)})
             if path == "/api/reminders/run":
                 return self._json(run_reminders(actor))
             if path.startswith("/api/tickets/"):

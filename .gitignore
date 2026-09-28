@@ -36,3 +36,6 @@ data/regulatory/objects/
 .DS_Store
 Thumbs.db
 Desktop.ini
+public/
+
+.vercel

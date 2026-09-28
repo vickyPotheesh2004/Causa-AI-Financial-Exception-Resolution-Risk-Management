@@ -1,0 +1,14 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "python tools/build_vercel_static.py",
+  "outputDirectory": "public",
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index.py?cause_path=$1" }
+  ],
+  "functions": {
+    "api/index.py": {
+      "maxDuration": 10,
+      "excludeFiles": "{tests/**,reports/**,presentations/**,ppt-*/**,data/**}"
+    }
+  }
+}

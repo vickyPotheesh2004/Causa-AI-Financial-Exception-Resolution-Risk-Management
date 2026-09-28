@@ -1,6 +1,6 @@
-# Cause AI
+# Causa
 
-Cause AI is an evidence-driven financial exception investigation application. It helps operations teams detect payment discrepancies, build a case from normalized records, assess explainable risk, route work to the right department, retain audit evidence, and verify a submitted resolution.
+Causa — AI Financial Exception Resolution & Risk Management System is an evidence-driven financial exception investigation application. It helps operations teams detect payment discrepancies, build a case from normalized records, assess explainable risk, route work to the right department, retain audit evidence, and verify a submitted resolution.
 
 The project is designed as a safe demonstration and integration foundation for financial operations. It performs no payment action, holds no funds, and does not declare fraud. It keeps high-impact decisions under human control.
 
@@ -8,7 +8,7 @@ The project is designed as a safe demonstration and integration foundation for f
 
 Payment operations reconcile information from payment, fee, refund, settlement, adjustment and bank sources. Manual review makes it hard to connect evidence, identify repeat reports, explain a risk decision, and preserve a trustworthy audit trail.
 
-Cause AI addresses that gap by:
+Causa addresses that gap by:
 
 - Detecting settlement, fee, refund, adjustment, bank, timing, duplicate and suspicious-activity exceptions.
 - Storing normalized source records as immutable financial events with a SHA-256 content hash.
@@ -30,7 +30,43 @@ The company will own production deployment, public availability, identity, cloud
 - Windows PowerShell, macOS shell, or Linux shell
 - A modern browser
 
-The application uses the Python standard library. No package installation is required for the local demo.
+Install the small open-source runtime dependency before starting:
+
+```powershell
+python -m pip install -r requirements.txt
+```
+
+## Optional OpenRouter investigation
+
+Causa works without an AI provider. In that mode it explicitly labels investigation output as deterministic fallback; it never represents it as LLM-generated analysis.
+
+To use OpenRouter, copy `.env.example` to `.env` locally and set these values there. The application loads `.env` locally without overwriting variables already supplied by the operating system. Keep the fields blank in source control.
+
+```env
+AI_PROVIDER=openrouter
+OPENROUTER_API_KEY=paste-your-key-here
+OPENROUTER_MODEL=nvidia/nemotron-3.5-lightning:free
+```
+
+```powershell
+$env:AI_PROVIDER = "openrouter"
+$env:OPENROUTER_API_KEY = "paste-your-key-here"
+$env:OPENROUTER_MODEL = "nvidia/nemotron-3.5-lightning:free"
+```
+
+For Vercel, add `AI_PROVIDER`, `OPENROUTER_API_KEY`, and `OPENROUTER_MODEL` in **Project Settings → Environment Variables**. Do not paste the key into frontend code, a README, an issue, a chat, or any committed `.env` file. Vercel encrypts environment variables at rest and injects them only into server functions. Rotate the key immediately if it is ever exposed.
+
+The supplied model slug is a free-tier example, not a guaranteed permanent free offering. Confirm its availability in OpenRouter before enabling it. Causa uses the standard OpenRouter server-side chat-completions API with an Authorization Bearer header. [OpenRouter chat-completions documentation](https://openrouter.ai/docs/api/api-reference/chat/send-chat-completion-request)
+
+The AI investigation receives only a minimized case context. It can summarize, identify unknowns, cite supplied evidence and recommend a route. It cannot approve or move money, alter policy, change audit history, claim confirmed fraud, or override deterministic decisions.
+
+## Deployment modes
+
+| Mode | Storage and AI | Intended use |
+|---|---|---|
+| Local zero-cost | SQLite, local filesystem, deterministic fallback | Development and complete synthetic workflow |
+| Vercel demo | Synthetic data, ephemeral SQLite, deterministic fallback or optional configured OpenRouter provider | Public submission demonstration only |
+| Future production | Durable PostgreSQL, persistent sessions, approved identity and AI provider, object storage | Company-owned deployment after approvals |
 
 ## Installation and start
 
@@ -41,7 +77,7 @@ The application uses the Python standard library. No package installation is req
 3. Run `./run.ps1`.
 4. Open <http://127.0.0.1:8000> in a browser.
 
-The application uses Python's standard library, so the local synthetic demo has no packages to install. On the first start, it creates `data/cause_ai.sqlite3` and seeds fictional cases. Use `Ctrl+C` in the terminal to stop it.
+After installing `requirements.txt`, the local synthetic demo creates `data/cause_ai.sqlite3` and seeds fictional cases on first start. Use `Ctrl+C` in the terminal to stop it.
 
 ### Windows PowerShell
 
@@ -96,7 +132,7 @@ All local demo accounts use password `CauseDemo!2026`. These credentials are del
 
 The sample file is at [razorpay_public_schema_sample.json](src/cause_ai/static/samples/razorpay_public_schema_sample.json). Its rules and data boundary are described in [samples README](src/cause_ai/static/samples/README.md).
 
-On startup, Cause AI also evaluates any historical pending case automatically. New detected cases are evaluated during their creation transaction. Automatic evaluation can approve, reject, or create an escalation ticket; it never executes a payment, refund, settlement, or adjustment.
+On startup, Causa also evaluates any historical pending case automatically. New detected cases are evaluated during their creation transaction. Automatic evaluation can approve, reject, or create an escalation ticket; it never executes a payment, refund, settlement, or adjustment.
 
 ## Razorpay Test Mode integration
 
@@ -184,6 +220,18 @@ See [deployment instructions](deployment/README.md). The GitHub Actions workflow
 
 ## Architecture and AI use
 
+## Free Vercel submission deployment
+
+The public synthetic-data submission deployment is available at [Causa on Vercel](https://causa-ai-financial-exception.vercel.app). It runs the browser application and Python API on Vercel's free serverless runtime. The adapter initializes fictional demo data and enables the complete sign-in, case review, automatic evaluation, evidence, AI investigation, department-ticket and audit workflow.
+
+Vercel serverless storage is temporary in this free submission configuration. It must not be used for customer, payment or company data because cases, tickets and sessions can reset when a function instance is replaced. The included production preflight remains the required gate for a company deployment with managed PostgreSQL, Redis or equivalent durable sessions, company identity, backups and monitoring.
+
+To redeploy the free submission build from this repository:
+
+```powershell
+vercel deploy --prod --yes
+```
+
 ### Architecture design
 
 The browser application communicates with a Python HTTP API over same-origin requests. The API authenticates the user, applies role and tenant checks, and invokes the workflow service. The workflow service stores cases, tickets, policy versions, financial events, regulatory evidence and append-only audit events in the database. The static interface renders the case queue, evidence, automatic outcome, previous case history and department ticket from those scoped API responses.
@@ -248,7 +296,7 @@ flowchart TD
 ```mermaid
 sequenceDiagram
     participant Source as Financial source
-    participant CAUSA as Cause AI workflow
+    participant CAUSA as Causa workflow
     participant Dept as Department queue
     participant Analyst as Authorized analyst
 
@@ -265,7 +313,7 @@ sequenceDiagram
     end
 ```
 
-Cause AI currently uses deterministic, explainable decision logic rather than a generative AI model. The application calculates expected settlements with decimal arithmetic, identifies configured exception patterns, scores risk from transparent factors, and records why it escalated or rejected a case.
+Causa uses deterministic, explainable decision logic for financial outcomes. Its optional bounded AI investigation layer can summarize controlled case context, identify unknowns and cite supplied evidence. AI output is advisory, schema-validated and cannot override policy, risk, permissions, audit history or financial decisions.
 
 This design helps reviewers inspect evidence and challenge outcomes. A future statistical or machine-learning model must complete data-governance, model-risk, evaluation, monitoring and human-override reviews before it influences material decisions.
 

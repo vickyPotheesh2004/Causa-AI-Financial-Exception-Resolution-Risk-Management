@@ -6,6 +6,7 @@ const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 const human = value => String(value ?? "").replaceAll("_", " ").toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
 const currency = (amount, unit = "INR") => new Intl.NumberFormat("en-IN", { style: "currency", currency: unit, maximumFractionDigits: 2 }).format(Number(amount || 0));
+const dateTime = value => value ? new Intl.DateTimeFormat("en-IN", { dateStyle: "medium", timeStyle: "short" }).format(new Date(value)) : "Not recorded";
 const initials = name => String(name || "U").split(/[ _-]+/).map(p => p[0]).join("").slice(0, 2).toUpperCase();
 const canAnalyst = () => ["analyst", "admin"].includes(state.user?.role);
 const canDepartment = () => ["department", "admin"].includes(state.user?.role);
@@ -65,16 +66,16 @@ function caseIdentity(c) {
 function caseRows(cases) {
   if (!cases.length) return `<tr><td colspan="7"><div class="empty-state"><div class="empty-icon">⌕</div>No cases match these filters.</div></td></tr>`;
   return cases.map(c => `<tr>
-    <td><button class="case-id" data-case="${escapeHtml(c.id)}">${escapeHtml(c.id)}</button>${caseIdentity(c)}</td>
-    <td><span class="case-title">${escapeHtml(c.title)}</span><span class="case-sub">${escapeHtml(c.payment_id)} · ${escapeHtml(human(c.type))}</span></td>
-    <td class="money">${escapeHtml(currency(c.amount, c.currency))}</td>
-    <td>${badge(c.risk.level)}</td><td>${badge(c.evidence_status, c.evidence_status === "VERIFIED" ? "verified" : c.evidence_status === "CONFLICTING" ? "conflicting" : "medium")}</td>
-    <td>${badge(c.status)}</td><td>${escapeHtml(c.department)}</td></tr>`).join("");
+    <td data-label="Case and identity"><button class="case-id" data-case="${escapeHtml(c.id)}">${escapeHtml(c.id)}</button>${caseIdentity(c)}<span class="case-sub">Registered: ${escapeHtml(dateTime(c.registered_at))}</span></td>
+    <td data-label="Exception"><span class="case-title">${escapeHtml(c.title)}</span><span class="case-sub">${escapeHtml(c.payment_id)} · ${escapeHtml(human(c.type))}</span></td>
+    <td data-label="Amount" class="money">${escapeHtml(currency(c.amount, c.currency))}</td>
+    <td data-label="Risk">${badge(c.risk.level)}</td><td data-label="Evidence">${badge(c.evidence_status, c.evidence_status === "VERIFIED" ? "verified" : c.evidence_status === "CONFLICTING" ? "conflicting" : "medium")}</td>
+    <td data-label="Status">${badge(c.status)}</td><td data-label="Assigned queue">${escapeHtml(c.department)}</td></tr>`).join("");
 }
 
 function casesTable(cases, withFilters = false) {
   const filter = withFilters ? `<div class="filter-row"><input id="case-search" class="search-input" type="search" placeholder="Search ID, user, email, payment…" aria-label="Search cases"><select id="case-status" class="filter-select" aria-label="Filter status"><option value="">All statuses</option>${["DETECTED", "INVESTIGATING", "DECISION_READY", "ESCALATED", "RESOLVED", "VERIFIED"].map(s => `<option>${s}</option>`).join("")}</select><select id="case-risk" class="filter-select" aria-label="Filter risk"><option value="">All risk</option><option>HIGH</option><option>MEDIUM</option><option>LOW</option></select><select id="case-type" class="filter-select" aria-label="Filter issue"><option value="">All issue types</option>${[...new Set(cases.map(c => c.type))].map(t => `<option value="${escapeHtml(t)}">${escapeHtml(human(t))}</option>`).join("")}</select><span id="filter-count" class="muted">${cases.length} cases</span></div>` : "";
-  return `<section class="content-card">${filter}<div class="table-wrap"><table><thead><tr><th>Case ID · User/Company · Email</th><th>Exception</th><th>Amount</th><th>Risk</th><th>Evidence</th><th>Status</th><th>Assigned queue</th></tr></thead><tbody id="case-table-body">${caseRows(cases)}</tbody></table></div></section>`;
+  return `<section class="content-card">${filter}<div class="table-wrap"><table><thead><tr><th>Case ID · User/Company · Email · Registered</th><th>Exception</th><th>Amount</th><th>Risk</th><th>Evidence</th><th>Status</th><th>Assigned queue</th></tr></thead><tbody id="case-table-body">${caseRows(cases)}</tbody></table></div></section>`;
 }
 
 function attachCaseOpeners(root = document) {
@@ -92,8 +93,8 @@ function renderDashboard() {
       <article class="metric-card"><div class="metric-top">High risk <span class="metric-icon metric-high">△</span></div><div class="metric-value">${d.high_risk}</div><div class="metric-foot">Evidence-linked risk factors</div></article>
       <article class="metric-card"><div class="metric-top">Active tickets <span class="metric-icon metric-ticket">▤</span></div><div class="metric-value">${d.open_tickets}</div><div class="metric-foot">In configured department queues</div></article>
     </div>
-    <div class="content-card priority-card"><div class="card-header"><div><h2>Priority exceptions</h2><p>Cases ordered by explainable risk level</p></div><button class="text-link" data-navigate="cases">View all cases →</button></div><div class="table-wrap"><table><thead><tr><th>Case ID · User/Company · Email</th><th>Exception</th><th>Amount</th><th>Risk</th><th>Evidence</th><th>Status</th><th>Assigned queue</th></tr></thead><tbody>${caseRows(recent)}</tbody></table></div></div>
-    <div class="content-card"><div class="card-header"><div><h2>Department work</h2><p>Active tickets with a clear owner and next step</p></div><button class="text-link" data-navigate="tickets">Open ticket board →</button></div>${tickets.length ? `<div class="table-wrap"><table><thead><tr><th>Ticket</th><th>Case</th><th>Department</th><th>Priority</th><th>Status</th><th>Next step</th></tr></thead><tbody>${tickets.map(t => `<tr><td class="case-id">${escapeHtml(t.id)}</td><td><button class="case-id" data-case="${escapeHtml(t.case_id)}">${escapeHtml(t.case_id)}</button></td><td>${escapeHtml(t.department)}</td><td>${badge(t.priority)}</td><td>${badge(t.status)}</td><td><button class="text-link" data-case="${escapeHtml(t.case_id)}">Review case →</button></td></tr>`).join("")}</tbody></table></div>` : `<div class="empty-state">No active department tickets.</div>`}</div>`;
+    <div class="content-card priority-card"><div class="card-header"><div><h2>Priority exceptions</h2><p>Cases ordered by explainable risk level</p></div><button class="text-link" data-navigate="cases">View all cases →</button></div><div class="table-wrap"><table><thead><tr><th>Case ID · User/Company · Email · Registered</th><th>Exception</th><th>Amount</th><th>Risk</th><th>Evidence</th><th>Status</th><th>Assigned queue</th></tr></thead><tbody>${caseRows(recent)}</tbody></table></div></div>
+    <div class="content-card"><div class="card-header"><div><h2>Department work</h2><p>Active tickets with a clear owner and next step</p></div><button class="text-link" data-navigate="tickets">Open ticket board →</button></div>${tickets.length ? `<div class="table-wrap"><table><thead><tr><th>Ticket</th><th>Case</th><th>Department</th><th>Priority</th><th>Status</th><th>Next step</th></tr></thead><tbody>${tickets.map(t => `<tr><td data-label="Ticket" class="case-id">${escapeHtml(t.id)}</td><td data-label="Case"><button class="case-id" data-case="${escapeHtml(t.case_id)}">${escapeHtml(t.case_id)}</button></td><td data-label="Department">${escapeHtml(t.department)}</td><td data-label="Priority">${badge(t.priority)}</td><td data-label="Status">${badge(t.status)}</td><td data-label="Next step"><button class="text-link" data-case="${escapeHtml(t.case_id)}">Review case →</button></td></tr>`).join("")}</tbody></table></div>` : `<div class="empty-state">No active department tickets.</div>`}</div>`;
   attachCaseOpeners();
 }
 
@@ -143,7 +144,7 @@ function renderCase(c) {
   $("#page-content").innerHTML = `${pageHeading("Case investigation", c.summary, `<button class="button" data-navigate="cases">← Back to queue</button>`)}
     <div class="detail-title case-detail-title"><button class="back-button" data-navigate="cases" aria-label="Back to cases">←</button><h1>${escapeHtml(c.title)}</h1>${badge(c.status)}<span class="case-id">${escapeHtml(c.id)}</span>${caseIdentity(c)}</div>
     <div class="detail-layout"><div class="detail-main">
-      <section class="section-card"><div class="section-title"><h3>Case summary</h3><span>${escapeHtml(c.payment_id)}</span></div><div class="section-body"><p class="case-summary">${escapeHtml(c.summary)}</p><div class="meta-grid summary-meta"><div class="meta-cell"><small>FINANCIAL EXPOSURE</small><strong>${escapeHtml(currency(c.amount, c.currency))}</strong></div><div class="meta-cell"><small>EXCEPTION TYPE</small><strong>${escapeHtml(human(c.type))}</strong></div><div class="meta-cell"><small>REPORT COUNT</small><strong>${Number(c.report_count)}</strong></div><div class="meta-cell"><small>ROUTING QUEUE</small><strong>${escapeHtml(c.department)}</strong></div></div></div></section>
+      <section class="section-card"><div class="section-title"><h3>Case summary</h3><span>${escapeHtml(c.payment_id)}</span></div><div class="section-body"><p class="case-summary">${escapeHtml(c.summary)}</p><div class="meta-grid summary-meta"><div class="meta-cell"><small>CASE REGISTERED</small><strong>${escapeHtml(dateTime(c.registered_at))}</strong></div><div class="meta-cell"><small>FINANCIAL EXPOSURE</small><strong>${escapeHtml(currency(c.amount, c.currency))}</strong></div><div class="meta-cell"><small>EXCEPTION TYPE</small><strong>${escapeHtml(human(c.type))}</strong></div><div class="meta-cell"><small>REPORT COUNT</small><strong>${Number(c.report_count)}</strong></div><div class="meta-cell"><small>ROUTING QUEUE</small><strong>${escapeHtml(c.department)}</strong></div></div></div></section>
       ${repeatHistory}
       <section class="section-card"><div class="section-title"><h3>Evidence package</h3><span>${c.evidence.length} source${c.evidence.length === 1 ? "" : "s"}</span></div><div class="section-body">${renderEvidence(c.evidence)}</div></section>
       <section class="section-card"><div class="section-title"><h3>Transaction timeline</h3><span>Source-linked activity</span></div><div class="section-body"><div class="timeline">${c.timeline.map(item => `<div class="timeline-item"><span class="timeline-dot"></span><div class="timeline-copy"><strong>${escapeHtml(item.event)}</strong><small>${escapeHtml(item.time)} · ${escapeHtml(item.source)}</small></div></div>`).join("")}</div></div></section>
@@ -152,11 +153,23 @@ function renderCase(c) {
       <section class="section-card"><div class="section-title"><h3>Explainable risk</h3>${badge(c.risk.level)}</div><div class="section-body"><div class="risk-score"><div class="score-ring"><strong>${c.risk.score}</strong></div><div class="risk-meta"><strong>${escapeHtml(c.risk.level)} risk</strong><small>Configured demo score · 0–100</small></div></div><div class="risk-bar"><progress max="100" value="${c.risk.score}" aria-label="Risk score ${c.risk.score} out of 100"></progress></div><div class="factor-list">${factors}</div></div></section>
       <section class="section-card"><div class="section-title"><h3>Rule evaluation</h3>${badge(policy.status, policy.status === "PASS" ? "verified" : policy.status === "FAIL" ? "rejected" : "medium")}</div><div class="section-body"><div class="decision-box"><strong>${escapeHtml(policy.id)} · v${escapeHtml(policy.version)}</strong><p>${escapeHtml(policy.description)}</p><div class="policy-source">Source: ${escapeHtml(policy.source)}<br>Effective: ${escapeHtml(policy.effective_from)}</div></div></div></section>
       <section class="section-card"><div class="section-title"><h3>Decision</h3><span>Automatic deterministic evaluation</span></div><div class="section-body">${decision ? `<div class="decision-box">${badge(decision.outcome)}<p>${escapeHtml(decision.reason)}</p>${decision.blockers?.length ? `<div class="blocker">Blockers: ${escapeHtml(decision.blockers.map(human).join(", "))}</div>` : ""}<div class="ticket-note"><strong>Evidence used for this decision</strong><p>${escapeHtml(decision.evidence_description || "This historical decision predates the separate evidence description.")}</p></div><div class="policy-source">The decision was recorded automatically at detection. This demo does not execute payment actions.</div></div>` : `<div class="decision-box"><strong>Historical case without a decision</strong><p>New cases are evaluated automatically at detection. This seeded historical case has no recorded decision.</p></div>`}</div></section>
+      <section class="section-card"><div class="section-title"><h3>AI Investigation</h3><span>Advisory only</span></div><div id="ai-investigation" class="section-body"><div class="loading">Loading bounded investigation assistance…</div></div></section>
       ${ticket ? renderTicketPanel(ticket, c) : ""}
     </div></div>`;
   $$('[data-navigate]').forEach(button => button.addEventListener("click", () => navigate(button.dataset.navigate)));
   attachCaseOpeners($("#page-content"));
   attachTicketActions(c, ticket);
+  renderAiInvestigation(c.id);
+}
+
+async function renderAiInvestigation(caseId) {
+  const target = $("#ai-investigation");
+  if (!target) return;
+  try {
+    const { investigation } = await api(`/api/cases/${encodeURIComponent(caseId)}/ai-investigation`, { method: "POST", body: "{}" });
+    const finding = investigation.finding;
+    target.innerHTML = `<div class="decision-box"><strong>${escapeHtml(human(investigation.status))} · ${escapeHtml(investigation.provider)}${investigation.model ? ` · ${escapeHtml(investigation.model)}` : ""}</strong><p>${escapeHtml(investigation.notice)}</p><div class="ticket-note"><strong>${escapeHtml(human(finding.finding_status))} root-cause finding</strong><p>${escapeHtml(finding.investigation_summary)}</p><p><strong>Possible root cause:</strong> ${escapeHtml(finding.possible_root_cause)}</p><p><strong>Evidence:</strong> ${escapeHtml(finding.evidence_ids.join(", ") || "No evidence cited")}</p><p><strong>Unknowns:</strong> ${escapeHtml(finding.unknowns.join("; ") || "None recorded")}</p><p><strong>Conflicts:</strong> ${escapeHtml(finding.conflicts.join("; ") || "None recorded")}</p><p><strong>Recommended next step:</strong> ${escapeHtml(finding.recommended_next_steps.join("; ") || "No recommendation")}</p><p><strong>Route recommendation:</strong> ${escapeHtml(human(finding.recommended_route))}</p></div><div class="policy-source">Generated: ${escapeHtml(new Date(investigation.generated_at).toLocaleString())}<br>AI confidence does not confer authority. Deterministic policy, risk and decision engines retain control.</div></div>`;
+  } catch (err) { target.innerHTML = `<div class="empty-state">Investigation assistance is unavailable: ${escapeHtml(err.message)}</div>`; }
 }
 
 function renderTicketPanel(ticket, c) {
@@ -186,7 +199,7 @@ function attachTicketActions(c, ticket) {
 
 function renderTickets() {
   const tickets = state.dashboard.tickets;
-  const items = tickets.map(t => `<tr><td class="case-id">${escapeHtml(t.id)}</td><td><button class="case-id" data-case="${escapeHtml(t.case_id)}">${escapeHtml(t.case_id)}</button></td><td>${escapeHtml(t.department)}</td><td>${badge(t.priority)}</td><td>${badge(t.status)}</td><td>${escapeHtml(t.sla_due || "Not configured")}</td><td><button class="text-link" data-case="${escapeHtml(t.case_id)}">Open workspace →</button></td></tr>`).join("");
+  const items = tickets.map(t => `<tr><td data-label="Ticket" class="case-id">${escapeHtml(t.id)}</td><td data-label="Case"><button class="case-id" data-case="${escapeHtml(t.case_id)}">${escapeHtml(t.case_id)}</button></td><td data-label="Department queue">${escapeHtml(t.department)}</td><td data-label="Priority">${badge(t.priority)}</td><td data-label="Status">${badge(t.status)}</td><td data-label="SLA due">${escapeHtml(t.sla_due || "Not configured")}</td><td data-label="Workspace"><button class="text-link" data-case="${escapeHtml(t.case_id)}">Open workspace →</button></td></tr>`).join("");
   const actions = canAnalyst() ? '<button id="run-reminders" class="button">Check overdue reminders</button>' : '<span class="demo-pill"><i></i> CONFIGURABLE DEMO QUEUES</span>';
   $("#page-content").innerHTML = `${pageHeading("Department tickets", "Review assigned cases, record findings and submit evidence-backed resolutions.", actions)}<section class="content-card"><div class="card-header"><div><h2>Active and recent tickets</h2><p>Current queue ownership and case status</p></div></div><div class="table-wrap"><table><thead><tr><th>Ticket ID</th><th>Case</th><th>Department queue</th><th>Priority</th><th>Status</th><th>SLA due</th><th>Workspace</th></tr></thead><tbody>${items || '<tr><td colspan="7"><div class="empty-state">No tickets are currently available.</div></td></tr>'}</tbody></table></div></section>`;
   attachCaseOpeners();
@@ -289,6 +302,7 @@ function renderScan() {
 }
 
 async function navigate(view) {
+  closeMobileNavigation();
   if (view === "case") return state.selectedCase && openCase(state.selectedCase);
   state.currentView = ["dashboard", "cases", "scan", "tickets", "audit", "regulatory"].includes(view) && (view !== "regulatory" || state.user?.role === "admin") ? view : "dashboard";
   state.selectedCase = null;
@@ -306,6 +320,13 @@ async function navigate(view) {
     if (state.currentView === "regulatory") await renderRegulatory();
   } catch (err) { $("#page-content").innerHTML = `<section class="content-card"><div class="empty-state">${escapeHtml(err.message)}</div></section>`; }
 }
+
+function setMobileNavigation(open) {
+  document.body.classList.toggle("mobile-nav-open", open);
+  $("#mobile-menu-button")?.setAttribute("aria-expanded", String(open));
+}
+
+function closeMobileNavigation() { setMobileNavigation(false); }
 
 $("#login-form").addEventListener("submit", async event => {
   event.preventDefault();
@@ -326,6 +347,11 @@ $("#refresh-button").addEventListener("click", async () => {
   try { await loadDashboard(); await navigate(state.currentView); toast("Workspace refreshed."); }
   catch (err) { toast(err.message, true); }
 });
+
+$("#mobile-menu-button").addEventListener("click", () => setMobileNavigation(!document.body.classList.contains("mobile-nav-open")));
+$("#nav-backdrop").addEventListener("click", closeMobileNavigation);
+$("#mobile-refresh-button").addEventListener("click", () => $("#refresh-button").click());
+document.addEventListener("keydown", event => { if (event.key === "Escape") closeMobileNavigation(); });
 
 $$('[data-view]').forEach(button => button.addEventListener("click", () => navigate(button.dataset.view)));
 document.addEventListener("click", event => {
