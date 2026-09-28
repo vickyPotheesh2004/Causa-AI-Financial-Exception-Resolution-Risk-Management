@@ -198,9 +198,41 @@ Browser interface -> HTTP API and session controls -> Workflow service
 
 The repository also includes the target production boundary: managed PostgreSQL for durable data, company SSO for identity, secrets management, object storage for retained evidence, centralized observability and a durable worker queue. These services must be supplied by the company before public deployment.
 
+```mermaid
+flowchart LR
+    U[Analyst or department user] --> W[Browser application]
+    W -->|Same origin HTTPS request| A[Python HTTP API]
+    A --> I[Authentication and role checks]
+    I --> S[Workflow service]
+    S --> D[Deterministic decision and risk engine]
+    S --> DB[(Case ticket policy and audit store)]
+    S --> R[Regulatory source monitor]
+    D --> DB
+    DB --> A
+    A --> W
+```
+
 ### Backend design
 
 The backend accepts normalized payment, settlement, refund, fee, adjustment and bank records. It uses decimal arithmetic, immutable source-event hashes and tenant-scoped database queries. The detector creates a case, attaches evidence identifiers, calculates explainable risk, applies the approved policy version and records an automatic decision in the same transaction. Escalations create a department ticket containing a separate investigation description. The system does not execute payments, refunds, account changes or other financial actions.
+
+```mermaid
+flowchart TD
+    R[Normalized financial records] --> V[Schema and financial validation]
+    V --> E[Immutable financial event records]
+    E --> X[Exception detection]
+    X --> C[Create tenant scoped case]
+    C --> EV[Attach evidence IDs User or Company ID email and prior reports]
+    EV --> G[Policy evaluation and explainable risk score]
+    G --> O{Automatic outcome}
+    O -->|All controls pass| AP[Auto approve]
+    O -->|Policy failure| RJ[Reject]
+    O -->|Risk missing evidence fraud or repeat report| ES[Escalate]
+    ES --> T[Create department ticket with investigation description]
+    AP --> AU[Append only audit event]
+    RJ --> AU
+    T --> AU
+```
 
 ### Workflow design
 
@@ -212,6 +244,26 @@ The backend accepts normalized payment, settlement, refund, fee, adjustment and 
 6. An escalated case creates a department ticket with an investigation description, risk, policy and related case history.
 7. A department submits findings and a proposed resolution; an authorized analyst independently verifies the resolution.
 8. Every material action is recorded in the append-only audit trail.
+
+```mermaid
+sequenceDiagram
+    participant Source as Financial source
+    participant CAUSA as Cause AI workflow
+    participant Dept as Department queue
+    participant Analyst as Authorized analyst
+
+    Source->>CAUSA: Submit normalized records
+    CAUSA->>CAUSA: Validate records and create immutable evidence
+    CAUSA->>CAUSA: Detect exception and evaluate automatically
+    alt Approval or rejection
+        CAUSA->>CAUSA: Store outcome evidence description and audit event
+    else Escalation required
+        CAUSA->>Dept: Create ticket with investigation description and evidence
+        Dept->>CAUSA: Submit finding and proposed resolution
+        Analyst->>CAUSA: Verify cited evidence and resolution
+        CAUSA->>CAUSA: Record final audit event
+    end
+```
 
 Cause AI currently uses deterministic, explainable decision logic rather than a generative AI model. The application calculates expected settlements with decimal arithmetic, identifies configured exception patterns, scores risk from transparent factors, and records why it escalated or rejected a case.
 
