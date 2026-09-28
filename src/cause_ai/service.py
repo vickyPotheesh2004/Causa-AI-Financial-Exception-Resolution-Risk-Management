@@ -114,6 +114,30 @@ def dashboard(tenant_id: str = "DEMO-MERCHANT-01") -> dict[str, Any]:
         conn.close()
 
 
+def _evidence_description(case: dict[str, Any]) -> str:
+    """Create a concise, evidence-attributed explanation for a decision."""
+    evidence = case.get("evidence", [])
+    if not evidence:
+        return "No source evidence was supplied; the case cannot be safely resolved automatically."
+    citations = "; ".join(
+        f"{item.get('id', 'UNIDENTIFIED')} ({item.get('source_type', 'source')}, {item.get('status', 'UNKNOWN')})"
+        for item in evidence
+    )
+    return f"The decision used {len(evidence)} source record(s): {citations}. Case evidence status: {case.get('evidence_status', 'UNKNOWN')}."
+
+
+def _investigation_description(case: dict[str, Any], decision: dict[str, Any], prior_cases: list[dict[str, Any]] | None = None) -> str:
+    """Create the handoff instruction that accompanies an automated escalation."""
+    prior_note = ""
+    if prior_cases:
+        prior_note = " Review linked prior reports and their recorded outcomes before disposition."
+    return (
+        f"Investigate {case['title'].lower()} for payment {case.get('payment_id', 'not supplied')} "
+        f"and reconcile the cited source records. Automated routing reason: {decision['reason']}"
+        f"{prior_note} Do not execute a financial action until the department records a verified resolution."
+    )
+
+
 def list_cases(filters: dict[str, str], tenant_id: str = "DEMO-MERCHANT-01") -> list[dict[str, Any]]:
     conn = connect()
     try:
@@ -250,7 +274,8 @@ def create_detected_cases(records: list[dict[str, Any]], timing_window_days: int
                 decision["reason"] += " This request also matches prior reports; review the linked case history before disposition."
                 decision["blockers"] = sorted(set(decision.get("blockers", [])) | {"REPEAT_REQUEST_REVIEW"})
             decision.update({"policy_id": policy.get("id"), "policy_version": policy.get("version"),
-                             "risk_level": risk["level"], "created_at": timestamp, "automated": True})
+                             "risk_level": risk["level"], "created_at": timestamp, "automated": True,
+                             "evidence_description": _evidence_description(case)})
             case["decision"], case["risk"], case["policy"] = decision, risk, policy
             case["status"] = "APPROVED" if decision["outcome"] == "AUTO_APPROVE" else "REJECTED" if decision["outcome"] == "REJECT" else "ESCALATED"
             case["timeline"].append({"time": timestamp, "event": "Automated governed decision", "source": "Deterministic decision engine"})
@@ -264,7 +289,8 @@ def create_detected_cases(records: list[dict[str, Any]], timing_window_days: int
                                                  "amount": case["amount"], "currency": case["currency"],
                                                  "evidence": evidence, "risk": risk, "policy": policy,
                                                  "decision": decision, "prior_cases": prior_cases,
-                                                 "required_action": "Review source evidence and linked case history; establish facts before disposition."},
+                                                 "required_action": _investigation_description(case, decision, prior_cases)},
+                          "investigation_description": _investigation_description(case, decision, prior_cases),
                           "related_case_ids": [item["id"] for item in prior_cases],
                           "sla_due": (datetime.now(timezone.utc) + timedelta(days=1)).isoformat(timespec="seconds"),
                           "reminders_sent": 0, "created_by": actor["username"], "created_at": timestamp, "comments": []}
@@ -532,7 +558,8 @@ def evaluate_case(case_id: str, actor: dict[str, str], idempotency_key: str = ""
         policy = _policy_for(conn, policy_id, actor["tenant_id"])
         risk = risk_assessment(case)
         decision = decide(case, policy, risk)
-        decision.update({"policy_id": policy.get("id"), "policy_version": policy.get("version"), "risk_level": risk["level"], "created_at": now_iso()})
+        decision.update({"policy_id": policy.get("id"), "policy_version": policy.get("version"), "risk_level": risk["level"], "created_at": now_iso(),
+                         "automated": actor["username"] == "system-automation", "evidence_description": _evidence_description(case)})
         case["decision"] = decision
         case["risk"] = risk
         if decision["outcome"].endswith("ESCALATE"):
@@ -541,6 +568,7 @@ def evaluate_case(case_id: str, actor: dict[str, str], idempotency_key: str = ""
             ticket = {"id": ticket_id, "case_id": case_id, "status": "CREATED", "department": case["department"],
                       "priority": "HIGH" if risk["level"] == "HIGH" else "MEDIUM" if risk["level"] == "MEDIUM" else "LOW",
                       "summary": "; ".join([case["title"], decision["reason"], "Evidence status: " + case["evidence_status"]]),
+                      "investigation_description": _investigation_description(case, decision),
                       "sla_due": (datetime.now(timezone.utc) + timedelta(days=1)).isoformat(timespec="seconds"), "reminders_sent": 0, "created_by": actor["username"], "created_at": now_iso(), "comments": []}
             conn.execute("INSERT INTO tickets VALUES(?,?,?,?,?,?,?,?)", (ticket_id, case_id, ticket["status"], ticket["department"], ticket["priority"], json.dumps(ticket), ticket["created_at"], ticket["created_at"]))
             case.setdefault("tickets", []).append(ticket)

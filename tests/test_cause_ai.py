@@ -612,9 +612,12 @@ class ServiceTests(unittest.TestCase):
         second = evaluate_case("EXC-2026-000187", self.analyst, "test-key-1")
         third = evaluate_case("EXC-2026-000187", self.analyst, "test-key-2")
         self.assertEqual(first["decision"]["outcome"], "DEPARTMENT_ESCALATE")
+        self.assertIn("source record", first["decision"]["evidence_description"])
+        self.assertIn("Case evidence status", first["decision"]["evidence_description"])
         self.assertEqual(first["decision"], second["decision"])
         self.assertEqual(first["decision"], third["decision"])
         self.assertEqual(len(get_case("EXC-2026-000187")["tickets"]), 2)
+        self.assertIn("Investigate", first["case"]["tickets"][-1]["investigation_description"])
         conn = connect()
         try:
             self.assertEqual(conn.execute("SELECT COUNT(*) FROM audit_events WHERE object_id=?", ("EXC-2026-000187",)).fetchone()[0], 1)

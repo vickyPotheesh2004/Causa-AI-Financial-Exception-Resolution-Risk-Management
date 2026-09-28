@@ -184,6 +184,35 @@ See [deployment instructions](deployment/README.md). The GitHub Actions workflow
 
 ## Architecture and AI use
 
+### Architecture design
+
+The browser application communicates with a Python HTTP API over same-origin requests. The API authenticates the user, applies role and tenant checks, and invokes the workflow service. The workflow service stores cases, tickets, policy versions, financial events, regulatory evidence and append-only audit events in the database. The static interface renders the case queue, evidence, automatic outcome, previous case history and department ticket from those scoped API responses.
+
+```text
+Browser interface -> HTTP API and session controls -> Workflow service
+                                                -> Decision and risk engine
+                                                -> SQLite demo data store
+                                                -> Append-only audit hash chain
+                                                -> Regulatory source monitor
+```
+
+The repository also includes the target production boundary: managed PostgreSQL for durable data, company SSO for identity, secrets management, object storage for retained evidence, centralized observability and a durable worker queue. These services must be supplied by the company before public deployment.
+
+### Backend design
+
+The backend accepts normalized payment, settlement, refund, fee, adjustment and bank records. It uses decimal arithmetic, immutable source-event hashes and tenant-scoped database queries. The detector creates a case, attaches evidence identifiers, calculates explainable risk, applies the approved policy version and records an automatic decision in the same transaction. Escalations create a department ticket containing a separate investigation description. The system does not execute payments, refunds, account changes or other financial actions.
+
+### Workflow design
+
+1. A source record bundle is validated and normalized.
+2. The system detects financial exceptions and saves immutable financial events.
+3. It creates a tenant-scoped case with User or Company ID, email when supplied, evidence, and prior-report links.
+4. The deterministic engine automatically approves, rejects or escalates the case.
+5. The case view shows the evidence description used for the decision.
+6. An escalated case creates a department ticket with an investigation description, risk, policy and related case history.
+7. A department submits findings and a proposed resolution; an authorized analyst independently verifies the resolution.
+8. Every material action is recorded in the append-only audit trail.
+
 Cause AI currently uses deterministic, explainable decision logic rather than a generative AI model. The application calculates expected settlements with decimal arithmetic, identifies configured exception patterns, scores risk from transparent factors, and records why it escalated or rejected a case.
 
 This design helps reviewers inspect evidence and challenge outcomes. A future statistical or machine-learning model must complete data-governance, model-risk, evaluation, monitoring and human-override reviews before it influences material decisions.
