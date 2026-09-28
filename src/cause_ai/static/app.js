@@ -51,7 +51,7 @@ async function loadDashboard() {
 
 function pageHeading(title, description, actions = "") {
   const today = new Intl.DateTimeFormat("en-IN", { weekday: "long", day: "2-digit", month: "long", year: "numeric" }).format(new Date()).toUpperCase();
-  return `<div class="page-heading"><div><p class="eyebrow">${escapeHtml(state.currentView === "dashboard" ? `${today} · SYNTHETIC DATA` : "CAUSE AI WORKSPACE")}</p><h1>${escapeHtml(title)}</h1><p>${escapeHtml(description)}</p></div><div class="heading-actions">${actions}</div></div>`;
+  return `<div class="page-heading"><div><p class="eyebrow">${escapeHtml(state.currentView === "dashboard" ? `${today} · SYNTHETIC DATA` : "CAUSA WORKSPACE")}</p><h1>${escapeHtml(title)}</h1><p>${escapeHtml(description)}</p></div><div class="heading-actions">${actions}</div></div>`;
 }
 
 function badge(value, kind = value) {

@@ -39,3 +39,10 @@ Desktop.ini
 public/
 
 .vercel
+node_modules/
+.ppt-build/
+ppt-build/
+ppt-render*/
+finalizer/
+.doc_extract_*.txt
+artifacts/
