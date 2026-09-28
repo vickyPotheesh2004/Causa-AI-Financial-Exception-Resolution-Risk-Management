@@ -17,8 +17,8 @@
   "department_escalated": 70,
   "unresolved": 0,
   "unresolved_ids": [],
-  "processing_time_ms": 2.441,
-  "throughput_records_per_second": 40966.82,
+  "processing_time_ms": 2.229,
+  "throughput_records_per_second": 44863.17,
   "ai_investigations": 0,
   "exception_breakdown": {
     "NORMAL": {
@@ -60,5 +60,5 @@
   },
   "dataset": "synthetic deterministic scenarios",
   "seed": 20260928,
-  "generated_at": "2026-09-28T12:20:10+00:00"
+  "generated_at": "2026-09-28T12:50:34+00:00"
 }

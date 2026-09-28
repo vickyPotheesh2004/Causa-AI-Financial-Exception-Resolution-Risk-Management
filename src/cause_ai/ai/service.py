@@ -6,14 +6,14 @@ from datetime import datetime, timezone
 from pydantic import ValidationError
 
 from ..config import load_local_env
-from .providers import DeterministicFallbackProvider, GeminiFreeProvider, OllamaProvider, OpenRouterProvider
+from .providers import DeterministicFallbackProvider, OpenRouterProvider
 from .schemas import InvestigationFinding, InvestigationResult
 
 
 def _provider():
     load_local_env()
     configured = os.environ.get("AI_PROVIDER", "fallback").casefold()
-    candidate = OpenRouterProvider() if configured == "openrouter" else OllamaProvider() if configured == "ollama" else GeminiFreeProvider() if configured == "gemini" else None
+    candidate = OpenRouterProvider() if configured == "openrouter" else None
     return candidate if candidate and candidate.available() else DeterministicFallbackProvider()
 
 
