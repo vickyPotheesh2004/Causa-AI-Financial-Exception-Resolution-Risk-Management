@@ -16,6 +16,7 @@ from urllib.parse import parse_qs, unquote, urlparse
 
 from .database import DEFAULT_DB, connect, initialize
 from .domain import detect_exceptions
+from .benchmark.runner import run as run_benchmark
 from .service import (ServiceError, audit_log, authenticate, dashboard, evaluate_case,
                       get_case, list_cases, list_tickets, respond_to_ticket,
                       resolve_ticket, run_reminders, verify_ticket, create_detected_cases,
@@ -174,6 +175,8 @@ class CauseAIHandler(BaseHTTPRequestHandler):
                     return self._json({"user": {"username": actor["username"], "role": actor["role"], "tenant_id": actor["tenant_id"]}, "demo_mode": DEMO_MODE})
                 if path == "/api/dashboard":
                     return self._json(dashboard(actor["tenant_id"]))
+                if path == "/api/benchmark":
+                    return self._json(run_benchmark(write_files=False))
                 if path == "/api/cases":
                     q = {k: v[-1] for k, v in parse_qs(urlparse(self.path).query).items() if v}
                     return self._json({"items": list_cases(q, actor["tenant_id"])})

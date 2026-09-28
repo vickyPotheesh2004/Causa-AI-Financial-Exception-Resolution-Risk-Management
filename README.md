@@ -167,6 +167,17 @@ python -m unittest discover -s tests -v
 
 The suite covers financial calculation, validation, tenant isolation, roles, sessions, HTTP security controls, immutable audit data, immutable financial events, automatic routing, regulatory safeguards, Razorpay configuration and the public-schema sample route.
 
+## Deterministic benchmark
+
+Run the reproducible 100-scenario benchmark without OpenRouter:
+
+```powershell
+$env:PYTHONPATH = "$PWD\src"
+python -m cause_ai.benchmark.runner
+```
+
+It generates versioned scenarios and ground truth in `benchmarks/`, plus measured output in `reports/benchmark_results.json`. The current synthetic regression dataset has 80 expected exceptions and 20 normal scenarios. Its results measure the encoded deterministic rules, not real financial data performance.
+
 `GET /api/audit/integrity` is admin-only. It verifies the append-only SHA-256 chain created from schema v5 onward and reports its coverage explicitly after a migration.
 
 ## Health and readiness

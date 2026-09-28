@@ -1,0 +1,63 @@
+{
+  "benchmark_version": "1.0",
+  "records_processed": 100,
+  "exceptions_expected": 80,
+  "exceptions_detected": 80,
+  "true_positives": 80,
+  "false_positives": 0,
+  "false_negatives": 0,
+  "true_negatives": 20,
+  "precision": 1.0,
+  "recall": 1.0,
+  "f1": 1.0,
+  "match_rate": 1.0,
+  "auto_resolved": 0,
+  "rejected": 0,
+  "fraud_escalated": 10,
+  "department_escalated": 70,
+  "unresolved": 0,
+  "unresolved_ids": [],
+  "processing_time_ms": 3.225,
+  "throughput_records_per_second": 31007.75,
+  "ai_investigations": 0,
+  "exception_breakdown": {
+    "NORMAL": {
+      "scenarios": 20,
+      "matched": 20
+    },
+    "SETTLEMENT_MISMATCH": {
+      "scenarios": 10,
+      "matched": 10
+    },
+    "REFUND_MISMATCH": {
+      "scenarios": 10,
+      "matched": 10
+    },
+    "FEE_DISCREPANCY": {
+      "scenarios": 10,
+      "matched": 10
+    },
+    "DUPLICATE_TRANSACTION": {
+      "scenarios": 10,
+      "matched": 10
+    },
+    "MISSING_SETTLEMENT": {
+      "scenarios": 10,
+      "matched": 10
+    },
+    "BANK_MISMATCH": {
+      "scenarios": 10,
+      "matched": 10
+    },
+    "TIMING_EXCEPTION": {
+      "scenarios": 10,
+      "matched": 10
+    },
+    "SUSPICIOUS_ACTIVITY": {
+      "scenarios": 10,
+      "matched": 10
+    }
+  },
+  "dataset": "synthetic deterministic scenarios",
+  "seed": 20260928
+}

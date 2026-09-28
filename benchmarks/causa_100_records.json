@@ -1,0 +1,2885 @@
+{
+  "seed": 20260928,
+  "scenarios": [
+    {
+      "scenario_id": "SCN-001",
+      "category": "NORMAL",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-001-PAYMENT-1",
+          "payment_id": "BEN-PAY-001",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-001-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-001",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-002",
+      "category": "NORMAL",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-002-PAYMENT-1",
+          "payment_id": "BEN-PAY-002",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-002-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-002",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-003",
+      "category": "NORMAL",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-003-PAYMENT-1",
+          "payment_id": "BEN-PAY-003",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-003-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-003",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-004",
+      "category": "NORMAL",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-004-PAYMENT-1",
+          "payment_id": "BEN-PAY-004",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-004-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-004",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-005",
+      "category": "NORMAL",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-005-PAYMENT-1",
+          "payment_id": "BEN-PAY-005",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-005-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-005",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-006",
+      "category": "NORMAL",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-006-PAYMENT-1",
+          "payment_id": "BEN-PAY-006",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-006-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-006",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-007",
+      "category": "NORMAL",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-007-PAYMENT-1",
+          "payment_id": "BEN-PAY-007",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-007-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-007",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-008",
+      "category": "NORMAL",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-008-PAYMENT-1",
+          "payment_id": "BEN-PAY-008",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-008-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-008",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-009",
+      "category": "NORMAL",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-009-PAYMENT-1",
+          "payment_id": "BEN-PAY-009",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-009-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-009",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-010",
+      "category": "NORMAL",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-010-PAYMENT-1",
+          "payment_id": "BEN-PAY-010",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-010-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-010",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-011",
+      "category": "NORMAL",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-011-PAYMENT-1",
+          "payment_id": "BEN-PAY-011",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-011-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-011",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-012",
+      "category": "NORMAL",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-012-PAYMENT-1",
+          "payment_id": "BEN-PAY-012",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-012-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-012",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-013",
+      "category": "NORMAL",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-013-PAYMENT-1",
+          "payment_id": "BEN-PAY-013",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-013-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-013",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-014",
+      "category": "NORMAL",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-014-PAYMENT-1",
+          "payment_id": "BEN-PAY-014",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-014-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-014",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-015",
+      "category": "NORMAL",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-015-PAYMENT-1",
+          "payment_id": "BEN-PAY-015",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-015-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-015",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-016",
+      "category": "NORMAL",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-016-PAYMENT-1",
+          "payment_id": "BEN-PAY-016",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-016-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-016",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-017",
+      "category": "NORMAL",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-017-PAYMENT-1",
+          "payment_id": "BEN-PAY-017",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-017-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-017",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-018",
+      "category": "NORMAL",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-018-PAYMENT-1",
+          "payment_id": "BEN-PAY-018",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-018-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-018",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-019",
+      "category": "NORMAL",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-019-PAYMENT-1",
+          "payment_id": "BEN-PAY-019",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-019-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-019",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-020",
+      "category": "NORMAL",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-020-PAYMENT-1",
+          "payment_id": "BEN-PAY-020",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-020-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-020",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-021",
+      "category": "SETTLEMENT_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-021-PAYMENT-1",
+          "payment_id": "BEN-PAY-021",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "fee",
+          "record_id": "BEN-021-FEE-1",
+          "payment_id": "BEN-PAY-021",
+          "currency": "INR",
+          "amount": "5.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-021-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-021",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-022",
+      "category": "SETTLEMENT_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-022-PAYMENT-1",
+          "payment_id": "BEN-PAY-022",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "fee",
+          "record_id": "BEN-022-FEE-1",
+          "payment_id": "BEN-PAY-022",
+          "currency": "INR",
+          "amount": "5.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-022-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-022",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-023",
+      "category": "SETTLEMENT_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-023-PAYMENT-1",
+          "payment_id": "BEN-PAY-023",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "fee",
+          "record_id": "BEN-023-FEE-1",
+          "payment_id": "BEN-PAY-023",
+          "currency": "INR",
+          "amount": "5.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-023-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-023",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-024",
+      "category": "SETTLEMENT_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-024-PAYMENT-1",
+          "payment_id": "BEN-PAY-024",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "fee",
+          "record_id": "BEN-024-FEE-1",
+          "payment_id": "BEN-PAY-024",
+          "currency": "INR",
+          "amount": "5.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-024-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-024",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-025",
+      "category": "SETTLEMENT_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-025-PAYMENT-1",
+          "payment_id": "BEN-PAY-025",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "fee",
+          "record_id": "BEN-025-FEE-1",
+          "payment_id": "BEN-PAY-025",
+          "currency": "INR",
+          "amount": "5.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-025-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-025",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-026",
+      "category": "SETTLEMENT_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-026-PAYMENT-1",
+          "payment_id": "BEN-PAY-026",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "fee",
+          "record_id": "BEN-026-FEE-1",
+          "payment_id": "BEN-PAY-026",
+          "currency": "INR",
+          "amount": "5.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-026-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-026",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-027",
+      "category": "SETTLEMENT_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-027-PAYMENT-1",
+          "payment_id": "BEN-PAY-027",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "fee",
+          "record_id": "BEN-027-FEE-1",
+          "payment_id": "BEN-PAY-027",
+          "currency": "INR",
+          "amount": "5.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-027-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-027",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-028",
+      "category": "SETTLEMENT_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-028-PAYMENT-1",
+          "payment_id": "BEN-PAY-028",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "fee",
+          "record_id": "BEN-028-FEE-1",
+          "payment_id": "BEN-PAY-028",
+          "currency": "INR",
+          "amount": "5.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-028-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-028",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-029",
+      "category": "SETTLEMENT_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-029-PAYMENT-1",
+          "payment_id": "BEN-PAY-029",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "fee",
+          "record_id": "BEN-029-FEE-1",
+          "payment_id": "BEN-PAY-029",
+          "currency": "INR",
+          "amount": "5.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-029-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-029",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-030",
+      "category": "SETTLEMENT_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-030-PAYMENT-1",
+          "payment_id": "BEN-PAY-030",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "fee",
+          "record_id": "BEN-030-FEE-1",
+          "payment_id": "BEN-PAY-030",
+          "currency": "INR",
+          "amount": "5.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-030-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-030",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-031",
+      "category": "REFUND_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-031-PAYMENT-1",
+          "payment_id": "BEN-PAY-031",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "refund_request",
+          "record_id": "BEN-031-REFUND_REQUEST-1",
+          "payment_id": "BEN-PAY-031",
+          "currency": "INR",
+          "amount": "20.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "requested_amount": "20.00"
+        },
+        {
+          "record_type": "refund",
+          "record_id": "BEN-031-REFUND-1",
+          "payment_id": "BEN-PAY-031",
+          "currency": "INR",
+          "amount": "10.00",
+          "occurred_at": "2026-09-01",
+          "status": "COMPLETED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-031-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-031",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-032",
+      "category": "REFUND_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-032-PAYMENT-1",
+          "payment_id": "BEN-PAY-032",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "refund_request",
+          "record_id": "BEN-032-REFUND_REQUEST-1",
+          "payment_id": "BEN-PAY-032",
+          "currency": "INR",
+          "amount": "20.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "requested_amount": "20.00"
+        },
+        {
+          "record_type": "refund",
+          "record_id": "BEN-032-REFUND-1",
+          "payment_id": "BEN-PAY-032",
+          "currency": "INR",
+          "amount": "10.00",
+          "occurred_at": "2026-09-01",
+          "status": "COMPLETED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-032-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-032",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-033",
+      "category": "REFUND_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-033-PAYMENT-1",
+          "payment_id": "BEN-PAY-033",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "refund_request",
+          "record_id": "BEN-033-REFUND_REQUEST-1",
+          "payment_id": "BEN-PAY-033",
+          "currency": "INR",
+          "amount": "20.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "requested_amount": "20.00"
+        },
+        {
+          "record_type": "refund",
+          "record_id": "BEN-033-REFUND-1",
+          "payment_id": "BEN-PAY-033",
+          "currency": "INR",
+          "amount": "10.00",
+          "occurred_at": "2026-09-01",
+          "status": "COMPLETED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-033-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-033",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-034",
+      "category": "REFUND_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-034-PAYMENT-1",
+          "payment_id": "BEN-PAY-034",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "refund_request",
+          "record_id": "BEN-034-REFUND_REQUEST-1",
+          "payment_id": "BEN-PAY-034",
+          "currency": "INR",
+          "amount": "20.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "requested_amount": "20.00"
+        },
+        {
+          "record_type": "refund",
+          "record_id": "BEN-034-REFUND-1",
+          "payment_id": "BEN-PAY-034",
+          "currency": "INR",
+          "amount": "10.00",
+          "occurred_at": "2026-09-01",
+          "status": "COMPLETED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-034-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-034",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-035",
+      "category": "REFUND_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-035-PAYMENT-1",
+          "payment_id": "BEN-PAY-035",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "refund_request",
+          "record_id": "BEN-035-REFUND_REQUEST-1",
+          "payment_id": "BEN-PAY-035",
+          "currency": "INR",
+          "amount": "20.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "requested_amount": "20.00"
+        },
+        {
+          "record_type": "refund",
+          "record_id": "BEN-035-REFUND-1",
+          "payment_id": "BEN-PAY-035",
+          "currency": "INR",
+          "amount": "10.00",
+          "occurred_at": "2026-09-01",
+          "status": "COMPLETED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-035-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-035",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-036",
+      "category": "REFUND_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-036-PAYMENT-1",
+          "payment_id": "BEN-PAY-036",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "refund_request",
+          "record_id": "BEN-036-REFUND_REQUEST-1",
+          "payment_id": "BEN-PAY-036",
+          "currency": "INR",
+          "amount": "20.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "requested_amount": "20.00"
+        },
+        {
+          "record_type": "refund",
+          "record_id": "BEN-036-REFUND-1",
+          "payment_id": "BEN-PAY-036",
+          "currency": "INR",
+          "amount": "10.00",
+          "occurred_at": "2026-09-01",
+          "status": "COMPLETED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-036-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-036",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-037",
+      "category": "REFUND_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-037-PAYMENT-1",
+          "payment_id": "BEN-PAY-037",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "refund_request",
+          "record_id": "BEN-037-REFUND_REQUEST-1",
+          "payment_id": "BEN-PAY-037",
+          "currency": "INR",
+          "amount": "20.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "requested_amount": "20.00"
+        },
+        {
+          "record_type": "refund",
+          "record_id": "BEN-037-REFUND-1",
+          "payment_id": "BEN-PAY-037",
+          "currency": "INR",
+          "amount": "10.00",
+          "occurred_at": "2026-09-01",
+          "status": "COMPLETED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-037-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-037",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-038",
+      "category": "REFUND_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-038-PAYMENT-1",
+          "payment_id": "BEN-PAY-038",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "refund_request",
+          "record_id": "BEN-038-REFUND_REQUEST-1",
+          "payment_id": "BEN-PAY-038",
+          "currency": "INR",
+          "amount": "20.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "requested_amount": "20.00"
+        },
+        {
+          "record_type": "refund",
+          "record_id": "BEN-038-REFUND-1",
+          "payment_id": "BEN-PAY-038",
+          "currency": "INR",
+          "amount": "10.00",
+          "occurred_at": "2026-09-01",
+          "status": "COMPLETED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-038-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-038",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-039",
+      "category": "REFUND_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-039-PAYMENT-1",
+          "payment_id": "BEN-PAY-039",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "refund_request",
+          "record_id": "BEN-039-REFUND_REQUEST-1",
+          "payment_id": "BEN-PAY-039",
+          "currency": "INR",
+          "amount": "20.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "requested_amount": "20.00"
+        },
+        {
+          "record_type": "refund",
+          "record_id": "BEN-039-REFUND-1",
+          "payment_id": "BEN-PAY-039",
+          "currency": "INR",
+          "amount": "10.00",
+          "occurred_at": "2026-09-01",
+          "status": "COMPLETED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-039-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-039",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-040",
+      "category": "REFUND_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-040-PAYMENT-1",
+          "payment_id": "BEN-PAY-040",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "refund_request",
+          "record_id": "BEN-040-REFUND_REQUEST-1",
+          "payment_id": "BEN-PAY-040",
+          "currency": "INR",
+          "amount": "20.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "requested_amount": "20.00"
+        },
+        {
+          "record_type": "refund",
+          "record_id": "BEN-040-REFUND-1",
+          "payment_id": "BEN-PAY-040",
+          "currency": "INR",
+          "amount": "10.00",
+          "occurred_at": "2026-09-01",
+          "status": "COMPLETED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-040-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-040",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-041",
+      "category": "FEE_DISCREPANCY",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-041-PAYMENT-1",
+          "payment_id": "BEN-PAY-041",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "expected_fee_amount": "5.00"
+        },
+        {
+          "record_type": "fee",
+          "record_id": "BEN-041-FEE-1",
+          "payment_id": "BEN-PAY-041",
+          "currency": "INR",
+          "amount": "7.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-041-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-041",
+          "currency": "INR",
+          "amount": "93.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-042",
+      "category": "FEE_DISCREPANCY",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-042-PAYMENT-1",
+          "payment_id": "BEN-PAY-042",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "expected_fee_amount": "5.00"
+        },
+        {
+          "record_type": "fee",
+          "record_id": "BEN-042-FEE-1",
+          "payment_id": "BEN-PAY-042",
+          "currency": "INR",
+          "amount": "7.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-042-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-042",
+          "currency": "INR",
+          "amount": "93.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-043",
+      "category": "FEE_DISCREPANCY",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-043-PAYMENT-1",
+          "payment_id": "BEN-PAY-043",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "expected_fee_amount": "5.00"
+        },
+        {
+          "record_type": "fee",
+          "record_id": "BEN-043-FEE-1",
+          "payment_id": "BEN-PAY-043",
+          "currency": "INR",
+          "amount": "7.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-043-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-043",
+          "currency": "INR",
+          "amount": "93.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-044",
+      "category": "FEE_DISCREPANCY",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-044-PAYMENT-1",
+          "payment_id": "BEN-PAY-044",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "expected_fee_amount": "5.00"
+        },
+        {
+          "record_type": "fee",
+          "record_id": "BEN-044-FEE-1",
+          "payment_id": "BEN-PAY-044",
+          "currency": "INR",
+          "amount": "7.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-044-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-044",
+          "currency": "INR",
+          "amount": "93.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-045",
+      "category": "FEE_DISCREPANCY",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-045-PAYMENT-1",
+          "payment_id": "BEN-PAY-045",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "expected_fee_amount": "5.00"
+        },
+        {
+          "record_type": "fee",
+          "record_id": "BEN-045-FEE-1",
+          "payment_id": "BEN-PAY-045",
+          "currency": "INR",
+          "amount": "7.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-045-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-045",
+          "currency": "INR",
+          "amount": "93.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-046",
+      "category": "FEE_DISCREPANCY",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-046-PAYMENT-1",
+          "payment_id": "BEN-PAY-046",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "expected_fee_amount": "5.00"
+        },
+        {
+          "record_type": "fee",
+          "record_id": "BEN-046-FEE-1",
+          "payment_id": "BEN-PAY-046",
+          "currency": "INR",
+          "amount": "7.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-046-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-046",
+          "currency": "INR",
+          "amount": "93.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-047",
+      "category": "FEE_DISCREPANCY",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-047-PAYMENT-1",
+          "payment_id": "BEN-PAY-047",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "expected_fee_amount": "5.00"
+        },
+        {
+          "record_type": "fee",
+          "record_id": "BEN-047-FEE-1",
+          "payment_id": "BEN-PAY-047",
+          "currency": "INR",
+          "amount": "7.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-047-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-047",
+          "currency": "INR",
+          "amount": "93.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-048",
+      "category": "FEE_DISCREPANCY",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-048-PAYMENT-1",
+          "payment_id": "BEN-PAY-048",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "expected_fee_amount": "5.00"
+        },
+        {
+          "record_type": "fee",
+          "record_id": "BEN-048-FEE-1",
+          "payment_id": "BEN-PAY-048",
+          "currency": "INR",
+          "amount": "7.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-048-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-048",
+          "currency": "INR",
+          "amount": "93.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-049",
+      "category": "FEE_DISCREPANCY",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-049-PAYMENT-1",
+          "payment_id": "BEN-PAY-049",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "expected_fee_amount": "5.00"
+        },
+        {
+          "record_type": "fee",
+          "record_id": "BEN-049-FEE-1",
+          "payment_id": "BEN-PAY-049",
+          "currency": "INR",
+          "amount": "7.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-049-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-049",
+          "currency": "INR",
+          "amount": "93.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-050",
+      "category": "FEE_DISCREPANCY",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-050-PAYMENT-1",
+          "payment_id": "BEN-PAY-050",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "expected_fee_amount": "5.00"
+        },
+        {
+          "record_type": "fee",
+          "record_id": "BEN-050-FEE-1",
+          "payment_id": "BEN-PAY-050",
+          "currency": "INR",
+          "amount": "7.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-050-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-050",
+          "currency": "INR",
+          "amount": "93.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-051",
+      "category": "DUPLICATE_TRANSACTION",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-051-PAYMENT-1",
+          "payment_id": "BEN-PAY-051",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "payment",
+          "record_id": "BEN-051-PAYMENT-2",
+          "payment_id": "BEN-PAY-051",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-051-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-051",
+          "currency": "INR",
+          "amount": "200.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-052",
+      "category": "DUPLICATE_TRANSACTION",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-052-PAYMENT-1",
+          "payment_id": "BEN-PAY-052",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "payment",
+          "record_id": "BEN-052-PAYMENT-2",
+          "payment_id": "BEN-PAY-052",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-052-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-052",
+          "currency": "INR",
+          "amount": "200.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-053",
+      "category": "DUPLICATE_TRANSACTION",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-053-PAYMENT-1",
+          "payment_id": "BEN-PAY-053",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "payment",
+          "record_id": "BEN-053-PAYMENT-2",
+          "payment_id": "BEN-PAY-053",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-053-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-053",
+          "currency": "INR",
+          "amount": "200.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-054",
+      "category": "DUPLICATE_TRANSACTION",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-054-PAYMENT-1",
+          "payment_id": "BEN-PAY-054",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "payment",
+          "record_id": "BEN-054-PAYMENT-2",
+          "payment_id": "BEN-PAY-054",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-054-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-054",
+          "currency": "INR",
+          "amount": "200.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-055",
+      "category": "DUPLICATE_TRANSACTION",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-055-PAYMENT-1",
+          "payment_id": "BEN-PAY-055",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "payment",
+          "record_id": "BEN-055-PAYMENT-2",
+          "payment_id": "BEN-PAY-055",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-055-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-055",
+          "currency": "INR",
+          "amount": "200.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-056",
+      "category": "DUPLICATE_TRANSACTION",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-056-PAYMENT-1",
+          "payment_id": "BEN-PAY-056",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "payment",
+          "record_id": "BEN-056-PAYMENT-2",
+          "payment_id": "BEN-PAY-056",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-056-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-056",
+          "currency": "INR",
+          "amount": "200.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-057",
+      "category": "DUPLICATE_TRANSACTION",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-057-PAYMENT-1",
+          "payment_id": "BEN-PAY-057",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "payment",
+          "record_id": "BEN-057-PAYMENT-2",
+          "payment_id": "BEN-PAY-057",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-057-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-057",
+          "currency": "INR",
+          "amount": "200.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-058",
+      "category": "DUPLICATE_TRANSACTION",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-058-PAYMENT-1",
+          "payment_id": "BEN-PAY-058",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "payment",
+          "record_id": "BEN-058-PAYMENT-2",
+          "payment_id": "BEN-PAY-058",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-058-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-058",
+          "currency": "INR",
+          "amount": "200.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-059",
+      "category": "DUPLICATE_TRANSACTION",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-059-PAYMENT-1",
+          "payment_id": "BEN-PAY-059",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "payment",
+          "record_id": "BEN-059-PAYMENT-2",
+          "payment_id": "BEN-PAY-059",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-059-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-059",
+          "currency": "INR",
+          "amount": "200.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-060",
+      "category": "DUPLICATE_TRANSACTION",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-060-PAYMENT-1",
+          "payment_id": "BEN-PAY-060",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "payment",
+          "record_id": "BEN-060-PAYMENT-2",
+          "payment_id": "BEN-PAY-060",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-060-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-060",
+          "currency": "INR",
+          "amount": "200.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-061",
+      "category": "MISSING_SETTLEMENT",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-061-PAYMENT-1",
+          "payment_id": "BEN-PAY-061",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-062",
+      "category": "MISSING_SETTLEMENT",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-062-PAYMENT-1",
+          "payment_id": "BEN-PAY-062",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-063",
+      "category": "MISSING_SETTLEMENT",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-063-PAYMENT-1",
+          "payment_id": "BEN-PAY-063",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-064",
+      "category": "MISSING_SETTLEMENT",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-064-PAYMENT-1",
+          "payment_id": "BEN-PAY-064",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-065",
+      "category": "MISSING_SETTLEMENT",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-065-PAYMENT-1",
+          "payment_id": "BEN-PAY-065",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-066",
+      "category": "MISSING_SETTLEMENT",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-066-PAYMENT-1",
+          "payment_id": "BEN-PAY-066",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-067",
+      "category": "MISSING_SETTLEMENT",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-067-PAYMENT-1",
+          "payment_id": "BEN-PAY-067",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-068",
+      "category": "MISSING_SETTLEMENT",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-068-PAYMENT-1",
+          "payment_id": "BEN-PAY-068",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-069",
+      "category": "MISSING_SETTLEMENT",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-069-PAYMENT-1",
+          "payment_id": "BEN-PAY-069",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-070",
+      "category": "MISSING_SETTLEMENT",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-070-PAYMENT-1",
+          "payment_id": "BEN-PAY-070",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-071",
+      "category": "BANK_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-071-PAYMENT-1",
+          "payment_id": "BEN-PAY-071",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-071-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-071",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "bank",
+          "record_id": "BEN-071-BANK-1",
+          "payment_id": "BEN-PAY-071",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-072",
+      "category": "BANK_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-072-PAYMENT-1",
+          "payment_id": "BEN-PAY-072",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-072-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-072",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "bank",
+          "record_id": "BEN-072-BANK-1",
+          "payment_id": "BEN-PAY-072",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-073",
+      "category": "BANK_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-073-PAYMENT-1",
+          "payment_id": "BEN-PAY-073",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-073-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-073",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "bank",
+          "record_id": "BEN-073-BANK-1",
+          "payment_id": "BEN-PAY-073",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-074",
+      "category": "BANK_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-074-PAYMENT-1",
+          "payment_id": "BEN-PAY-074",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-074-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-074",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "bank",
+          "record_id": "BEN-074-BANK-1",
+          "payment_id": "BEN-PAY-074",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-075",
+      "category": "BANK_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-075-PAYMENT-1",
+          "payment_id": "BEN-PAY-075",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-075-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-075",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "bank",
+          "record_id": "BEN-075-BANK-1",
+          "payment_id": "BEN-PAY-075",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-076",
+      "category": "BANK_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-076-PAYMENT-1",
+          "payment_id": "BEN-PAY-076",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-076-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-076",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "bank",
+          "record_id": "BEN-076-BANK-1",
+          "payment_id": "BEN-PAY-076",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-077",
+      "category": "BANK_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-077-PAYMENT-1",
+          "payment_id": "BEN-PAY-077",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-077-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-077",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "bank",
+          "record_id": "BEN-077-BANK-1",
+          "payment_id": "BEN-PAY-077",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-078",
+      "category": "BANK_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-078-PAYMENT-1",
+          "payment_id": "BEN-PAY-078",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-078-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-078",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "bank",
+          "record_id": "BEN-078-BANK-1",
+          "payment_id": "BEN-PAY-078",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-079",
+      "category": "BANK_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-079-PAYMENT-1",
+          "payment_id": "BEN-PAY-079",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-079-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-079",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "bank",
+          "record_id": "BEN-079-BANK-1",
+          "payment_id": "BEN-PAY-079",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-080",
+      "category": "BANK_MISMATCH",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-080-PAYMENT-1",
+          "payment_id": "BEN-PAY-080",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-080-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-080",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "bank",
+          "record_id": "BEN-080-BANK-1",
+          "payment_id": "BEN-PAY-080",
+          "currency": "INR",
+          "amount": "90.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-081",
+      "category": "TIMING_EXCEPTION",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-081-PAYMENT-1",
+          "payment_id": "BEN-PAY-081",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-081-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-081",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-12",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-082",
+      "category": "TIMING_EXCEPTION",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-082-PAYMENT-1",
+          "payment_id": "BEN-PAY-082",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-082-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-082",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-12",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-083",
+      "category": "TIMING_EXCEPTION",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-083-PAYMENT-1",
+          "payment_id": "BEN-PAY-083",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-083-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-083",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-12",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-084",
+      "category": "TIMING_EXCEPTION",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-084-PAYMENT-1",
+          "payment_id": "BEN-PAY-084",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-084-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-084",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-12",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-085",
+      "category": "TIMING_EXCEPTION",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-085-PAYMENT-1",
+          "payment_id": "BEN-PAY-085",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-085-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-085",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-12",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-086",
+      "category": "TIMING_EXCEPTION",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-086-PAYMENT-1",
+          "payment_id": "BEN-PAY-086",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-086-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-086",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-12",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-087",
+      "category": "TIMING_EXCEPTION",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-087-PAYMENT-1",
+          "payment_id": "BEN-PAY-087",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-087-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-087",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-12",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-088",
+      "category": "TIMING_EXCEPTION",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-088-PAYMENT-1",
+          "payment_id": "BEN-PAY-088",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-088-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-088",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-12",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-089",
+      "category": "TIMING_EXCEPTION",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-089-PAYMENT-1",
+          "payment_id": "BEN-PAY-089",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-089-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-089",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-12",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-090",
+      "category": "TIMING_EXCEPTION",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-090-PAYMENT-1",
+          "payment_id": "BEN-PAY-090",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-090-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-090",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-12",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-091",
+      "category": "SUSPICIOUS_ACTIVITY",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-091-PAYMENT-1",
+          "payment_id": "BEN-PAY-091",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "suspicious_signal": true
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-091-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-091",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-092",
+      "category": "SUSPICIOUS_ACTIVITY",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-092-PAYMENT-1",
+          "payment_id": "BEN-PAY-092",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "suspicious_signal": true
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-092-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-092",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-093",
+      "category": "SUSPICIOUS_ACTIVITY",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-093-PAYMENT-1",
+          "payment_id": "BEN-PAY-093",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "suspicious_signal": true
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-093-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-093",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-094",
+      "category": "SUSPICIOUS_ACTIVITY",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-094-PAYMENT-1",
+          "payment_id": "BEN-PAY-094",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "suspicious_signal": true
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-094-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-094",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-095",
+      "category": "SUSPICIOUS_ACTIVITY",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-095-PAYMENT-1",
+          "payment_id": "BEN-PAY-095",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "suspicious_signal": true
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-095-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-095",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-096",
+      "category": "SUSPICIOUS_ACTIVITY",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-096-PAYMENT-1",
+          "payment_id": "BEN-PAY-096",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "suspicious_signal": true
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-096-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-096",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-097",
+      "category": "SUSPICIOUS_ACTIVITY",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-097-PAYMENT-1",
+          "payment_id": "BEN-PAY-097",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "suspicious_signal": true
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-097-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-097",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-098",
+      "category": "SUSPICIOUS_ACTIVITY",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-098-PAYMENT-1",
+          "payment_id": "BEN-PAY-098",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "suspicious_signal": true
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-098-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-098",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-099",
+      "category": "SUSPICIOUS_ACTIVITY",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-099-PAYMENT-1",
+          "payment_id": "BEN-PAY-099",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "suspicious_signal": true
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-099-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-099",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SCN-100",
+      "category": "SUSPICIOUS_ACTIVITY",
+      "records": [
+        {
+          "record_type": "payment",
+          "record_id": "BEN-100-PAYMENT-1",
+          "payment_id": "BEN-PAY-100",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED",
+          "suspicious_signal": true
+        },
+        {
+          "record_type": "settlement",
+          "record_id": "BEN-100-SETTLEMENT-1",
+          "payment_id": "BEN-PAY-100",
+          "currency": "INR",
+          "amount": "100.00",
+          "occurred_at": "2026-09-01",
+          "status": "CAPTURED"
+        }
+      ]
+    }
+  ]
+}

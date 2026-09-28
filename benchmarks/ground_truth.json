@@ -1,0 +1,605 @@
+{
+  "seed": 20260928,
+  "ground_truth": [
+    {
+      "scenario_id": "SCN-001",
+      "payment_id": "BEN-PAY-001",
+      "expected_exception": null,
+      "expected_route": null
+    },
+    {
+      "scenario_id": "SCN-002",
+      "payment_id": "BEN-PAY-002",
+      "expected_exception": null,
+      "expected_route": null
+    },
+    {
+      "scenario_id": "SCN-003",
+      "payment_id": "BEN-PAY-003",
+      "expected_exception": null,
+      "expected_route": null
+    },
+    {
+      "scenario_id": "SCN-004",
+      "payment_id": "BEN-PAY-004",
+      "expected_exception": null,
+      "expected_route": null
+    },
+    {
+      "scenario_id": "SCN-005",
+      "payment_id": "BEN-PAY-005",
+      "expected_exception": null,
+      "expected_route": null
+    },
+    {
+      "scenario_id": "SCN-006",
+      "payment_id": "BEN-PAY-006",
+      "expected_exception": null,
+      "expected_route": null
+    },
+    {
+      "scenario_id": "SCN-007",
+      "payment_id": "BEN-PAY-007",
+      "expected_exception": null,
+      "expected_route": null
+    },
+    {
+      "scenario_id": "SCN-008",
+      "payment_id": "BEN-PAY-008",
+      "expected_exception": null,
+      "expected_route": null
+    },
+    {
+      "scenario_id": "SCN-009",
+      "payment_id": "BEN-PAY-009",
+      "expected_exception": null,
+      "expected_route": null
+    },
+    {
+      "scenario_id": "SCN-010",
+      "payment_id": "BEN-PAY-010",
+      "expected_exception": null,
+      "expected_route": null
+    },
+    {
+      "scenario_id": "SCN-011",
+      "payment_id": "BEN-PAY-011",
+      "expected_exception": null,
+      "expected_route": null
+    },
+    {
+      "scenario_id": "SCN-012",
+      "payment_id": "BEN-PAY-012",
+      "expected_exception": null,
+      "expected_route": null
+    },
+    {
+      "scenario_id": "SCN-013",
+      "payment_id": "BEN-PAY-013",
+      "expected_exception": null,
+      "expected_route": null
+    },
+    {
+      "scenario_id": "SCN-014",
+      "payment_id": "BEN-PAY-014",
+      "expected_exception": null,
+      "expected_route": null
+    },
+    {
+      "scenario_id": "SCN-015",
+      "payment_id": "BEN-PAY-015",
+      "expected_exception": null,
+      "expected_route": null
+    },
+    {
+      "scenario_id": "SCN-016",
+      "payment_id": "BEN-PAY-016",
+      "expected_exception": null,
+      "expected_route": null
+    },
+    {
+      "scenario_id": "SCN-017",
+      "payment_id": "BEN-PAY-017",
+      "expected_exception": null,
+      "expected_route": null
+    },
+    {
+      "scenario_id": "SCN-018",
+      "payment_id": "BEN-PAY-018",
+      "expected_exception": null,
+      "expected_route": null
+    },
+    {
+      "scenario_id": "SCN-019",
+      "payment_id": "BEN-PAY-019",
+      "expected_exception": null,
+      "expected_route": null
+    },
+    {
+      "scenario_id": "SCN-020",
+      "payment_id": "BEN-PAY-020",
+      "expected_exception": null,
+      "expected_route": null
+    },
+    {
+      "scenario_id": "SCN-021",
+      "payment_id": "BEN-PAY-021",
+      "expected_exception": "SETTLEMENT_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-022",
+      "payment_id": "BEN-PAY-022",
+      "expected_exception": "SETTLEMENT_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-023",
+      "payment_id": "BEN-PAY-023",
+      "expected_exception": "SETTLEMENT_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-024",
+      "payment_id": "BEN-PAY-024",
+      "expected_exception": "SETTLEMENT_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-025",
+      "payment_id": "BEN-PAY-025",
+      "expected_exception": "SETTLEMENT_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-026",
+      "payment_id": "BEN-PAY-026",
+      "expected_exception": "SETTLEMENT_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-027",
+      "payment_id": "BEN-PAY-027",
+      "expected_exception": "SETTLEMENT_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-028",
+      "payment_id": "BEN-PAY-028",
+      "expected_exception": "SETTLEMENT_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-029",
+      "payment_id": "BEN-PAY-029",
+      "expected_exception": "SETTLEMENT_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-030",
+      "payment_id": "BEN-PAY-030",
+      "expected_exception": "SETTLEMENT_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-031",
+      "payment_id": "BEN-PAY-031",
+      "expected_exception": "REFUND_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-032",
+      "payment_id": "BEN-PAY-032",
+      "expected_exception": "REFUND_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-033",
+      "payment_id": "BEN-PAY-033",
+      "expected_exception": "REFUND_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-034",
+      "payment_id": "BEN-PAY-034",
+      "expected_exception": "REFUND_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-035",
+      "payment_id": "BEN-PAY-035",
+      "expected_exception": "REFUND_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-036",
+      "payment_id": "BEN-PAY-036",
+      "expected_exception": "REFUND_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-037",
+      "payment_id": "BEN-PAY-037",
+      "expected_exception": "REFUND_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-038",
+      "payment_id": "BEN-PAY-038",
+      "expected_exception": "REFUND_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-039",
+      "payment_id": "BEN-PAY-039",
+      "expected_exception": "REFUND_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-040",
+      "payment_id": "BEN-PAY-040",
+      "expected_exception": "REFUND_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-041",
+      "payment_id": "BEN-PAY-041",
+      "expected_exception": "FEE_DISCREPANCY",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-042",
+      "payment_id": "BEN-PAY-042",
+      "expected_exception": "FEE_DISCREPANCY",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-043",
+      "payment_id": "BEN-PAY-043",
+      "expected_exception": "FEE_DISCREPANCY",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-044",
+      "payment_id": "BEN-PAY-044",
+      "expected_exception": "FEE_DISCREPANCY",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-045",
+      "payment_id": "BEN-PAY-045",
+      "expected_exception": "FEE_DISCREPANCY",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-046",
+      "payment_id": "BEN-PAY-046",
+      "expected_exception": "FEE_DISCREPANCY",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-047",
+      "payment_id": "BEN-PAY-047",
+      "expected_exception": "FEE_DISCREPANCY",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-048",
+      "payment_id": "BEN-PAY-048",
+      "expected_exception": "FEE_DISCREPANCY",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-049",
+      "payment_id": "BEN-PAY-049",
+      "expected_exception": "FEE_DISCREPANCY",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-050",
+      "payment_id": "BEN-PAY-050",
+      "expected_exception": "FEE_DISCREPANCY",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-051",
+      "payment_id": "BEN-PAY-051",
+      "expected_exception": "DUPLICATE_TRANSACTION",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-052",
+      "payment_id": "BEN-PAY-052",
+      "expected_exception": "DUPLICATE_TRANSACTION",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-053",
+      "payment_id": "BEN-PAY-053",
+      "expected_exception": "DUPLICATE_TRANSACTION",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-054",
+      "payment_id": "BEN-PAY-054",
+      "expected_exception": "DUPLICATE_TRANSACTION",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-055",
+      "payment_id": "BEN-PAY-055",
+      "expected_exception": "DUPLICATE_TRANSACTION",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-056",
+      "payment_id": "BEN-PAY-056",
+      "expected_exception": "DUPLICATE_TRANSACTION",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-057",
+      "payment_id": "BEN-PAY-057",
+      "expected_exception": "DUPLICATE_TRANSACTION",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-058",
+      "payment_id": "BEN-PAY-058",
+      "expected_exception": "DUPLICATE_TRANSACTION",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-059",
+      "payment_id": "BEN-PAY-059",
+      "expected_exception": "DUPLICATE_TRANSACTION",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-060",
+      "payment_id": "BEN-PAY-060",
+      "expected_exception": "DUPLICATE_TRANSACTION",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-061",
+      "payment_id": "BEN-PAY-061",
+      "expected_exception": "MISSING_SETTLEMENT",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-062",
+      "payment_id": "BEN-PAY-062",
+      "expected_exception": "MISSING_SETTLEMENT",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-063",
+      "payment_id": "BEN-PAY-063",
+      "expected_exception": "MISSING_SETTLEMENT",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-064",
+      "payment_id": "BEN-PAY-064",
+      "expected_exception": "MISSING_SETTLEMENT",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-065",
+      "payment_id": "BEN-PAY-065",
+      "expected_exception": "MISSING_SETTLEMENT",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-066",
+      "payment_id": "BEN-PAY-066",
+      "expected_exception": "MISSING_SETTLEMENT",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-067",
+      "payment_id": "BEN-PAY-067",
+      "expected_exception": "MISSING_SETTLEMENT",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-068",
+      "payment_id": "BEN-PAY-068",
+      "expected_exception": "MISSING_SETTLEMENT",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-069",
+      "payment_id": "BEN-PAY-069",
+      "expected_exception": "MISSING_SETTLEMENT",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-070",
+      "payment_id": "BEN-PAY-070",
+      "expected_exception": "MISSING_SETTLEMENT",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-071",
+      "payment_id": "BEN-PAY-071",
+      "expected_exception": "BANK_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-072",
+      "payment_id": "BEN-PAY-072",
+      "expected_exception": "BANK_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-073",
+      "payment_id": "BEN-PAY-073",
+      "expected_exception": "BANK_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-074",
+      "payment_id": "BEN-PAY-074",
+      "expected_exception": "BANK_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-075",
+      "payment_id": "BEN-PAY-075",
+      "expected_exception": "BANK_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-076",
+      "payment_id": "BEN-PAY-076",
+      "expected_exception": "BANK_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-077",
+      "payment_id": "BEN-PAY-077",
+      "expected_exception": "BANK_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-078",
+      "payment_id": "BEN-PAY-078",
+      "expected_exception": "BANK_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-079",
+      "payment_id": "BEN-PAY-079",
+      "expected_exception": "BANK_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-080",
+      "payment_id": "BEN-PAY-080",
+      "expected_exception": "BANK_MISMATCH",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-081",
+      "payment_id": "BEN-PAY-081",
+      "expected_exception": "TIMING_EXCEPTION",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-082",
+      "payment_id": "BEN-PAY-082",
+      "expected_exception": "TIMING_EXCEPTION",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-083",
+      "payment_id": "BEN-PAY-083",
+      "expected_exception": "TIMING_EXCEPTION",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-084",
+      "payment_id": "BEN-PAY-084",
+      "expected_exception": "TIMING_EXCEPTION",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-085",
+      "payment_id": "BEN-PAY-085",
+      "expected_exception": "TIMING_EXCEPTION",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-086",
+      "payment_id": "BEN-PAY-086",
+      "expected_exception": "TIMING_EXCEPTION",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-087",
+      "payment_id": "BEN-PAY-087",
+      "expected_exception": "TIMING_EXCEPTION",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-088",
+      "payment_id": "BEN-PAY-088",
+      "expected_exception": "TIMING_EXCEPTION",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-089",
+      "payment_id": "BEN-PAY-089",
+      "expected_exception": "TIMING_EXCEPTION",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-090",
+      "payment_id": "BEN-PAY-090",
+      "expected_exception": "TIMING_EXCEPTION",
+      "expected_route": "DEPARTMENT_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-091",
+      "payment_id": "BEN-PAY-091",
+      "expected_exception": "SUSPICIOUS_ACTIVITY",
+      "expected_route": "FRAUD_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-092",
+      "payment_id": "BEN-PAY-092",
+      "expected_exception": "SUSPICIOUS_ACTIVITY",
+      "expected_route": "FRAUD_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-093",
+      "payment_id": "BEN-PAY-093",
+      "expected_exception": "SUSPICIOUS_ACTIVITY",
+      "expected_route": "FRAUD_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-094",
+      "payment_id": "BEN-PAY-094",
+      "expected_exception": "SUSPICIOUS_ACTIVITY",
+      "expected_route": "FRAUD_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-095",
+      "payment_id": "BEN-PAY-095",
+      "expected_exception": "SUSPICIOUS_ACTIVITY",
+      "expected_route": "FRAUD_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-096",
+      "payment_id": "BEN-PAY-096",
+      "expected_exception": "SUSPICIOUS_ACTIVITY",
+      "expected_route": "FRAUD_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-097",
+      "payment_id": "BEN-PAY-097",
+      "expected_exception": "SUSPICIOUS_ACTIVITY",
+      "expected_route": "FRAUD_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-098",
+      "payment_id": "BEN-PAY-098",
+      "expected_exception": "SUSPICIOUS_ACTIVITY",
+      "expected_route": "FRAUD_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-099",
+      "payment_id": "BEN-PAY-099",
+      "expected_exception": "SUSPICIOUS_ACTIVITY",
+      "expected_route": "FRAUD_ESCALATE"
+    },
+    {
+      "scenario_id": "SCN-100",
+      "payment_id": "BEN-PAY-100",
+      "expected_exception": "SUSPICIOUS_ACTIVITY",
+      "expected_route": "FRAUD_ESCALATE"
+    }
+  ]
+}
