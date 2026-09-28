@@ -1,0 +1,1898 @@
+Absolutely. We now have a **final, coherent version** of the project. I’ve aligned the original **AI Financial Exception Resolution** concept with the additions you finalized: **Risk Management, Issue Tracker, department tickets, reminders, evidence/source-backed decisions, searchable records, status history, and auditability**.
+
+I also checked the current Razorpay material again. The current Buildathon explicitly emphasizes finance-ops loops over 50+ synthetic records, measured accuracy/throughput, and an honest exception list; its Risk Manager track emphasizes measured precision/recall and false-positive cost. :chatgpt-content-reference{index="0"} Razorpay's current Agent Studio material also emphasizes verified first-party data, permission/compliance/amount validation, human approval for sensitive actions, and complete action logs. :chatgpt-content-reference{index="1"} The current Payment Terms identify applicable laws, RBI/NPCI requirements, card-network rules, Facility Providers, and merchant-specific obligations as relevant authorities/rules. :chatgpt-content-reference{index="2"}
+
+# 🚀 Final Project
+
+# **AI Financial Exception Resolution & Risk Management System**
+
+### One-line definition
+
+> **An evidence-driven AI financial operations system that detects, investigates, evaluates, risk-assesses, resolves, rejects, or escalates financial exceptions across payment, settlement, refund, fee, adjustment, and bank records — while enforcing applicable rules and permissions, creating department tickets and reminders for unresolved cases, and maintaining a complete searchable, source-backed audit trail from detection to final resolution.**
+
+---
+
+# 1. The Problem
+
+Financial operations can involve multiple connected records:
+
+```text
+Payment
+   ↓
+Order
+   ↓
+Refund
+   ↓
+Fees
+   ↓
+Adjustments
+   ↓
+Settlement
+   ↓
+Bank Record
+```
+
+An exception can occur anywhere in this lifecycle.
+
+For example:
+
+```text
+Payment = ₹10,000
+Expected Settlement = ₹9,750
+Actual Settlement = ₹9,500
+                         ↓
+                   ₹250 mismatch
+```
+
+A finance employee then has to manually:
+
+- find the transaction,
+- find the settlement,
+- inspect fees,
+- inspect refunds,
+- compare bank records,
+- determine what happened,
+- check applicable rules,
+- determine whether the issue is valid,
+- assess financial/fraud/compliance risk,
+- decide whether it can be resolved,
+- contact the appropriate department,
+- track the ticket,
+- remember to follow up,
+- and finally document everything.
+
+The problem is therefore **not simply reconciliation**.
+
+The deeper problem is:
+
+> **When financial records do not agree, there is no unified evidence-driven workflow that can investigate the exception, determine what is actually known, assess its risk, apply the appropriate rules and authority boundaries, resolve safe cases, escalate uncertain or fraud-related cases, and track the issue until closure.**
+
+---
+
+# 2. What the system actually solves
+
+The system converts:
+
+```text
+"Something doesn't match."
+```
+
+into:
+
+```text
+"What happened?"
+       ↓
+"What evidence proves it?"
+       ↓
+"Which rules apply?"
+       ↓
+"Who has authority to decide?"
+       ↓
+"What is the risk?"
+       ↓
+"Can this be resolved safely?"
+       ↓
+"If not, which department should handle it?"
+       ↓
+"Has the department responded?"
+       ↓
+"Has the issue actually been resolved?"
+```
+
+---
+
+# 3. Core philosophy
+
+The entire system follows one principle:
+
+> **AI investigates. Evidence proves. Rules constrain. Risk prioritizes. Authority determines. Humans control consequential decisions. Code executes. Audit remembers.**
+
+This is particularly aligned with Razorpay's published agent principles: verified data, bounded permissions, independent action validation, human approval for sensitive actions, and auditable actions. :chatgpt-content-reference{index="3"}
+
+---
+
+# 4. End-to-end lifecycle
+
+The complete lifecycle is:
+
+```text
+                 ┌───────────────────────┐
+                 │ 1. DATA INGESTION     │
+                 └───────────┬───────────┘
+                             ↓
+                 ┌───────────────────────┐
+                 │ 2. EXCEPTION DETECTION│
+                 └───────────┬───────────┘
+                             ↓
+                 ┌───────────────────────┐
+                 │ 3. INVESTIGATION      │
+                 └───────────┬───────────┘
+                             ↓
+                 ┌───────────────────────┐
+                 │ 4. EVIDENCE ENGINE    │
+                 └───────────┬───────────┘
+                             ↓
+                 ┌───────────────────────┐
+                 │ 5. POLICY/RULE ENGINE │
+                 └───────────┬───────────┘
+                             ↓
+                 ┌───────────────────────┐
+                 │ 6. RISK ENGINE        │
+                 └───────────┬───────────┘
+                             ↓
+                 ┌───────────────────────┐
+                 │ 7. DECISION ENGINE    │
+                 └───────────┬───────────┘
+                             ↓
+              ┌──────────────┼──────────────┐
+              ↓              ↓              ↓
+        AUTO-APPROVE      REJECT       ESCALATE
+              │              │              │
+              │              │       ┌──────┴──────┐
+              │              │       ↓             ↓
+              │              │    FRAUD        DEPARTMENT
+              │              │    TICKET        TICKET
+              │              │       │             │
+              └──────────────┴───────┴─────────────┘
+                             ↓
+                 ┌───────────────────────┐
+                 │ 8. TICKET TRACKER     │
+                 └───────────┬───────────┘
+                             ↓
+                 ┌───────────────────────┐
+                 │ 9. REMINDER ENGINE    │
+                 └───────────┬───────────┘
+                             ↓
+                 ┌───────────────────────┐
+                 │10. RESOLUTION         │
+                 └───────────┬───────────┘
+                             ↓
+                 ┌───────────────────────┐
+                 │11. VERIFICATION       │
+                 └───────────┬───────────┘
+                             ↓
+                 ┌───────────────────────┐
+                 │12. AUDIT + HISTORY    │
+                 └───────────────────────┘
+```
+
+---
+
+# 5. Module 1 — Data Ingestion
+
+The system works with multiple financial sources.
+
+### Synthetic/demo sources
+
+For the buildathon, these can be simulated datasets:
+
+```text
+Payments
+Orders
+Refunds
+Fees
+Settlements
+Adjustments
+Bank Statements
+Merchant Policies
+Department Tickets
+Issue Reports
+```
+
+Example:
+
+```json
+{
+  "payment_id": "PAY-10291",
+  "merchant_id": "MRC-1008",
+  "amount": 10000,
+  "status": "captured",
+  "date": "2026-09-25"
+}
+```
+
+The system creates a unified financial representation rather than forcing the employee to inspect every source manually.
+
+---
+
+# 6. Module 2 — Exception Detection Engine
+
+The system continuously checks for financial inconsistencies.
+
+### Exception types
+
+| ID | Exception |
+|---|---|
+| E1 | Settlement mismatch |
+| E2 | Refund mismatch |
+| E3 | Fee discrepancy |
+| E4 | Duplicate transaction |
+| E5 | Missing settlement |
+| E6 | Bank mismatch |
+| E7 | Timing exception |
+| E8 | Adjustment discrepancy |
+| E9 | Suspicious/fraud-related anomaly |
+| E10 | Unknown exception |
+
+Example:
+
+```text
+Payment:
+₹10,000
+
+Fees:
+₹250
+
+Expected:
+₹9,750
+
+Settlement:
+₹9,500
+
+Exception:
+₹250 unexplained discrepancy
+```
+
+The system automatically creates:
+
+```text
+EXC-2026-000184
+```
+
+---
+
+# 7. Module 3 — Financial Investigation Engine
+
+Once an exception exists, the AI investigates it.
+
+### Investigation flow
+
+```text
+Exception
+   ↓
+Find related records
+   ↓
+Construct transaction timeline
+   ↓
+Compare authoritative records
+   ↓
+Calculate expected values
+   ↓
+Identify discrepancies
+   ↓
+Find possible root cause
+   ↓
+Determine evidence sufficiency
+```
+
+The AI should never simply generate a plausible explanation.
+
+If evidence isn't sufficient:
+
+```text
+ROOT_CAUSE = UNKNOWN
+```
+
+rather than hallucinating one.
+
+---
+
+# 8. Financial Event Graph
+
+A major technical component is the **Financial Event Graph**.
+
+Example:
+
+```text
+ORDER-102
+    │
+    ▼
+PAYMENT-883
+    │
+    ├───────────────┐
+    ▼               ▼
+REFUND-221       FEE-992
+    │               │
+    └───────┬───────┘
+            ▼
+       SETTLEMENT-551
+            │
+            ▼
+       BANK-7782
+```
+
+This lets the AI reconstruct the complete lifecycle.
+
+Instead of asking:
+
+> "Why is settlement wrong?"
+
+it can investigate:
+
+> "Which payment generated this settlement, which fees/refunds/adjustments affected it, and what corresponding bank entry exists?"
+
+---
+
+# 9. Module 4 — Evidence Engine
+
+This is one of the **most important parts of the project**.
+
+Every factual conclusion needs evidence.
+
+### Evidence object
+
+```json
+{
+  "evidence_id": "EV-001",
+  "fact": "Payment captured for ₹10,000",
+  "source_type": "payment_record",
+  "source_id": "PAY-10291",
+  "timestamp": "2026-09-25T14:01:22",
+  "authority": "payment_system"
+}
+```
+
+The system maintains:
+
+```text
+FACT
+ ↓
+EVIDENCE
+ ↓
+SOURCE
+ ↓
+RULE
+ ↓
+DECISION
+```
+
+---
+
+# 10. Evidence hierarchy
+
+The system should prioritize:
+
+```text
+1. Authoritative financial records
+             ↓
+2. Bank/payment-provider records
+             ↓
+3. Merchant records
+             ↓
+4. Versioned policies/rules
+             ↓
+5. AI interpretation
+```
+
+The AI's interpretation **cannot override authoritative records**.
+
+---
+
+# 11. Source-backed decisions
+
+Every decision must answer:
+
+### What happened?
+
+### What evidence proves it?
+
+### Which rule applies?
+
+### Where did that rule come from?
+
+### Who has authority?
+
+### Why was this decision made?
+
+Example:
+
+```text
+DECISION: REJECT
+
+Reason:
+Requested refund does not satisfy the applicable
+refund condition.
+
+Evidence:
+EV-001 — Original payment instrument
+EV-002 — Requested refund instrument
+
+Rule:
+RZ-REFUND-001
+
+Source:
+Razorpay Payment Terms & Conditions
+
+Decision Authority:
+Merchant / applicable payment workflow
+
+AI Action:
+No financial action executed.
+```
+
+The current Razorpay Terms define a refund as returning the transaction amount to the payment instrument used for the payment, making source-backed rule application important in this workflow. :chatgpt-content-reference{index="4"}
+
+---
+
+# 12. Module 5 — Policy & Regulation Engine
+
+This is the system's **governance layer**.
+
+Applicable sources can include:
+
+```text
+Razorpay Terms & Conditions
+        +
+Merchant policies
+        +
+Applicable RBI requirements
+        +
+NPCI requirements
+        +
+Card-network rules
+        +
+Facility Provider requirements
+        +
+Applicable law
+        +
+Internal SOP
+```
+
+The current Razorpay Terms explicitly define "Applicable Laws" to include applicable regulatory mandates, including RBI requirements and NPCI rules, and separately refer to Card Network rules and Facility Providers. :chatgpt-content-reference{index="5"}
+
+### Policy versioning
+
+Every rule should contain:
+
+```text
+policy_id
+version
+effective_from
+effective_to
+source
+source_url
+rule_text
+jurisdiction
+applies_to
+priority
+```
+
+This is important because policies can change. Razorpay's current Terms state that updated terms can take effect upon posting. :chatgpt-content-reference{index="6"}
+
+---
+
+# 13. Module 6 — Risk Management Engine
+
+This is now a **first-class component**, not an add-on.
+
+The Risk Engine evaluates:
+
+### Financial Risk
+
+```text
+Amount at risk
+Potential loss
+Revenue leakage
+Settlement discrepancy
+Refund exposure
+```
+
+### Fraud Risk
+
+```text
+Suspicious patterns
+Repeated anomalies
+Conflicting records
+Potential fabricated information
+Unusual transaction behavior
+```
+
+### Operational Risk
+
+```text
+Repeated exceptions
+Long unresolved tickets
+Systemic failures
+Increasing issue frequency
+```
+
+### Compliance Risk
+
+```text
+Potential policy conflict
+Missing required evidence
+Applicable-rule uncertainty
+Regulatory constraint
+```
+
+### Customer/Merchant Impact
+
+```text
+Number of affected transactions
+Merchant impact
+Repeated reports
+Potential financial disruption
+```
+
+---
+
+# 14. Explainable Risk
+
+Don't make the system say:
+
+> "Risk = 87%"
+
+with no explanation.
+
+Instead:
+
+```text
+RISK ASSESSMENT
+
+Financial Risk       HIGH
+Fraud Risk           MEDIUM
+Operational Risk     HIGH
+Compliance Risk      LOW
+Customer Impact      HIGH
+```
+
+Then:
+
+```text
+Risk Factors:
+
+✓ ₹25,000 discrepancy
+✓ Reported 4 times
+✓ Ticket unresolved
+✓ Conflicting settlement records
+✓ 2 related exceptions
+```
+
+Each risk factor links to evidence.
+
+---
+
+# 15. Risk history
+
+The system should track risk over time.
+
+```text
+09:00
+LOW
+
+11:30
+MEDIUM
+Reason: repeated report
+
+14:00
+HIGH
+Reason:
++ increased financial exposure
++ unresolved ticket
++ conflicting records
+```
+
+This allows employees to identify **risk escalation**, not merely a static score.
+
+---
+
+# 16. Module 7 — Decision Engine
+
+Now comes the heart of the system.
+
+The decision engine evaluates:
+
+```text
+Evidence
++
+Applicable Rules
++
+Financial Calculation
++
+Risk
++
+Decision Authority
++
+Agent Permissions
++
+Action Safety
+```
+
+Then produces one of **four outcomes**.
+
+---
+
+## 🟢 1. AUTO_APPROVE
+
+Conditions:
+
+```text
+✓ Required evidence complete
+✓ Rules satisfied
+✓ Financial calculation verified
+✓ Authorized decision owner
+✓ Agent has permission
+✓ Action within configured limits
+✓ No unresolved conflict
+✓ No mandatory human/Razorpay review
+```
+
+Then:
+
+```text
+AUTO_APPROVE
+      ↓
+EXECUTE
+      ↓
+VERIFY
+      ↓
+AUDIT
+```
+
+---
+
+## 🔴 2. REJECT
+
+Use this only when the request is **clearly invalid or not permitted** based on applicable rules/policy.
+
+It does **not** mean "something failed."
+
+Example:
+
+```text
+Requested action
+      ↓
+Applicable rule
+      ↓
+Clear violation
+      ↓
+REJECT
+```
+
+The system must provide the evidence and source supporting the rejection.
+
+---
+
+## 🟠 3. FRAUD_ESCALATE
+
+When evidence indicates possible fraud/fabrication/suspicious activity requiring specialist investigation:
+
+```text
+Possible fraud
+      ↓
+Evidence collection
+      ↓
+Risk assessment
+      ↓
+FRAUD_ESCALATE
+      ↓
+Fraud/Risk Department Ticket
+```
+
+The AI should say:
+
+> **"Possible fraudulent activity detected; investigation required."**
+
+not:
+
+> "This is definitely fraud."
+
+That preserves the distinction between an AI-generated risk signal and an authorized final determination.
+
+---
+
+## 🟡 4. DEPARTMENT_ESCALATE
+
+Used when:
+
+```text
+Evidence incomplete
+OR
+Authoritative records conflict
+OR
+Decision authority is external
+OR
+Policy is ambiguous
+OR
+Action exceeds permission
+OR
+High-risk manual review required
+```
+
+Then:
+
+```text
+DEPARTMENT_ESCALATE
+       ↓
+CREATE TICKET
+       ↓
+ASSIGN DEPARTMENT
+       ↓
+TRACK
+       ↓
+REMIND
+       ↓
+RESOLVE
+```
+
+---
+
+# 17. Decision Authority Model
+
+Every decision should identify **who owns the decision**.
+
+Possible authority:
+
+```text
+SYSTEM
+MERCHANT
+FINANCE_MANAGER
+RAZORPAY
+FRAUD_DEPARTMENT
+COMPLIANCE_DEPARTMENT
+FACILITY_PROVIDER
+BANK
+CARD_NETWORK
+NPCI
+REGULATOR
+UNKNOWN
+```
+
+This prevents the AI from making decisions that belong to another authority.
+
+The current Razorpay Terms identify Facility Providers as including banks, NPCI, technology providers and other parties involved in providing services, and define card-network rules separately. :chatgpt-content-reference{index="7"}
+
+---
+
+# 18. Module 8 — Issue Tracker
+
+Every exception gets a permanent issue record.
+
+### Example
+
+```text
+EXCEPTION ID
+EXC-2026-000184
+
+Company
+ABC Technologies Pvt Ltd
+
+Contact
+finance@abc.example
+
+Issue Type
+Settlement Mismatch
+
+Date Raised
+25 Sep 2026
+
+Times Reported
+4
+
+Current Status
+ESCALATED
+
+Risk
+HIGH
+
+Assigned Department
+Settlement Operations
+
+Ticket
+RZ-INC-82931
+```
+
+---
+
+# 19. Issue history
+
+Never overwrite history.
+
+Store:
+
+```text
+09:12 — DETECTED
+09:14 — INVESTIGATING
+09:18 — RISK_ASSESSED
+09:20 — ESCALATED
+09:21 — TICKET_CREATED
+10:21 — REMINDER_SENT
+12:21 — REMINDER_SENT
+13:04 — DEPARTMENT_RESPONDED
+13:10 — RESOLVED
+13:11 — VERIFIED
+```
+
+This creates a complete lifecycle.
+
+---
+
+# 20. Module 9 — Department Ticket System
+
+When escalation occurs, automatically generate a structured ticket.
+
+```text
+Ticket ID:
+RZ-INC-82931
+
+Exception:
+EXC-2026-000184
+
+Department:
+Settlement Operations
+
+Priority:
+HIGH
+
+Issue:
+₹250 settlement discrepancy
+
+Investigation:
+Payment = ₹10,000
+Fees = ₹250
+Expected = ₹9,750
+Actual settlement = ₹9,500
+
+Unexplained difference:
+₹250
+
+Risk:
+Financial = HIGH
+
+Decision:
+DEPARTMENT_ESCALATE
+
+Reason:
+Available authoritative records do not explain
+the remaining discrepancy.
+
+Evidence:
+EV-001
+EV-002
+EV-003
+
+Sources:
+Payment Record
+Fee Record
+Settlement Record
+Applicable Policy
+```
+
+---
+
+# 21. Module 10 — Unresolved Ticket Reminder Engine
+
+This directly addresses your new requirement.
+
+```text
+Ticket Created
+       ↓
+Waiting for department
+       ↓
+Response window reached?
+       │
+       ├── YES → Reminder
+       │
+       └── NO → Continue waiting
+```
+
+Then:
+
+```text
+Reminder #1
+     ↓
+Still unresolved
+     ↓
+Reminder #2
+     ↓
+Still unresolved
+     ↓
+Escalation
+```
+
+Every reminder is itself recorded.
+
+```text
+REM-001
+Sent: 16:00
+Reason: No response
+
+REM-002
+Sent: 18:00
+Reason: Ticket unresolved
+
+ESC-001
+Sent: 20:00
+Reason: Escalation threshold reached
+```
+
+The actual timing should be configurable by workflow/SLA rather than universally hard-coded.
+
+---
+
+# 22. Module 11 — Search
+
+The employee gets a **global financial operations search**.
+
+Search by:
+
+```text
+Exception ID
+Ticket ID
+Merchant/company
+Merchant ID
+Email
+Issue type
+Risk level
+Status
+Department
+Date
+Transaction ID
+Payment ID
+Settlement ID
+Refund ID
+```
+
+Example:
+
+```text
+🔍 Search: RZ-INC-82931
+```
+
+Result:
+
+```text
+EXC-2026-000184
+Settlement Mismatch
+HIGH RISK
+ESCALATED
+Settlement Operations
+```
+
+---
+
+# 23. Advanced filtering
+
+```text
+STATUS
+☐ Detected
+☐ Investigating
+☐ Resolved
+☐ Rejected
+☐ Escalated
+
+RISK
+☐ Low
+☐ Medium
+☐ High
+☐ Critical
+
+TYPE
+☐ Settlement
+☐ Refund
+☐ Payment
+☐ Fee
+☐ Fraud
+☐ Bank
+☐ Adjustment
+
+DEPARTMENT
+☐ Settlement
+☐ Fraud
+☐ Risk
+☐ Compliance
+☐ Support
+```
+
+---
+
+# 24. Module 12 — Audit Trail
+
+Every meaningful operation creates an immutable audit event.
+
+```text
+AUD-001
+Exception detected
+
+AUD-002
+Evidence retrieved
+
+AUD-003
+Rule evaluated
+
+AUD-004
+Risk calculated
+
+AUD-005
+Decision generated
+
+AUD-006
+Ticket created
+
+AUD-007
+Reminder sent
+
+AUD-008
+Department response received
+
+AUD-009
+Resolution recorded
+
+AUD-010
+Resolution verified
+```
+
+Each record should include:
+
+```text
+actor
+timestamp
+action
+input
+evidence
+source
+rule
+decision
+result
+```
+
+Razorpay's published Agent Studio principles emphasize that every agent action is logged with an audit trail, while its current terms also impose transaction-record retention obligations. :chatgpt-content-reference{index="8"}
+
+---
+
+# 25. Complete issue record
+
+Your final database object can conceptually look like:
+
+```json
+{
+  "exception_id": "EXC-2026-000184",
+
+  "merchant": {
+    "merchant_id": "MRC-1008",
+    "company_name": "ABC Technologies Pvt Ltd",
+    "contact": "finance@example.com"
+  },
+
+  "issue": {
+    "type": "SETTLEMENT_MISMATCH",
+    "date_detected": "2026-09-25",
+    "description": "Settlement amount differs from expected amount",
+    "times_reported": 4
+  },
+
+  "investigation": {
+    "status": "COMPLETED",
+    "root_cause": "UNKNOWN",
+    "timeline": [],
+    "calculations": []
+  },
+
+  "evidence": [],
+
+  "rules": [],
+
+  "risk": {
+    "financial": "HIGH",
+    "fraud": "MEDIUM",
+    "operational": "HIGH",
+    "compliance": "LOW"
+  },
+
+  "decision": {
+    "type": "DEPARTMENT_ESCALATE",
+    "authority": "SETTLEMENT_OPERATIONS",
+    "reason": "Insufficient authoritative evidence"
+  },
+
+  "ticket": {
+    "ticket_id": "RZ-INC-82931",
+    "department": "SETTLEMENT_OPERATIONS",
+    "status": "WAITING_RESPONSE",
+    "reminders_sent": 2
+  },
+
+  "resolution": {
+    "status": "PENDING"
+  },
+
+  "audit": []
+}
+```
+
+---
+
+# 26. Complete technical architecture
+
+```text
+                         USER / EMPLOYEE
+                               │
+                               ▼
+                  ┌─────────────────────────┐
+                  │ Next.js Operations UI   │
+                  │                         │
+                  │ Dashboard               │
+                  │ Exception Queue         │
+                  │ Risk                    │
+                  │ Tickets                 │
+                  │ Search                  │
+                  │ Audit                   │
+                  └────────────┬────────────┘
+                               │
+                               ▼
+                  ┌─────────────────────────┐
+                  │ API / Backend Layer     │
+                  └────────────┬────────────┘
+                               │
+          ┌────────────────────┼────────────────────┐
+          │                    │                    │
+          ▼                    ▼                    ▼
+ ┌────────────────┐   ┌────────────────┐   ┌────────────────┐
+ │ Exception      │   │ Investigation  │   │ Risk Engine    │
+ │ Engine         │   │ Engine         │   │                │
+ └───────┬────────┘   └───────┬────────┘   └───────┬────────┘
+         │                     │                    │
+         └─────────────────────┼────────────────────┘
+                               ▼
+                    ┌──────────────────────┐
+                    │ Evidence Engine      │
+                    └──────────┬───────────┘
+                               ▼
+                    ┌──────────────────────┐
+                    │ Policy/Rule Engine   │
+                    └──────────┬───────────┘
+                               ▼
+                    ┌──────────────────────┐
+                    │ Decision Engine      │
+                    └──────────┬───────────┘
+                               │
+                 ┌─────────────┼─────────────┐
+                 ▼             ▼             ▼
+            APPROVE         REJECT       ESCALATE
+                 │                           │
+                 │                  ┌────────┴────────┐
+                 │                  ▼                 ▼
+                 │               Fraud           Department
+                 │               Ticket             Ticket
+                 │                  │                 │
+                 └──────────────────┼─────────────────┘
+                                    ▼
+                         ┌─────────────────────┐
+                         │ Ticket Engine       │
+                         │ Reminder Engine     │
+                         └──────────┬──────────┘
+                                    ▼
+                         ┌─────────────────────┐
+                         │ Verification Engine │
+                         └──────────┬──────────┘
+                                    ▼
+                         ┌─────────────────────┐
+                         │ Audit Engine        │
+                         └─────────────────────┘
+```
+
+---
+
+# 27. Suggested technology stack
+
+### Frontend
+
+```text
+Next.js
+TypeScript
+React
+Tailwind CSS
+shadcn/ui
+Recharts
+```
+
+### Backend
+
+```text
+Python
+FastAPI
+Pydantic
+PostgreSQL
+Redis
+```
+
+### AI
+
+```text
+LLM
+Agent orchestration
+RAG
+Embeddings
+Vector database
+```
+
+### Deterministic financial layer
+
+```text
+Python
+Decimal
+Rule engine
+Policy evaluator
+Financial calculation engine
+```
+
+**Important:** money calculations should not depend on LLM arithmetic.
+
+```text
+LLM
+ ↓
+understands context
+
+Financial Engine
+ ↓
+calculates exact amount
+
+Policy Engine
+ ↓
+determines whether action is permitted
+```
+
+---
+
+# 28. AI Agent Tools
+
+The agent can have controlled tools such as:
+
+```text
+search_payment()
+search_order()
+search_refund()
+search_fee()
+search_settlement()
+search_adjustment()
+search_bank_record()
+
+build_financial_timeline()
+
+calculate_expected_settlement()
+
+get_applicable_policy()
+
+get_policy_version()
+
+collect_evidence()
+
+validate_evidence()
+
+assess_risk()
+
+create_decision()
+
+create_ticket()
+
+schedule_reminder()
+
+update_ticket()
+
+verify_resolution()
+
+write_audit_event()
+```
+
+Every tool must have permissions.
+
+---
+
+# 29. Safety architecture
+
+The AI should **never directly have unrestricted database or financial-action access**.
+
+Instead:
+
+```text
+AI
+ ↓
+Tool Request
+ ↓
+Permission Check
+ ↓
+Policy Check
+ ↓
+Risk Check
+ ↓
+Action Validation
+ ↓
+Execution
+```
+
+Razorpay's published Agent Studio architecture similarly describes independent validation of permissions, amounts, compliance and data-handling rules before actions execute. :chatgpt-content-reference{index="9"}
+
+---
+
+# 30. Human-in-the-loop
+
+Humans should be involved when:
+
+```text
+High-risk financial action
+Possible fraud
+Conflicting authoritative records
+Regulatory ambiguity
+External authority required
+Insufficient evidence
+Irreversible action
+Action outside agent permission
+```
+
+The agent prepares:
+
+```text
+Evidence
++
+Investigation
++
+Risk
++
+Applicable rules
++
+Recommended route
+```
+
+The human/authorized department makes the consequential decision where required.
+
+---
+
+# 31. Failure handling
+
+Your system should deliberately test:
+
+### Missing data
+
+```text
+UNKNOWN
+→ Department escalation
+```
+
+### Conflicting records
+
+```text
+CONFLICT
+→ Department escalation
+```
+
+### Possible fraud
+
+```text
+FRAUD SIGNAL
+→ Fraud ticket
+```
+
+### Invalid request
+
+```text
+CLEAR POLICY VIOLATION
+→ Reject
+```
+
+### LLM hallucination
+
+```text
+Unsupported claim
+→ Evidence validation fails
+→ Claim excluded
+```
+
+### API timeout
+
+```text
+No reliable response
+→ Do not execute
+→ Retry/idempotency
+```
+
+### Duplicate request
+
+```text
+Idempotency check
+→ Prevent duplicate action/ticket
+```
+
+---
+
+# 32. Example complete workflow
+
+Let's take one realistic synthetic case.
+
+### Step 1 — Detection
+
+```text
+Payment = ₹50,000
+Expected settlement = ₹48,750
+Actual settlement = ₹47,750
+```
+
+System detects:
+
+```text
+₹1,000 unexplained difference
+```
+
+Creates:
+
+```text
+EXC-2026-001001
+```
+
+---
+
+### Step 2 — Investigation
+
+AI finds:
+
+```text
+Payment record ✓
+Fee record ✓
+Refund record ✓
+Settlement record ✓
+Bank record ✓
+```
+
+Builds:
+
+```text
+Payment
+₹50,000
+   ↓
+Fee
+₹1,250
+   ↓
+Expected
+₹48,750
+   ↓
+Actual
+₹47,750
+```
+
+---
+
+### Step 3 — Evidence
+
+AI identifies:
+
+```text
+EV-001 Payment = ₹50,000
+EV-002 Fees = ₹1,250
+EV-003 Settlement = ₹47,750
+```
+
+---
+
+### Step 4 — Rules
+
+```text
+R-001 ✓
+R-002 ✓
+R-003 ?
+```
+
+One applicable condition cannot be verified.
+
+---
+
+### Step 5 — Risk
+
+```text
+Financial: HIGH
+Operational: MEDIUM
+Fraud: LOW
+Compliance: UNKNOWN
+```
+
+---
+
+### Step 6 — Decision
+
+Because evidence is incomplete:
+
+```text
+DEPARTMENT_ESCALATE
+```
+
+Not:
+
+```text
+REJECT
+```
+
+and not:
+
+```text
+AUTO_APPROVE
+```
+
+---
+
+### Step 7 — Ticket
+
+```text
+RZ-INC-99121
+Department: Settlement Operations
+Priority: HIGH
+```
+
+---
+
+### Step 8 — Reminder
+
+No response.
+
+```text
+REMINDER #1
+```
+
+Still no response:
+
+```text
+REMINDER #2
+```
+
+---
+
+### Step 9 — Department response
+
+Department provides the missing adjustment record:
+
+```text
+Adjustment = ₹1,000
+```
+
+---
+
+### Step 10 — Re-investigation
+
+Now:
+
+```text
+₹50,000
+- ₹1,250 fee
+- ₹1,000 adjustment
+= ₹47,750
+```
+
+Everything reconciles.
+
+---
+
+### Step 11 — Resolution
+
+```text
+STATUS = RESOLVED
+```
+
+---
+
+### Step 12 — Verification
+
+System verifies:
+
+```text
+Expected = Actual
+```
+
+---
+
+### Step 13 — Audit
+
+Everything is preserved:
+
+```text
+Detection
+Investigation
+Evidence
+Rules
+Risk
+Decision
+Ticket
+Reminders
+Department response
+Resolution
+Verification
+```
+
+That is the **complete closed loop**.
+
+---
+
+# 33. Dashboard KPIs
+
+The main dashboard should show:
+
+```text
+Total Exceptions
+Open Exceptions
+High-Risk Exceptions
+Fraud Escalations
+Department Escalations
+Rejected Cases
+Resolved Cases
+Unresolved Tickets
+Overdue Tickets
+Pending Reminders
+Average Resolution Time
+Average Investigation Time
+```
+
+And financial metrics:
+
+```text
+Total Amount at Risk
+Amount Resolved
+Amount Under Investigation
+Amount Associated With Escalations
+```
+
+---
+
+# 34. Risk dashboard
+
+A separate risk dashboard:
+
+```text
+Financial Risk
+████████████████  HIGH
+
+Fraud Risk
+██████████       MEDIUM
+
+Operational Risk
+██████████████   HIGH
+
+Compliance Risk
+████             LOW
+```
+
+Plus:
+
+```text
+Risk increasing
+Risk decreasing
+Repeated issues
+Top exception categories
+Top affected merchants
+Unresolved high-risk tickets
+```
+
+---
+
+# 35. Buildathon evaluation
+
+This project can be demonstrated against a **50+ synthetic-record batch**, matching the current Finance Controller requirement to report throughput, match rate and unresolved exceptions. :chatgpt-content-reference{index="10"}
+
+I would create a benchmark containing:
+
+```text
+60–100 synthetic financial records
++
+20–30 injected exceptions
++
+known ground truth
+```
+
+Example:
+
+```text
+10 settlement mismatches
+5 refund exceptions
+5 fee discrepancies
+5 duplicate transactions
+5 suspicious/fraud cases
+5 timing issues
+5 bank mismatches
+```
+
+Then measure:
+
+### Detection
+
+```text
+Precision
+Recall
+F1
+```
+
+### Investigation
+
+```text
+Root-cause accuracy
+Evidence accuracy
+Timeline reconstruction accuracy
+```
+
+### Decision
+
+```text
+Decision accuracy
+False resolution rate
+False rejection rate
+Escalation accuracy
+```
+
+### Risk
+
+```text
+Risk classification accuracy
+False-positive cost
+Fraud escalation precision
+```
+
+### Operations
+
+```text
+Throughput
+Average investigation time
+Average resolution time
+Ticket response time
+```
+
+This aligns particularly well with Razorpay's current published emphasis on measurable accuracy, throughput, honest exception handling, and risk metrics including false-positive cost. :chatgpt-content-reference{index="11"}
+
+---
+
+# 36. What makes this different from a generic AI chatbot?
+
+The system is **not**:
+
+❌ A chatbot answering payment questions  
+❌ A generic reconciliation script  
+❌ A fraud prediction model alone  
+❌ A financial calculator  
+❌ A generic RAG application  
+❌ A ticketing system alone  
+❌ An LLM that decides based on confidence  
+
+It is:
+
+```text
+                    AI
+                     ↓
+             INVESTIGATION
+                     ↓
+                  EVIDENCE
+                     ↓
+                   RULES
+                     ↓
+                   RISK
+                     ↓
+                 AUTHORITY
+                     ↓
+                 DECISION
+                     ↓
+           ┌─────────┴─────────┐
+           ↓                   ↓
+       RESOLUTION          ESCALATION
+                               ↓
+                         TICKET + REMINDER
+                               ↓
+                           RESOLUTION
+                               ↓
+                           VERIFY
+                               ↓
+                             AUDIT
+```
+
+---
+
+# 37. Final project identity
+
+### **Project Name**
+**AI Financial Exception Resolution & Risk Management System**
+
+### **Core Problem**
+Financial exceptions are difficult to resolve because transaction information, evidence, policies, risk signals, decisions, and departmental follow-ups are distributed across multiple workflows.
+
+### **Solution**
+An AI-powered financial operations system that reconstructs financial events, investigates exceptions using authoritative evidence, applies versioned rules and policies, assesses financial/fraud/operational/compliance risk, and determines whether a case can be automatically resolved, rejected, or escalated.
+
+### **Escalation**
+Uncertain or high-risk cases automatically generate structured departmental tickets containing the issue, investigation, evidence, applicable rules, risk factors, decision rationale, and required action. Unresolved tickets are tracked and reminded until resolution.
+
+### **Traceability**
+Every decision is linked to:
+
+> **Evidence → Source → Rule → Risk → Authority → Decision → Action → Verification**
+
+### **Final principle**
+
+> **No unsupported decision. No unexplained risk. No untracked escalation. No silent failure.**
+
+---
+
+# 🔥 Final end-to-end architecture in one view
+
+```text
+┌─────────────────────────────────────────────────────────────┐
+│                  FINANCIAL DATA SOURCES                     │
+│ Payments | Orders | Refunds | Fees | Settlements | Bank   │
+└──────────────────────────┬──────────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────────┐
+│                 EXCEPTION DETECTION                         │
+│ Detect mismatch / duplicate / missing / suspicious event   │
+└──────────────────────────┬──────────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────────┐
+│                    INVESTIGATION                            │
+│ Event Graph | Timeline | Root Cause | Calculations          │
+└──────────────────────────┬──────────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────────┐
+│                    EVIDENCE ENGINE                          │
+│ Evidence → Source → Timestamp → Record → Authority         │
+└──────────────────────────┬──────────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────────┐
+│                POLICY / RULE ENGINE                         │
+│ Razorpay | Merchant | RBI | NPCI | Network | Provider      │
+└──────────────────────────┬──────────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────────┐
+│                     RISK ENGINE                             │
+│ Financial | Fraud | Operational | Compliance | Impact       │
+└──────────────────────────┬──────────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────────┐
+│                    DECISION ENGINE                           │
+│ Evidence + Rules + Risk + Authority + Permissions           │
+└──────────────────────────┬──────────────────────────────────┘
+                           ↓
+          ┌────────────────┼─────────────────┐
+          ↓                ↓                 ↓
+   AUTO-APPROVE         REJECT          ESCALATE
+          │                │                 │
+          │                │        ┌────────┴────────┐
+          │                │        ↓                 ↓
+          │                │     FRAUD            DEPARTMENT
+          │                │     TICKET             TICKET
+          │                │        │                 │
+          └────────────────┼────────┴─────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────────┐
+│                 ISSUE / TICKET TRACKER                      │
+│ Issue ID | Ticket ID | Department | Status | Priority       │
+└──────────────────────────┬──────────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────────┐
+│                  REMINDER ENGINE                            │
+│ Reminder → Reminder → Escalation if unresolved              │
+└──────────────────────────┬──────────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────────┐
+│                 RESOLUTION + VERIFICATION                    │
+└──────────────────────────┬──────────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────────┐
+│             SEARCHABLE AUDIT & HISTORY                       │
+│ Evidence | Rules | Risk | Decisions | Tickets | Actions     │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### **The final concept in one sentence**
+
+> **AI Financial Exception Resolution & Risk Management is an evidence-first, policy-governed financial operations agent that turns a financial mismatch into a fully traceable lifecycle — detect → investigate → prove → risk-assess → decide → resolve/reject/escalate → ticket → remind → verify → audit — without allowing the AI to invent facts, override authoritative rules, or make decisions outside its authority.**
+
+That is now a **single unified system**, rather than a collection of separate features, and it gives you a very strong foundation for the architecture, PDR, UI, synthetic dataset, evaluation framework, and eventual implementation.

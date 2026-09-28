@@ -1,0 +1,38 @@
+# Python bytecode and test output
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Local environments and editor settings
+.venv/
+venv/
+env/
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+
+# Application data, backups, and runtime logs
+data/*.sqlite3
+data/*.sqlite3-*
+data/backups/
+data/*.log
+data/regulatory/objects/
+
+# Generated delivery and verification files
+.codex-*/
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini

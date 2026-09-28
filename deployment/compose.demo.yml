@@ -1,0 +1,23 @@
+services:
+  cause-ai-demo:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    environment:
+      CAUSE_AI_ENV: demo
+      CAUSE_AI_DEMO: "true"
+      HOST: 127.0.0.1
+      PORT: "8000"
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - cause_ai_demo_data:/app/data
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+volumes:
+  cause_ai_demo_data:

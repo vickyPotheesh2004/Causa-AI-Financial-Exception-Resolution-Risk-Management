@@ -1,0 +1,5 @@
+[
+  {"record_type":"payment","record_id":"rzp-public-schema-payment-001","payment_id":"pay_public_schema_001","currency":"INR","amount":"99.00","status":"CAPTURED","occurred_at":"2026-09-20T09:00:00+00:00","subject_type":"COMPANY","subject_id":"SAMPLE-COMPANY-001","email_id":"sample.company001@example.invalid"},
+  {"record_type":"fee","record_id":"rzp-public-schema-fee-001","payment_id":"pay_public_schema_001","currency":"INR","amount":"2.50","occurred_at":"2026-09-20T09:00:01+00:00","subject_type":"COMPANY","subject_id":"SAMPLE-COMPANY-001","email_id":"sample.company001@example.invalid"},
+  {"record_type":"settlement","record_id":"rzp-public-schema-settlement-001","payment_id":"pay_public_schema_001","currency":"INR","amount":"94.50","occurred_at":"2026-09-21T09:00:00+00:00","subject_type":"COMPANY","subject_id":"SAMPLE-COMPANY-001","email_id":"sample.company001@example.invalid"}
+]

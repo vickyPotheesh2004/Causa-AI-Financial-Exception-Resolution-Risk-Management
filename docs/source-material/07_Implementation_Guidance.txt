@@ -1,0 +1,2303 @@
+# CAUSA
+## AI Financial Exception Resolution & Risk Management System
+
+You are the **lead software architect, senior full-stack engineer, AI/agentic AI engineer, database engineer, QA engineer, security engineer, DevOps engineer, technical writer, and code reviewer** responsible for completing this project end-to-end.
+
+The project name is:
+
+**Causa — AI Financial Exception Resolution & Risk Management System**
+
+Your responsibility is not merely to generate code. Your responsibility is to take the project from the provided requirements and previous-conversation material to a **fully structured, runnable, tested, documented, production-quality project**.
+
+You must understand the complete system before making implementation decisions.
+
+---
+
+# 1. SOURCE OF TRUTH
+
+I will provide/copied previous conversations and project discussions after this prompt.
+
+Treat those materials as the primary product requirements and design context.
+
+Do NOT blindly copy earlier implementation decisions.
+
+Instead:
+
+1. Read all provided material completely.
+2. Extract requirements.
+3. Identify functional requirements.
+4. Identify non-functional requirements.
+5. Identify architecture requirements.
+6. Identify AI/agent requirements.
+7. Identify financial-domain rules.
+8. Identify security requirements.
+9. Identify UI requirements.
+10. Identify department-side requirements.
+11. Identify employee-side requirements.
+12. Identify testing requirements.
+13. Identify documentation requirements.
+14. Identify unresolved contradictions.
+15. Resolve contradictions using the latest explicitly stated requirement.
+16. If something is genuinely ambiguous, choose a safe and maintainable implementation and document the assumption.
+
+The latest explicit requirement takes precedence over an older conflicting requirement.
+
+Do not invent business facts.
+
+If a real external policy is required, represent it as a configurable/versioned policy rather than hard-coding unsupported claims.
+
+---
+
+# 2. PROJECT MISSION
+
+Causa is an evidence-driven financial operations system that detects, investigates, risk-assesses, resolves, rejects, or escalates financial exceptions across:
+
+- payments
+- settlements
+- refunds
+- fees
+- adjustments
+- bank records
+- related financial events
+
+The core workflow is:
+
+**DETECT → INVESTIGATE → PROVE → RISK-ASSESS → DECIDE → ROUTE → RESOLVE → VERIFY → AUDIT**
+
+The system must transform:
+
+> "Something doesn't match."
+
+into:
+
+> "Here is what happened, here is the evidence proving it, here is the applicable rule, here is the risk, here is the appropriate decision, here is who must act, and here is whether the resolution was actually verified."
+
+---
+
+# 3. CORE DESIGN PRINCIPLE
+
+The architecture must enforce:
+
+**AI reasons.  
+Evidence proves.  
+Rules constrain.  
+Risk prioritizes.  
+Authority determines.  
+Permissions control.  
+Code executes.  
+Verification confirms.  
+Audit remembers.**
+
+AI must never become an unrestricted financial action executor.
+
+AI may:
+
+- investigate
+- plan investigation steps
+- retrieve approved information through tools
+- correlate records
+- reconstruct timelines
+- identify possible root causes
+- retrieve relevant policies
+- summarize evidence
+- assess risk factors
+- generate recommendations
+- explain decisions
+- prepare department tickets
+
+Deterministic application code must control:
+
+- money calculations
+- financial comparisons
+- policy evaluation
+- permissions
+- authorization
+- risk thresholds
+- decision state
+- ticket states
+- SLA/reminders
+- idempotency
+- action validation
+- execution
+- verification
+- audit events
+
+---
+
+# 4. DECISION MODEL
+
+The system must support exactly these primary decision outcomes:
+
+## AUTO_APPROVE
+
+Use only when:
+
+- required evidence exists
+- evidence is sufficiently trustworthy
+- no material evidence conflict exists
+- all applicable rules pass
+- authority is known
+- required permission exists
+- action is permitted
+- risk is within configured limits
+- action is safe and idempotent
+
+## REJECT
+
+Use only when the request/case is clearly invalid or prohibited based on evidence and applicable rules.
+
+A failed rule alone must NOT automatically mean rejection.
+
+The system must show:
+
+- decision
+- reason
+- evidence
+- rule
+- source
+- authority
+- action
+
+## FRAUD_ESCALATE
+
+Use when evidence indicates possible suspicious/fraud-related activity requiring specialist investigation.
+
+Do not automatically state:
+
+"this is fraud"
+
+unless an authorized determination exists.
+
+Use language such as:
+
+"Possible fraud; specialist investigation required."
+
+The case must be routed to the configured Risk/Fraud workflow.
+
+## DEPARTMENT_ESCALATE
+
+Use when:
+
+- evidence is insufficient
+- evidence conflicts
+- authority is unclear
+- applicable policy is ambiguous
+- manual review is required
+- action risk exceeds autonomous threshold
+- another department must decide
+- external authority is required
+- system cannot safely establish the resolution
+
+---
+
+# 5. UNKNOWN MUST BE FIRST-CLASS
+
+Never force an answer.
+
+The system must support:
+
+- UNKNOWN
+- INSUFFICIENT_EVIDENCE
+- CONFLICTING_EVIDENCE
+- POLICY_UNAVAILABLE
+- AUTHORITY_UNKNOWN
+- TOOL_FAILURE
+- EXECUTION_FAILURE
+- VERIFICATION_FAILURE
+
+The rule is:
+
+**No evidence → no confirmed fact.**
+
+**No source → no policy claim.**
+
+**Conflict → no automatic resolution.**
+
+**Possible fraud → fraud investigation.**
+
+**Clear invalid request → reject.**
+
+**All required conditions pass → authorized action.**
+
+**Action completed → verify.**
+
+**Every decision → audit.**
+
+---
+
+# 6. EVIDENCE MODEL
+
+Every factual claim generated by the system must be traceable to evidence.
+
+Evidence hierarchy:
+
+1. Authoritative financial records
+2. Bank/payment-provider records
+3. Merchant records
+4. Versioned policies/rules
+5. AI interpretation
+
+Create a structured evidence model containing at minimum:
+
+- evidence_id
+- claim/fact
+- source_type
+- source_id
+- source_record_id
+- source_timestamp
+- retrieved_at
+- authority
+- verification_status
+- optional checksum/hash
+- related_exception_id
+
+Evidence states:
+
+- VERIFIED
+- UNVERIFIED
+- CONFLICTING
+- INVALID
+
+The UI must allow users to trace a finding back to its supporting evidence.
+
+---
+
+# 7. FINANCIAL EVENT MODEL
+
+Create a canonical financial event model.
+
+Financial entities include:
+
+- Merchant
+- Customer
+- Order
+- Payment
+- Refund
+- Fee
+- Settlement
+- Adjustment
+- Bank Record
+
+Create a financial event graph:
+
+Merchant
+→ Order
+→ Payment
+→ Fee / Refund / Adjustment
+→ Settlement
+→ Bank Record
+
+Exceptions and tickets must connect to the relevant financial events.
+
+Money must NEVER be represented using unsafe floating-point arithmetic.
+
+Use Decimal or integer minor units.
+
+---
+
+# 8. EXCEPTION TYPES
+
+Support at minimum:
+
+- settlement mismatch
+- refund mismatch
+- fee discrepancy
+- duplicate transaction
+- missing settlement
+- bank mismatch
+- timing exception
+- adjustment discrepancy
+- suspicious/fraud-related anomaly
+- unknown exception
+
+Use stable exception identifiers such as:
+
+`EXC-2026-000184`
+
+Repeated reports of the same underlying issue must be correlated rather than blindly creating duplicate cases.
+
+Track:
+
+- first reported
+- latest reported
+- report count
+- unique reporters
+- related transactions
+- related exceptions
+- history
+
+---
+
+# 9. INVESTIGATION ENGINE
+
+The investigation process must follow:
+
+1. Identify entities
+2. Retrieve relevant records
+3. Construct financial timeline
+4. Calculate expected state
+5. Compare expected vs actual
+6. Identify discrepancy
+7. Collect evidence
+8. Check related events
+9. Check applicable policy
+10. Determine possible root cause
+11. Assess uncertainty
+12. Produce investigation report
+
+The investigation engine must not hallucinate missing financial records.
+
+If records are missing, explicitly report them as missing.
+
+If records conflict, explicitly report the conflict.
+
+---
+
+# 10. AI AGENT ARCHITECTURE
+
+Do not build one giant unrestricted agent.
+
+Use controlled components such as:
+
+### Investigation Planner
+Creates investigation steps.
+
+### Evidence Agent
+Retrieves and validates evidence through approved tools.
+
+### Root Cause Investigator
+Analyzes evidence and identifies possible causes.
+
+### Policy Retriever
+Retrieves relevant policy/rule versions.
+
+### Risk Analyzer
+Produces structured risk factors.
+
+### Decision Explainer
+Generates human-readable explanation from deterministic decision output.
+
+### Ticket Generator
+Creates structured department tickets.
+
+### AI Orchestrator
+Coordinates these components.
+
+The AI must operate through controlled tools.
+
+Never allow arbitrary SQL, unrestricted database access, unrestricted filesystem access, or unrestricted financial action tools.
+
+---
+
+# 11. TOOL LAYER
+
+Implement a controlled tool registry.
+
+Possible tools:
+
+- get_payment
+- get_order
+- get_refund
+- get_fee
+- get_settlement
+- get_adjustment
+- get_bank_record
+- find_related_transactions
+- build_transaction_timeline
+- calculate_expected_amount
+- get_policy
+- get_policy_version
+- collect_evidence
+- validate_evidence
+- assess_risk
+- create_ticket
+- update_ticket
+- schedule_reminder
+- verify_resolution
+
+Every tool must define:
+
+- tool name
+- description
+- permission
+- input schema
+- output schema
+- data scope
+- risk level
+- audit requirement
+
+---
+
+# 12. POLICY ENGINE
+
+Do not encode important financial policy only inside an LLM prompt.
+
+Create a versioned policy registry.
+
+Possible policy sources include:
+
+- platform rules
+- merchant policies
+- applicable regulatory requirements
+- network requirements
+- provider requirements
+- internal SOPs
+
+Every policy should support:
+
+- policy_id
+- version
+- effective_from
+- effective_to
+- source
+- source_url if available
+- rule_text
+- jurisdiction
+- applies_to
+- priority
+
+Policy evaluation must return structured results such as:
+
+- PASS
+- FAIL
+- UNKNOWN
+- CONFLICT
+
+Do not make unsupported legal claims.
+
+---
+
+# 13. RISK MANAGEMENT
+
+Risk is a first-class feature.
+
+Track separately:
+
+- financial_risk
+- fraud_risk
+- operational_risk
+- compliance_risk
+- customer_impact
+
+Risk must be explainable.
+
+Every risk factor should connect to evidence.
+
+Example:
+
+HIGH financial risk
+
+because:
+
+- amount at risk = ₹850,000
+- unresolved settlement discrepancy
+- repeated related exceptions
+
+Risk influences priority/routing but does not itself prove fraud.
+
+Track risk history over time.
+
+---
+
+# 14. ISSUE/TICKET MANAGEMENT
+
+Every escalation creates a structured ticket.
+
+Example:
+
+`RZ-INC-82931`
+
+Ticket must contain:
+
+- ticket ID
+- exception ID
+- merchant
+- issue
+- amount
+- investigation
+- evidence IDs
+- source references
+- applicable rules
+- risk
+- decision
+- reason
+- required action
+- department
+- priority
+- SLA
+- status
+- assignment
+- reminder history
+
+Ticket lifecycle must be explicit.
+
+Possible states:
+
+CREATED
+→ ASSIGNED
+→ OPEN
+→ WAITING_FOR_RESPONSE
+→ REMINDER_DUE
+→ REMINDER_SENT
+→ RESPONDED
+→ UNDER_REVIEW
+→ RESOLVED
+→ VERIFIED
+→ CLOSED
+
+Also support appropriate escalation/specialist-review states.
+
+---
+
+# 15. REMINDER ENGINE
+
+Implement configurable reminders.
+
+Example:
+
+Ticket created
+→ SLA timer
+→ Reminder #1
+→ Reminder #2
+→ Manager/specialist escalation
+
+Do not spam users.
+
+Reminder rules must be configurable.
+
+Every reminder must create an audit event.
+
+---
+
+# 16. DEPARTMENT INTERFACE
+
+Create a complete department-side case-resolution workspace.
+
+Departments should be configurable.
+
+Examples:
+
+- Settlement Operations
+- Refund Operations
+- Risk/Fraud
+- Compliance
+- Support/Merchant Operations
+- Technical/Platform Operations
+
+Do not assume these are actual internal organizational names.
+
+The application should allow department configuration.
+
+Department navigation:
+
+- Dashboard
+- My Queue
+- Unassigned
+- High Risk
+- Overdue
+- Escalations
+- Search
+- Reports
+- Audit
+
+Case tabs:
+
+- Case
+- Evidence
+- Investigation
+- Risk
+- Rules
+- Timeline
+- Communication
+- Actions
+- Resolution
+- Audit
+
+Department users must be able to:
+
+- investigate
+- review evidence
+- request additional evidence
+- add findings
+- update structured risk findings where authorized
+- resolve authorized cases
+- reject authorized cases
+- reassign
+- escalate
+- request approval
+- add internal notes
+
+All actions must be permission-controlled and audited.
+
+---
+
+# 17. EMPLOYEE INTERFACE
+
+Create a Financial Operations Command Center.
+
+Dashboard should include:
+
+- Open Exceptions
+- High Risk Exceptions
+- Escalated Tickets
+- Unresolved Tickets
+- Total Amount at Risk
+- Amount Under Investigation
+- Amount Resolved
+
+Include:
+
+"Needs Your Attention"
+
+for:
+
+- high-risk cases
+- overdue tickets
+- conflicting evidence
+- failed verification
+- unresolved escalations
+
+---
+
+# 18. SEARCH
+
+Create global search.
+
+Search should support:
+
+- exception ID
+- ticket ID
+- merchant ID
+- company
+- email where permitted
+- transaction/payment ID
+- settlement ID
+- refund ID
+- issue type
+- risk
+- status
+- department
+- date
+- amount
+- root cause
+
+Support natural-language queries such as:
+
+"Show unresolved high-risk settlement issues above ₹1 lakh."
+
+The AI may translate natural language into a structured query, but the final filtering must be performed deterministically by the backend/database.
+
+---
+
+# 19. AUDIT
+
+Every important action must be auditable.
+
+Track separately:
+
+### AI actions
+
+- investigation
+- evidence collection
+- recommendation
+- generated explanation
+
+### Human actions
+
+- review
+- finding
+- approval
+- resolution
+- escalation
+
+### System actions
+
+- detection
+- ticket creation
+- reminder
+- verification
+- state transition
+
+Audit event should include:
+
+- audit ID
+- actor type
+- actor ID
+- action
+- timestamp
+- exception ID
+- evidence IDs
+- policy version
+- input/result references
+
+Audit history must be append-only from the application perspective.
+
+---
+
+# 20. VERIFICATION
+
+A resolution is NOT complete merely because a department marks it resolved.
+
+After resolution:
+
+1. Re-read relevant financial records.
+2. Recalculate expected state.
+3. Compare actual state.
+4. Validate the correction.
+5. Confirm the underlying exception is resolved.
+
+If verification fails:
+
+`RESOLUTION → VERIFICATION_FAILED → REOPEN`
+
+Only successful verification should permit final closure.
+
+---
+
+# 21. RECOMMENDED TECHNOLOGY
+
+Use a practical architecture:
+
+Frontend:
+
+- Next.js
+- TypeScript
+- React
+- Tailwind CSS
+- shadcn/ui
+- Recharts
+
+Backend:
+
+- Python
+- FastAPI
+- Pydantic
+- SQLAlchemy
+
+Database:
+
+- PostgreSQL
+- pgvector
+
+Operational:
+
+- Redis
+- background workers
+- Docker
+
+AI:
+
+- configurable LLM provider
+- configurable embedding provider
+- controlled agent/tool layer
+- RAG for policies/SOPs/historical investigation knowledge
+
+Testing:
+
+- Pytest
+- Playwright
+- frontend unit/component tests
+- API integration tests
+- database tests
+- agent/tool tests
+- security tests
+
+---
+
+# 22. ARCHITECTURAL STYLE
+
+For the initial implementation use:
+
+**Modular Monolith + Event-Driven Workers**
+
+Do NOT unnecessarily create dozens of microservices.
+
+Keep strong module boundaries so individual components can later become services.
+
+Suggested modules:
+
+- ingestion
+- normalization
+- financial core
+- exceptions
+- investigation
+- evidence
+- policy
+- risk
+- decision
+- tickets
+- reminders
+- resolution
+- verification
+- audit
+- authentication/authorization
+- search
+- AI
+
+---
+
+# 23. REQUIRED DEVELOPMENT PROCESS
+
+You MUST NOT immediately start coding.
+
+Follow these phases in order.
+
+## PHASE 0 — REQUIREMENT INGESTION
+
+Read all provided previous conversation material.
+
+Create:
+
+`docs/requirements/source-requirements.md`
+
+Extract everything relevant.
+
+---
+
+# PHASE 1 — PDR
+
+Create:
+
+`docs/PDR.md`
+
+The PDR must contain:
+
+1. Project title
+2. Executive summary
+3. Problem statement
+4. Problem context
+5. Goals
+6. Non-goals
+7. Users
+8. User roles
+9. User journeys
+10. Functional requirements
+11. Non-functional requirements
+12. Architecture
+13. Data architecture
+14. AI architecture
+15. Agent architecture
+16. Evidence architecture
+17. Policy architecture
+18. Risk architecture
+19. Decision architecture
+20. Ticket architecture
+21. Reminder architecture
+22. Department workflow
+23. Employee workflow
+24. Security
+25. Privacy
+26. Audit
+27. API architecture
+28. Database architecture
+29. Search
+30. Observability
+31. Failure handling
+32. Testing strategy
+33. Deployment
+34. Future scalability
+35. Known assumptions
+36. Known limitations
+37. Success metrics
+
+The PDR must describe the ACTUAL implementation target.
+
+Do not create a generic theoretical document.
+
+---
+
+# PHASE 2 — ARCHITECTURE DOCUMENTATION
+
+Create:
+
+`docs/architecture/README.md`
+
+And:
+
+```text
+docs/architecture/
+├── system-architecture.md
+├── frontend-architecture.md
+├── backend-architecture.md
+├── database-architecture.md
+├── ai-architecture.md
+├── agent-architecture.md
+├── evidence-architecture.md
+├── policy-engine.md
+├── risk-engine.md
+├── decision-engine.md
+├── ticket-engine.md
+├── verification-engine.md
+├── audit-architecture.md
+├── security-architecture.md
+└── deployment-architecture.md
+```
+
+Use Mermaid diagrams wherever useful.
+
+---
+
+# PHASE 3 — TASK BREAKDOWN
+
+Before implementation, create:
+
+`docs/TASKS.md`
+
+Break the entire project into small, verifiable tasks.
+
+Every task must contain:
+
+- ID
+- description
+- dependencies
+- files/modules affected
+- acceptance criteria
+- test requirements
+- completion status
+
+Use IDs such as:
+
+`ARCH-001`
+
+`DB-001`
+
+`API-001`
+
+`AI-001`
+
+`UI-001`
+
+`SEC-001`
+
+`TEST-001`
+
+`DOC-001`
+
+etc.
+
+Create dependency ordering.
+
+Do not leave vague tasks such as:
+
+"Build backend."
+
+Instead:
+
+"Implement ExceptionRepository.create() with transaction-safe ID generation, validation, persistence, and repository tests."
+
+---
+
+# PHASE 4 — PROJECT SCAFFOLDING
+
+Create a clean project structure.
+
+Before writing feature code:
+
+- configure package management
+- environment configuration
+- Docker
+- database
+- migrations
+- linting
+- formatting
+- type checking
+- testing
+- CI
+- logging
+- error handling
+
+Create `.env.example`.
+
+Never commit secrets.
+
+---
+
+# PHASE 5 — DATABASE
+
+Implement database schema from the approved architecture.
+
+Create migrations.
+
+Create seed data.
+
+Seed data must include realistic synthetic financial scenarios.
+
+Include cases such as:
+
+1. successful payment
+2. failed payment
+3. settlement mismatch
+4. refund mismatch
+5. fee discrepancy
+6. duplicate transaction
+7. missing settlement
+8. bank mismatch
+9. conflicting evidence
+10. insufficient evidence
+11. possible fraud
+12. clear invalid request
+13. automatically resolvable case
+14. department escalation
+15. failed verification
+16. repeated issue reports
+
+---
+
+# PHASE 6 — FINANCIAL CORE
+
+Implement:
+
+- canonical event model
+- financial relationships
+- Decimal-based calculations
+- reconciliation
+- exception detection
+- deduplication
+- correlation
+- timeline reconstruction
+
+Write unit and integration tests before considering this phase complete.
+
+---
+
+# PHASE 7 — EVIDENCE ENGINE
+
+Implement:
+
+- evidence records
+- source references
+- verification states
+- claim/evidence relationships
+- conflict detection
+- provenance
+- evidence retrieval
+
+Test missing, invalid, conflicting, duplicate, and verified evidence.
+
+---
+
+# PHASE 8 — POLICY ENGINE
+
+Implement:
+
+- policy registry
+- policy versioning
+- rules
+- effective dates
+- policy retrieval
+- deterministic rule evaluation
+- PASS/FAIL/UNKNOWN/CONFLICT
+
+Test version changes and conflicting rules.
+
+---
+
+# PHASE 9 — RISK ENGINE
+
+Implement explainable risk calculations.
+
+Do not create an unexplained AI-only score.
+
+Test:
+
+- financial exposure
+- repeated exceptions
+- unresolved duration
+- suspicious patterns
+- evidence conflicts
+- compliance uncertainty
+- customer impact
+
+---
+
+# PHASE 10 — AI INVESTIGATION
+
+Implement controlled agent architecture.
+
+AI must operate through tools.
+
+Implement:
+
+- planner
+- evidence retrieval
+- timeline analysis
+- root cause analysis
+- policy retrieval
+- risk explanation
+- decision explanation
+- ticket generation
+
+The AI output must be structured.
+
+Use Pydantic schemas for AI outputs.
+
+Validate every model response before accepting it.
+
+If invalid, retry safely or fall back to UNKNOWN/ESCALATE.
+
+---
+
+# PHASE 11 — DECISION ENGINE
+
+Implement deterministic decision logic.
+
+Test all four primary outcomes:
+
+AUTO_APPROVE
+
+REJECT
+
+FRAUD_ESCALATE
+
+DEPARTMENT_ESCALATE
+
+Create explicit test cases for:
+
+- insufficient evidence
+- conflicting evidence
+- unknown authority
+- policy failure
+- high risk
+- unauthorized action
+- valid low-risk case
+- possible fraud
+- clearly prohibited case
+
+---
+
+# PHASE 12 — TICKETING
+
+Implement:
+
+- ticket creation
+- department routing
+- assignment
+- priority
+- SLA
+- status transitions
+- comments
+- escalation
+- reminders
+- audit events
+
+---
+
+# PHASE 13 — RESOLUTION + VERIFICATION
+
+Implement:
+
+- department findings
+- resolution submission
+- approval where required
+- execution
+- verification
+- reopen on failed verification
+- final closure
+
+---
+
+# PHASE 14 — FRONTEND
+
+Build the complete UI.
+
+Minimum screens:
+
+### Employee
+
+- Login
+- Dashboard
+- Exception Queue
+- Exception Details
+- Risk
+- Tickets
+- Reminders
+- Search
+- Reports
+- Audit
+
+### Department
+
+- Department Dashboard
+- My Queue
+- Unassigned
+- High Risk
+- Overdue
+- Case Workspace
+- Evidence
+- Investigation
+- Rules
+- Timeline
+- Communication
+- Actions
+- Resolution
+- Audit
+
+### Admin
+
+- Policies
+- Rules
+- Users
+- Roles
+- Permissions
+- Departments
+- SLA configuration
+- AI configuration
+
+UI must not be decorative only.
+
+Every important screen must connect to real backend data.
+
+---
+
+# PHASE 15 — ERROR HANDLING
+
+Every API must have consistent error handling.
+
+Create standardized responses.
+
+Handle:
+
+- validation failures
+- authentication errors
+- authorization errors
+- missing resources
+- database failures
+- tool failures
+- AI failures
+- timeout
+- rate limiting
+- policy unavailable
+- evidence conflict
+- execution failure
+- verification failure
+
+Do not expose stack traces to users.
+
+Log useful diagnostic information server-side.
+
+---
+
+# PHASE 16 — SECURITY REVIEW
+
+Perform a security pass for:
+
+- authentication
+- authorization
+- RBAC
+- tenant isolation
+- PII exposure
+- secrets
+- SQL injection
+- XSS
+- CSRF where relevant
+- unsafe file upload
+- prompt injection
+- arbitrary tool execution
+- unrestricted database access
+- API abuse
+- insecure direct object references
+- logging sensitive information
+
+Do not store API keys in source code.
+
+---
+
+# PHASE 17 — TESTING STRATEGY
+
+Testing must happen at multiple levels.
+
+## Unit Tests
+
+Test every deterministic function.
+
+Examples:
+
+- amount calculations
+- settlement calculation
+- fee calculation
+- risk factors
+- rule evaluation
+- decision logic
+- ticket state transitions
+- reminder scheduling
+- permissions
+- verification
+
+## Integration Tests
+
+Test:
+
+Frontend/API
+API/database
+Exception/investigation
+Evidence/policy
+Risk/decision
+Decision/ticket
+Resolution/verification
+
+## AI Tests
+
+Test:
+
+- valid output
+- malformed output
+- hallucinated evidence
+- missing evidence
+- conflicting evidence
+- prompt injection
+- irrelevant retrieved context
+- unsupported conclusion
+- tool failure
+- model failure
+
+## API Tests
+
+Test every endpoint.
+
+## Security Tests
+
+Test unauthorized and cross-role access.
+
+## E2E Tests
+
+Use Playwright.
+
+Test real user journeys.
+
+---
+
+# 18. REQUIRED END-TO-END TEST SCENARIOS
+
+Create automated E2E scenarios for at least:
+
+### Scenario 1 — Auto Resolution
+
+Financial discrepancy detected
+→ investigation
+→ evidence
+→ policy passes
+→ low risk
+→ AUTO_APPROVE
+→ action
+→ verification
+→ CLOSED
+
+### Scenario 2 — Clear Invalid Request
+
+Request
+→ evidence
+→ policy evaluation
+→ clearly invalid
+→ REJECT
+→ reason/evidence/rule displayed
+→ audit
+
+### Scenario 3 — Possible Fraud
+
+Anomaly
+→ evidence
+→ suspicious indicators
+→ FRAUD_ESCALATE
+→ Risk/Fraud ticket
+→ department review
+→ resolution
+→ verification
+→ audit
+
+### Scenario 4 — Insufficient Evidence
+
+Exception
+→ investigation
+→ missing records
+→ UNKNOWN
+→ DEPARTMENT_ESCALATE
+→ ticket
+→ evidence request
+→ department response
+→ investigation continues
+
+### Scenario 5 — Conflicting Evidence
+
+Payment record differs from bank record
+→ conflict detected
+→ no automatic resolution
+→ department escalation
+→ human finding
+→ resolution
+→ verification
+
+### Scenario 6 — Repeated Issue
+
+Same underlying problem reported multiple times
+→ correlate reports
+→ one exception
+→ report count increments
+→ operational risk increases
+→ priority changes
+
+### Scenario 7 — Unresolved Ticket
+
+Ticket created
+→ SLA passes
+→ reminder
+→ second reminder
+→ escalation
+→ department response
+→ resolution
+
+### Scenario 8 — Failed Verification
+
+Resolution submitted
+→ verification fails
+→ case reopened
+→ department notified
+→ audit event created
+
+### Scenario 9 — Department Correction
+
+AI finding:
+UNKNOWN
+
+Department finding:
+ADJUSTMENT_IDENTIFIED
+
+Evidence added.
+
+System records both findings and actors.
+
+### Scenario 10 — Search
+
+User searches:
+
+"unresolved high-risk settlement issues above ₹1 lakh"
+
+→ structured filter
+→ backend query
+→ correct results.
+
+---
+
+# 19. FILE-BY-FILE QUALITY CHECK
+
+Before declaring completion, inspect EVERY project file.
+
+For every source file ask:
+
+1. Is it required?
+2. Is it imported correctly?
+3. Is the API/interface correct?
+4. Are types correct?
+5. Are error paths handled?
+6. Are security requirements satisfied?
+7. Is there dead code?
+8. Is there duplicated logic?
+9. Is there hardcoded configuration?
+10. Is there a missing test?
+11. Is documentation needed?
+12. Does it follow project conventions?
+
+Do not leave:
+
+- TODO
+- FIXME
+- placeholder logic
+- fake implementations
+- dead imports
+- unused variables
+- unreachable code
+- broken references
+- inconsistent naming
+- duplicated business logic
+- hardcoded secrets
+- unexplained magic numbers
+- mock logic accidentally used in production
+
+unless explicitly documented and intentionally required.
+
+---
+
+# 20. STATIC QUALITY GATES
+
+Before completion, run all applicable checks.
+
+Backend:
+
+- formatting
+- linting
+- type checking
+- unit tests
+- integration tests
+- coverage
+
+Frontend:
+
+- formatting
+- linting
+- TypeScript checks
+- component tests
+- E2E tests
+
+Database:
+
+- migrations
+- seed
+- constraints
+- indexes
+- foreign keys
+
+Security:
+
+- dependency audit
+- secret scanning
+- permission tests
+
+Docker:
+
+- build
+- startup
+- health checks
+
+---
+
+# 21. FINAL TEST COMMAND
+
+Create one reliable command that runs the full project validation.
+
+For example:
+
+```bash
+make test-all
+```
+
+or an equivalent project-specific command.
+
+It should run:
+
+1. backend tests
+2. frontend tests
+3. type checks
+4. lint
+5. integration tests
+6. database validation
+7. E2E tests
+8. security checks where practical
+
+Document the exact command in README.
+
+---
+
+# 22. README REQUIREMENTS
+
+Create a professional:
+
+`README.md`
+
+It must explain:
+
+# Causa
+
+## What is Causa?
+
+## Problem
+
+## Solution
+
+## Core Workflow
+
+## Architecture
+
+## Features
+
+## AI Architecture
+
+## Risk Management
+
+## Evidence System
+
+## Decision Engine
+
+## Department Workflow
+
+## Employee Workflow
+
+## Technology Stack
+
+## Project Structure
+
+## Requirements
+
+## Installation
+
+## Environment Variables
+
+## Database Setup
+
+## Migrations
+
+## Seed Data
+
+## Running Locally
+
+## Running Backend
+
+## Running Frontend
+
+## Running Workers
+
+## Docker
+
+## Testing
+
+## End-to-End Testing
+
+## API Documentation
+
+## Example Workflow
+
+## Security
+
+## AI Safety
+
+## Auditability
+
+## Known Limitations
+
+## Future Improvements
+
+## Contributing
+
+## License
+
+The README must be sufficient for a new developer to clone the project and understand how to run it.
+
+Do not write vague installation instructions.
+
+Use exact commands.
+
+---
+
+# 23. ENVIRONMENT CONFIGURATION
+
+Create:
+
+`.env.example`
+
+Document every variable.
+
+Group variables:
+
+```text
+APPLICATION
+DATABASE
+REDIS
+AI
+EMBEDDINGS
+AUTH
+STORAGE
+SECURITY
+OBSERVABILITY
+```
+
+Never commit `.env`.
+
+---
+
+# 24. DEMO MODE
+
+Because this project must be independently runnable, create a synthetic/demo mode.
+
+It should provide realistic synthetic financial data.
+
+The demo must allow the evaluator to experience:
+
+- exception detection
+- investigation
+- evidence
+- risk
+- decision
+- ticket
+- reminder
+- department resolution
+- verification
+- audit
+
+No real financial credentials or production financial records should be required for local demonstration.
+
+---
+
+# 25. OBSERVABILITY
+
+Implement structured logging.
+
+Every important request should have a correlation ID.
+
+Example:
+
+```text
+request_id
+trace_id
+user_id
+exception_id
+ticket_id
+operation
+duration
+result
+```
+
+Provide useful health endpoints.
+
+Example:
+
+`/health`
+
+`/ready`
+
+---
+
+# 26. PERFORMANCE
+
+Do not prematurely optimize.
+
+However:
+
+- index important database fields
+- use pagination
+- avoid N+1 queries
+- use async/background jobs where appropriate
+- cache safe read-heavy data
+- avoid loading huge datasets into memory
+- batch large investigations
+- avoid unnecessary LLM calls
+
+AI calls should be minimized where deterministic computation is sufficient.
+
+---
+
+# 27. COST CONTROL
+
+Do not use an LLM for:
+
+- simple arithmetic
+- deterministic comparisons
+- database filtering
+- state transitions
+- permission checks
+- rule evaluation
+- ticket state
+- SLA calculation
+
+Use AI where reasoning or natural-language interpretation adds value.
+
+---
+
+# 28. AI OUTPUT CONTRACTS
+
+All AI outputs must use structured schemas.
+
+For example:
+
+```json
+{
+  "finding": "...",
+  "confidence": 0.0,
+  "evidence_ids": [],
+  "unknowns": [],
+  "conflicts": [],
+  "recommended_next_steps": []
+}
+```
+
+Important:
+
+**AI confidence is not authority.**
+
+A confidence value must never independently authorize a financial action.
+
+---
+
+# 29. NO HALLUCINATION POLICY
+
+The system must enforce:
+
+```text
+If evidence exists:
+    cite evidence.
+
+If evidence does not exist:
+    say UNKNOWN.
+
+If sources conflict:
+    say CONFLICTING_EVIDENCE.
+
+If policy cannot be retrieved:
+    say POLICY_UNAVAILABLE.
+
+If authority is unclear:
+    say AUTHORITY_UNKNOWN.
+
+Never fabricate:
+    transaction IDs
+    amounts
+    dates
+    merchants
+    policies
+    rules
+    evidence
+    department findings
+    approvals
+```
+
+---
+
+# 30. HUMAN OVERRIDE
+
+Human corrections must not silently overwrite AI findings.
+
+Store:
+
+```text
+AI finding
++
+Human finding
++
+Actor
++
+Timestamp
++
+Reason
++
+Evidence
+```
+
+This allows later auditing of:
+
+"What did AI think?"
+
+"What did the department determine?"
+
+"What evidence changed the decision?"
+
+---
+
+# 31. STATE MACHINE
+
+Implement explicit state machines rather than arbitrary status updates.
+
+Exception state:
+
+```text
+DETECTED
+→ INVESTIGATING
+→ DECISION_READY
+→ RESOLVED / REJECTED / ESCALATED
+→ VERIFIED
+→ CLOSED
+```
+
+Ticket state:
+
+```text
+CREATED
+→ ASSIGNED
+→ OPEN
+→ WAITING_FOR_RESPONSE
+→ REMINDER_DUE
+→ REMINDER_SENT
+→ RESPONDED
+→ UNDER_REVIEW
+→ RESOLVED
+→ VERIFIED
+→ CLOSED
+```
+
+Invalid transitions must be rejected.
+
+Every transition must be audited.
+
+---
+
+# 32. IDEMPOTENCY
+
+Financial operations and ticket operations must be idempotent.
+
+For example:
+
+If the same request is submitted twice, it must not:
+
+- create duplicate refund
+- create duplicate ticket
+- create duplicate reminder
+- create duplicate resolution
+- execute the same financial action twice
+
+Implement idempotency keys where appropriate.
+
+---
+
+# 33. DATABASE INTEGRITY
+
+Use:
+
+- foreign keys
+- unique constraints
+- indexes
+- check constraints
+- transactions
+- optimistic/pessimistic locking where needed
+- proper cascading rules
+
+Never rely exclusively on frontend validation.
+
+Backend must enforce business rules.
+
+---
+
+# 34. NO FAKE COMPLETION
+
+Never declare a feature complete simply because:
+
+- the code exists
+- the UI renders
+- the endpoint returns 200
+- a mock response works
+
+A feature is complete only when:
+
+**implementation + integration + validation + tests + documentation**
+
+are complete.
+
+---
+
+# 35. WHEN YOU FIND BUGS
+
+Do not merely report them.
+
+Fix them.
+
+After fixing:
+
+1. rerun the failing test
+2. rerun related tests
+3. rerun the complete test suite
+4. check for regressions
+5. update documentation if necessary
+
+---
+
+# 36. FINAL COMPLETION AUDIT
+
+Before saying the project is complete, perform a final audit.
+
+Verify:
+
+### Architecture
+
+- architecture matches implementation
+- no undocumented major components
+- no broken dependency boundaries
+
+### Backend
+
+- all modules work
+- all endpoints work
+- errors handled
+- types valid
+
+### Frontend
+
+- all screens work
+- loading states
+- empty states
+- error states
+- permission states
+- responsive layout
+
+### AI
+
+- structured outputs
+- tool restrictions
+- evidence grounding
+- unknown handling
+- prompt injection resistance
+
+### Financial Logic
+
+- Decimal-safe calculations
+- deterministic rules
+- correct decision logic
+- idempotency
+- verification
+
+### Security
+
+- RBAC
+- authorization
+- secrets
+- PII
+- tool security
+
+### Database
+
+- migrations
+- indexes
+- constraints
+- seed data
+
+### Testing
+
+- unit
+- integration
+- API
+- AI
+- security
+- E2E
+- regression
+
+### Documentation
+
+- README
+- PDR
+- architecture
+- API
+- setup
+- testing
+- limitations
+
+---
+
+# 37. FINAL DELIVERABLES
+
+The final repository must contain at minimum:
+
+```text
+README.md
+
+docs/
+├── PDR.md
+├── TASKS.md
+├── requirements/
+│   └── source-requirements.md
+└── architecture/
+    ├── README.md
+    ├── system-architecture.md
+    ├── frontend-architecture.md
+    ├── backend-architecture.md
+    ├── database-architecture.md
+    ├── ai-architecture.md
+    ├── agent-architecture.md
+    ├── evidence-architecture.md
+    ├── policy-engine.md
+    ├── risk-engine.md
+    ├── decision-engine.md
+    ├── ticket-engine.md
+    ├── verification-engine.md
+    ├── audit-architecture.md
+    ├── security-architecture.md
+    └── deployment-architecture.md
+
+frontend/
+
+backend/
+
+tests/
+
+data/
+
+infrastructure/
+
+.env.example
+
+docker-compose.yml
+```
+
+Adapt the exact structure if the implementation requires something better, but preserve clean separation.
+
+---
+
+# 38. WORKING STYLE
+
+You are operating as a senior engineering team.
+
+Therefore:
+
+- Think before coding.
+- Inspect existing files before modifying them.
+- Reuse existing correct code.
+- Do not duplicate functionality.
+- Do not randomly rewrite working modules.
+- Keep interfaces stable.
+- Prefer simple reliable architecture.
+- Keep business logic deterministic.
+- Keep AI boundaries explicit.
+- Keep financial calculations deterministic.
+- Test continuously.
+- Fix failures immediately.
+- Document architectural decisions.
+- Never hide errors.
+- Never fabricate successful test results.
+
+---
+
+# 39. IMPORTANT IMPLEMENTATION RULE
+
+Do not implement everything in one enormous file.
+
+Maintain strong modularity.
+
+A function/class/module should have a clear responsibility.
+
+Avoid:
+
+```text
+god functions
+god classes
+god components
+god agents
+god prompts
+```
+
+Keep the system maintainable.
+
+---
+
+# 40. TASK EXECUTION LOOP
+
+For every implementation task:
+
+```text
+UNDERSTAND
+    ↓
+PLAN
+    ↓
+IMPLEMENT
+    ↓
+TEST
+    ↓
+REVIEW
+    ↓
+FIX
+    ↓
+REGRESSION TEST
+    ↓
+MARK COMPLETE
+```
+
+Do not mark a task complete without verification.
+
+---
+
+# 41. FINAL RESPONSE FORMAT
+
+When the entire implementation is finished, provide a concise final engineering report containing:
+
+1. Project status
+2. Architecture implemented
+3. Major features completed
+4. AI capabilities
+5. Risk system
+6. Department workflow
+7. Database
+8. API
+9. Frontend
+10. Security
+11. Testing
+12. E2E scenarios tested
+13. Final test results
+14. Known limitations
+15. How to run the project
+16. Important files
+17. Remaining tasks, if any
+
+If anything remains incomplete, clearly say so.
+
+Never claim "100% complete" unless the actual implementation and tests support that statement.
+
+---
+
+# 42. PRIMARY SUCCESS CRITERION
+
+Causa should feel like a coherent financial operations product, not a collection of demos.
+
+A new developer should be able to:
+
+1. Clone the repository.
+2. Read README.
+3. Configure `.env`.
+4. Start the system.
+5. Load synthetic data.
+6. Open the application.
+7. Create/detect an exception.
+8. Watch the investigation happen.
+9. Inspect evidence.
+10. Inspect risk.
+11. Inspect applicable rules.
+12. See the decision.
+13. See department routing.
+14. Resolve the case.
+15. Verify the resolution.
+16. Inspect the complete audit trail.
+17. Run the complete test suite.
+
+Everything must work as one connected system.
+
+---
+
+# 43. START NOW
+
+Your first action is NOT to write application code.
+
+First:
+
+### Step 1
+Read all provided previous conversation material.
+
+### Step 2
+Create the requirements extraction.
+
+### Step 3
+Create the complete PDR.
+
+### Step 4
+Create the architecture documents.
+
+### Step 5
+Create the dependency-aware task list.
+
+### Step 6
+Inspect the existing repository and identify what already exists.
+
+### Step 7
+Compare existing implementation against the PDR.
+
+### Step 8
+Create an implementation gap analysis.
+
+### Step 9
+Only then begin implementation.
+
+After each major phase, run the relevant tests.
+
+At the end, run the complete test suite and E2E suite.
+
+Then perform the file-by-file quality audit.
+
+Then update README and documentation to reflect the actual final implementation.
+
+**Do not rush into coding. Understand the system first, then build it systematically.**
+
+---
+
+# FINAL PROJECT NAME
+
+Use this exact name throughout the project:
+
+**Causa — AI Financial Exception Resolution & Risk Management System**
+
+Short name:
+
+**Causa**
+
+Tagline:
+
+**Evidence-driven financial exception resolution, risk management, and verified operational control.**

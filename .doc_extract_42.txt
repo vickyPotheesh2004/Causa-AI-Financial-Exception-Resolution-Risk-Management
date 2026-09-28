@@ -1,0 +1,596 @@
+===== AI_Financial_Exception_Resolution_PDR.docx =====
+[] PROJECT DESIGN REPORT
+[] ( P D R )
+[] AI Financial Exception Resolution
+[] & Risk Management System
+[Heading 1] Table of Contents
+[Heading 1] Executive Summary
+[] The defining architectural principle of the system is a strict separation of responsibility:
+[Heading 1] 1. Problem Statement
+[Heading 2] 1.1 The Financial Record Chain
+[] Financial operations involve a chain of connected records. An exception can occur at any link in this chain:
+[] A representative example:
+[Heading 2] 1.2 The Manual Burden Today
+[] To resolve a single exception, a finance employee must currently:
+[List Paragraph] Find the transaction and every related record
+[List Paragraph] Inspect fees, refunds, and adjustments
+[List Paragraph] Compare settlement records against bank records
+[List Paragraph] Determine what actually happened
+[List Paragraph] Check which rules and policies apply
+[List Paragraph] Determine whether the issue is valid
+[List Paragraph] Assess financial, fraud, and compliance risk
+[List Paragraph] Decide whether it can be resolved directly
+[List Paragraph] Contact the appropriate department
+[List Paragraph] Track the resulting ticket
+[List Paragraph] Remember to follow up
+[List Paragraph] Document everything for audit purposes
+[Heading 2] 1.3 The Real Problem
+[Heading 1] 2. Solution Overview
+[Heading 2] 2.1 One-Line Definition
+[Heading 2] 2.2 What the System Converts
+[] The system converts a vague signal into a structured decision chain:
+[Heading 2] 2.3 Core Philosophy
+[Heading 2] 2.4 What the System Is Not
+[] The system is deliberately not any of the following:
+[List Paragraph] ✕  A chatbot answering payment questions
+[List Paragraph] ✕  A generic reconciliation script
+[List Paragraph] ✕  A fraud prediction model alone
+[List Paragraph] ✕  A financial calculator
+[List Paragraph] ✕  A generic RAG application
+[List Paragraph] ✕  A ticketing system alone
+[List Paragraph] ✕  An LLM that decides based on confidence alone
+[Heading 2] 2.5 What It Is
+[Heading 1] 3. End-to-End Exception Lifecycle
+[] Figure 3.1 — The twelve-stage exception lifecycle, from ingestion to audit.
+[Heading 2] 3.1 Stage Summary
+[Heading 1] 4. System Architecture
+[] Figure 4.1 — Seven-layer architecture, from ingestion to the user experience.
+[Heading 2] 4.1 Layer Responsibilities
+[Heading 2] 4.2 Complete Processing Pipeline
+[] The diagram below shows the full path a financial exception takes from raw data through to a closed, audited case.
+[] Figure 4.2 — Complete system architecture: detection through audit.
+[Heading 2] 4.3 The Fundamental Architectural Boundary
+[] The clearest way to describe the architecture is as four concentric domains, each with a distinct kind of authority:
+[Heading 1] 5. Core Subsystems
+[] Figure 5.1 — The twelve core subsystems, left to right in processing order.
+[Heading 2] 5.1 Data Ingestion & Normalization
+[] Example canonical financial event:
+[] The system uses decimal-safe monetary representation throughout — never floating-point arithmetic for money.
+[Heading 3] Data Quality Gate
+[Heading 2] 5.2 Financial Event Graph
+[] The event graph is the backbone that lets the investigation engine reconstruct the complete lifecycle of a transaction instead of inspecting isolated records.
+[] Figure 5.2 — Financial Event Graph: entity relationships from Merchant to Bank Record.
+[Heading 2] 5.3 Exception Detection Engine
+[] Deterministic checks run first, before any AI reasoning:
+[] Ten recognized exception types:
+[Heading 3] Deduplication & Correlation
+[Heading 2] 5.4 Investigation Engine
+[Heading 2] 5.5 Evidence Engine
+[] Every factual conclusion in the system must be backed by evidence. The evidence engine maintains a strict chain:
+[] Example evidence object:
+[Heading 3] Evidence Hierarchy
+[] AI interpretation can never override authoritative records.
+[Heading 3] Evidence Status Values
+[List Paragraph] CONFIRMED
+[List Paragraph] PROBABLE
+[List Paragraph] UNKNOWN
+[List Paragraph] CONFLICTING
+[] A high AI confidence score does not turn UNKNOWN into CONFIRMED.
+[Heading 2] 5.6 Policy & Regulation Engine
+[] The policy engine is the system's governance layer. Applicable sources are treated as configurable, versioned policy inputs rather than one hard-coded rule set:
+[List Paragraph] Platform Terms & Conditions
+[List Paragraph] Merchant policies
+[List Paragraph] Applicable RBI requirements
+[List Paragraph] NPCI requirements
+[List Paragraph] Card-network rules
+[List Paragraph] Facility Provider requirements
+[List Paragraph] Applicable law
+[List Paragraph] Internal SOP
+[Heading 3] Policy Object
+[Heading 3] Policy Precedence (configurable per workflow)
+[Heading 1] 6. Risk Management Engine
+[Heading 2] 6.1 Explainable Risk, Not a Bare Score
+[] The system never presents an unexplained number such as “Risk = 87%.” Every score is accompanied by its contributing, evidence-linked factors:
+[Heading 2] 6.2 Risk History Over Time
+[] Risk is tracked as a timeline, not a single static value, so employees can see escalation rather than a snapshot:
+[Heading 2] 6.3 Risk Calculation Approach
+[] Risk level influences routing but does not, by itself, declare something fraudulent:
+[Heading 1] 7. Decision Engine
+[] Figure 7.1 — Decision engine: the four possible outcomes.
+[Heading 2] 7.1 Decision State Machine
+[Heading 2] 7.2 AUTO_APPROVE
+[] Used only when every condition holds:
+[List Paragraph] Required evidence complete
+[List Paragraph] Rules satisfied
+[List Paragraph] Financial calculation verified
+[List Paragraph] Authorized decision owner identified
+[List Paragraph] Agent has explicit permission
+[List Paragraph] Action within configured limits
+[List Paragraph] No unresolved conflict
+[List Paragraph] No mandatory human / platform review required
+[Heading 2] 7.3 REJECT
+[Heading 2] 7.4 FRAUD_ESCALATE
+[Heading 2] 7.5 DEPARTMENT_ESCALATE
+[] Used when any of the following hold:
+[List Paragraph] Evidence incomplete
+[List Paragraph] Authoritative records conflict
+[List Paragraph] Decision authority is external
+[List Paragraph] Policy is ambiguous
+[List Paragraph] Action exceeds agent permission
+[List Paragraph] High-risk manual review is required
+[Heading 2] 7.6 Decision Authority Model
+[] Every decision identifies who owns it, preventing the AI from making decisions that belong to another authority:
+[Heading 1] 8. Ticket Tracking & Department Escalation
+[Heading 2] 8.1 Issue Tracker Record
+[] Every exception receives a permanent issue record:
+[] History is append-only and never overwritten:
+[Heading 2] 8.2 Department Ticket Content
+[Heading 2] 8.3 Configurable Department Queues
+[Heading 2] 8.4 Ticket State Machine
+[] Figure 8.1 — Department ticket state machine, including the escalation branch.
+[Heading 2] 8.5 Reminder Engine
+[] Every reminder and escalation is itself an auditable event; timing is configurable per workflow / SLA, never universally hard-coded.
+[Heading 2] 8.6 Department Can Correct the AI
+[] The AI is assistive, not authoritative.
+[Heading 1] 9. Resolution & Verification
+[Heading 2] 9.1 Resolution Sources
+[List Paragraph] Automated action
+[List Paragraph] Department response
+[List Paragraph] Human approval
+[List Paragraph] Corrected financial record
+[List Paragraph] Additional evidence
+[List Paragraph] Policy clarification
+[] The resolution engine updates the exception only after validation — a department marking a ticket “Resolved” does not, by itself, close the case.
+[Heading 2] 9.2 Verification Before Closure
+[] The system independently re-derives the financial state and compares it against expectation:
+[Heading 1] 10. Audit Engine
+[] Each audit record includes:
+[] Human vs. AI vs. system attribution, as shown to a department user:
+[Heading 1] 11. Data Model
+[Heading 2] 11.1 Complete Issue Record (Conceptual)
+[Heading 2] 11.2 Core Database Tables
+[] PostgreSQL is the system of record. Tables are grouped by responsibility:
+[Heading 2] 11.3 Independent State Tracking
+[] An exception has several independent states, deliberately never collapsed into one status field, because each dimension changes on its own timeline:
+[Heading 2] 11.4 Search Index
+[] The system indexes the following fields for both employee and department search:
+[Heading 1] 12. AI Agent & Tool Architecture
+[Heading 2] 12.1 LLM vs. Deterministic Logic
+[] This separation is the single most important engineering decision in the system.
+[] The LLM never calculates financial amounts itself.
+[Heading 2] 12.2 Agent Orchestration
+[] The system uses an orchestrator that coordinates specialized agents rather than a single monolithic prompt:
+[Heading 2] 12.3 Controlled Tool Layer
+[] The AI never has unrestricted database or financial-action access. Every tool call passes through permission, policy, and risk checks before execution:
+[] Representative tool registry:
+[] Every tool definition carries: Tool ID, Permission, Input schema, Output schema, Data scope, Risk level, Rate limit, Audit requirement.
+[Heading 1] 13. Security, Permissions & Human-in-the-Loop
+[Heading 2] 13.1 Role-Based Access Control
+[Heading 2] 13.2 Agent Permission Model
+[] The AI agent itself carries an explicit, bounded permission set:
+[] A separate, more privileged action agent may exist for specific automated actions, but its permissions remain equally bounded and audited.
+[Heading 2] 13.3 Human-in-the-Loop Triggers
+[List Paragraph] High-risk financial action
+[List Paragraph] Possible fraud
+[List Paragraph] Conflicting authoritative records
+[List Paragraph] Regulatory ambiguity
+[List Paragraph] External authority required
+[List Paragraph] Insufficient evidence
+[List Paragraph] Irreversible action
+[List Paragraph] Action outside agent permission
+[] The agent prepares evidence, investigation, risk, applicable rules, and a recommended route; the human or authorized department makes the consequential decision.
+[Heading 2] 13.4 Idempotency
+[Heading 2] 13.5 PII Minimization
+[Heading 2] 13.6 Prompt-Injection Protection
+[Heading 2] 13.7 Explicit Failure States
+[] The system represents uncertainty explicitly rather than allowing the AI to fabricate a result:
+[Heading 1] 14. User Experience — Employee Side
+[Heading 2] 14.1 Roles Served by One Platform
+[Heading 2] 14.2 Dashboard — “What Needs My Attention?”
+[] Needs Your Attention
+[Heading 2] 14.3 The Exception Case Page
+[] Every exception becomes a single case file with a consistent set of sections, so any employee can navigate any case using the same structure:
+[Heading 2] 14.4 “Why This Decision?”
+[] Every decision is explainable on demand, in plain language linked to evidence — not a bare confidence percentage:
+[Heading 2] 14.5 Repeated-Issue & Related-Case Signals
+[Heading 2] 14.6 Employee Journey
+[Heading 1] 15. User Experience — Department Side
+[Heading 2] 15.1 Department Router
+[] An escalated case is routed to a configured queue based on issue type, risk, authority, and policy — never on an assumed, hard-coded organizational chart.
+[Heading 2] 15.2 Department Dashboard
+[] Financial Exposure Under Investigation: ₹18.4 L
+[Heading 2] 15.3 Queue Prioritization
+[] Cases are sorted by system-configured priority, never an AI's arbitrary opinion:
+[List Paragraph] 1. Critical / high risk
+[List Paragraph] 2. High financial exposure
+[List Paragraph] 3. Overdue cases
+[List Paragraph] 4. Fraud-related cases
+[List Paragraph] 5. Repeated issues
+[List Paragraph] 6. Oldest unresolved cases
+[Heading 2] 15.4 Department Case Workspace Sections
+[Heading 2] 15.5 Department Actions
+[] Available actions are permission-gated and never silently hidden — a locked action explains what is required:
+[Heading 2] 15.6 Internal vs. External vs. Audit Communication
+[] The system strictly separates three kinds of communication so they are never mixed:
+[Heading 2] 15.7 Fraud & Compliance Department Views
+[Heading 2] 15.8 Department Escalation Onward
+[] If a department cannot resolve a case, escalation carries the entire case package — evidence, risk, investigation — to the next team, so the next team never starts from zero.
+[Heading 1] 16. Three-Sided Product Architecture
+[] The product is best understood as three connected experiences sharing one underlying case record.
+[] Figure 16.1 — AI System, Employee Experience, and Department Experience converge on one case record.
+[Heading 1] 17. Technology Stack
+[Heading 2] 17.1 Backend Module Layout
+[Heading 2] 17.2 Recommended Repository Structure
+[Heading 1] 18. Deployment Architecture
+[] Figure 18.1 — Deployment and infrastructure architecture for the initial release.
+[Heading 2] 18.1 Event-Driven Backbone
+[] An internal event stream (Redis Streams for the prototype; Kafka or an equivalent durable platform at larger scale) drives the workflow:
+[Heading 1] 19. Failure Handling & Guardrails
+[] The system is deliberately designed to fail safely and explicitly rather than to guess.
+[Heading 1] 20. Worked End-to-End Example
+[] A single realistic case, traced through the entire lifecycle, illustrates how the subsystems interact.
+[Heading 1] 21. Dashboard KPIs & Reporting
+[Heading 2] 21.1 Operational KPIs
+[Heading 2] 21.2 Financial KPIs
+[Heading 2] 21.3 Risk Heatmap (Illustrative)
+[] Rows = Risk level; Columns = Financial Impact.
+[Heading 1] 22. Evaluation & Benchmark Plan
+[Heading 2] 22.1 Suggested Benchmark Composition
+[Heading 2] 22.2 Metrics by Stage
+[Heading 1] 23. Final Project Identity & Guiding Principles
+[Heading 2] 23.1 Core Problem
+[Heading 2] 23.2 Solution
+[Heading 2] 23.3 Traceability
+[] Every decision is linked end-to-end:
+[Heading 2] 23.4 Final Principle
+[Heading 2] 23.5 Summary
+[] The resulting product is not simply “an AI agent.” It is a Financial Exception Operating System:
+[TABLE 1]
+Document Type | Project Design Report (PDR)
+Domain | Financial Operations, Risk Management & Compliance
+Context | Payments-platform Buildathon — Finance Ops & Risk Manager tracks
+Version | 1.0 — Final Consolidated
+Date | 25 September 2026
+Status | Ready for Implementation Planning
+[TABLE 2]
+Core Principle AI investigates. Evidence proves. Rules constrain. Risk prioritizes. Authority determines. Humans control consequential decisions. Code executes. Audit remembers.
+[TABLE 3]
+Payment    ↓ Order    ↓ Refund    ↓ Fees    ↓ Adjustments    ↓ Settlement    ↓ Bank Record
+[TABLE 4]
+Payment              = ₹10,000 Expected Settlement  = ₹9,750 Actual Settlement    = ₹9,500                               ↓                         ₹250 mismatch
+[TABLE 5]
+Problem Statement When financial records do not agree, there is no unified, evidence-driven workflow that can investigate the exception, determine what is actually known, assess its risk, apply the appropriate rules and authority boundaries, resolve safe cases automatically, escalate uncertain or fraud-related cases, and track the issue until closure.
+[TABLE 6]
+Product Definition An evidence-driven AI financial operations system that detects, investigates, evaluates, risk-assesses, resolves, rejects, or escalates financial exceptions across payment, settlement, refund, fee, adjustment, and bank records — while enforcing applicable rules and permissions, creating department tickets and reminders for unresolved cases, and maintaining a complete, searchable, source-backed audit trail from detection to final resolution.
+[TABLE 7]
+"Something doesn't match."        ↓ "What happened?"        ↓ "What evidence proves it?"        ↓ "Which rules apply?"        ↓ "Who has authority to decide?"        ↓ "What is the risk?"        ↓ "Can this be resolved safely?"        ↓ "If not, which department should handle it?"        ↓ "Has the department responded?"        ↓ "Has the issue actually been resolved?"
+[TABLE 8]
+Governing Principle AI investigates. Evidence proves. Rules constrain. Risk prioritizes. Authority determines. Humans control consequential decisions. Code executes. Audit remembers.
+[TABLE 9]
+AI                      ↓              INVESTIGATION                      ↓                   EVIDENCE                      ↓                    RULES                      ↓                    RISK                      ↓                  AUTHORITY                      ↓                  DECISION                      ↓            ┌─────────┴─────────┐            ↓                   ↓        RESOLUTION          ESCALATION                                ↓                          TICKET + REMINDER                                ↓                            RESOLUTION                                ↓                              VERIFY                                ↓                              AUDIT
+[TABLE 10]
+# | Stage | Purpose
+1 | Data Ingestion | Receive payment, order, refund, fee, settlement, adjustment, and bank records
+2 | Normalization | Convert heterogeneous sources into one canonical, decimal-safe financial event model
+3 | Exception Detection | Run deterministic checks that flag mismatches, duplicates, or anomalies
+4 | Investigation | Reconstruct the transaction timeline and identify a candidate root cause
+5 | Evidence Engine | Attach source-backed, provenance-tracked evidence to every claim
+6 | Policy / Rule Engine | Determine which versioned rules and regulatory requirements apply
+7 | Risk Engine | Score financial, fraud, operational, compliance, and customer-impact risk
+8 | Decision Engine | Combine evidence, rules, and risk into Approve / Reject / Escalate
+9 | Ticket Tracker | Create a fully-prepared departmental or fraud ticket when escalated
+10 | Reminder Engine | Track SLA timers and remind or escalate unresolved tickets
+11 | Resolution | Record the department's finding and corrective evidence
+12 | Verification & Audit | Re-check the financial state and write an immutable audit trail
+[TABLE 11]
+Layer | Responsibility
+7 — Experience | Employee, department, risk/fraud, and audit user interfaces
+6 — Workflow | Tickets, reminders, approvals, resolution tracking
+5 — Intelligence | AI investigation, evidence collection, risk scoring, decision recommendation
+4 — Governance | Evidence provenance, policy/rule registry, permissions
+3 — Financial Core | Canonical events, the financial event graph, reconciliation, exceptions
+2 — Data | PostgreSQL (system of record), Redis, vector store, object storage
+1 — Ingestion | APIs, webhooks, batch files, bank feeds, policy documents
+[TABLE 12]
+Domain | Owns
+AI Domain | Investigation, reasoning, evidence discovery, root-cause hypotheses, explanation, natural-language interpretation
+Control Domain | Policy engine, risk engine, permission engine, decision engine, financial calculator, action validator, verification engine
+Execution Domain | Refund / adjustment / ticket actions, department routing, reminders, resolution
+Audit Domain | Evidence, decisions, human actions, AI actions, system actions, policy versions, verification records
+[TABLE 13]
+Architectural Invariant The AI can investigate and recommend, but evidence, deterministic rules, permissions, authority, and human review control every consequential financial action.
+[TABLE 14]
+# | Subsystem | Responsibility
+1 | Data Ingestion | Receive financial records from payments, orders, refunds, fees, settlements, adjustments, and bank statements
+2 | Normalization | Convert heterogeneous data into a common, decimal-safe schema
+3 | Financial Event Graph | Connect related financial events into a navigable graph
+4 | Exception Engine | Detect financial inconsistencies using deterministic rules
+5 | Investigation Engine | Reconstruct what happened and identify a candidate root cause
+6 | Evidence Engine | Establish factual proof and full provenance for every claim
+7 | Policy Engine | Determine applicable, versioned rules and regulatory requirements
+8 | Risk Engine | Evaluate financial, fraud, operational, and compliance risk
+9 | Decision Engine | Determine the system outcome: approve, reject, or escalate
+10 | Ticket Engine | Manage departmental escalation, assignment, and SLA
+11 | Reminder & Resolution Engine | Track unresolved cases and verify closure
+12 | Audit Engine | Preserve the complete, immutable history of the case
+[TABLE 15]
+Raw Data    ↓ Schema Validation    ↓ Type Validation    ↓ Required Field Validation    ↓ Duplicate Detection    ↓ Timestamp Normalization    ↓ Currency Normalization    ↓ Source Tagging    ↓ Canonical Storage
+[TABLE 16]
+{   "event_id": "PAY-1001",   "event_type": "PAYMENT",   "merchant_id": "MRC-100",   "amount": "10000.00",   "currency": "INR",   "status": "CAPTURED",   "occurred_at": "2026-09-25T10:32:00Z",   "source": "payment_system",   "source_record_id": "PAY-1001" }
+[TABLE 17]
+EXPECTED_SETTLEMENT != ACTUAL_SETTLEMENT   REFUND_AMOUNT > ORIGINAL_PAYMENT_AMOUNT   DUPLICATE_TRANSACTION_ID   PAYMENT_CAPTURED && NO_SETTLEMENT   SETTLEMENT_EXISTS && NO_PAYMENT   BANK_AMOUNT != SETTLEMENT_AMOUNT
+[TABLE 18]
+ID | Exception Type
+E1 | Settlement mismatch
+E2 | Refund mismatch
+E3 | Fee discrepancy
+E4 | Duplicate transaction
+E5 | Missing settlement
+E6 | Bank mismatch
+E7 | Timing exception
+E8 | Adjustment discrepancy
+E9 | Suspicious / fraud-related anomaly
+E10 | Unknown exception
+[TABLE 19]
+Exception    ↓ Find related records    ↓ Construct transaction timeline    ↓ Compare authoritative records    ↓ Calculate expected values    ↓ Identify discrepancies    ↓ Find possible root cause    ↓ Determine evidence sufficiency
+[TABLE 20]
+Guardrail If evidence is not sufficient, the root cause is recorded as UNKNOWN rather than an AI-generated plausible explanation. The investigation engine operates only through controlled tools, never through unrestricted database access.
+[TABLE 21]
+FACT  ↓ EVIDENCE  ↓ SOURCE  ↓ RULE  ↓ DECISION
+[TABLE 22]
+{   "evidence_id": "EV-001",   "claim": "Payment captured for INR 10000",   "source_type": "PAYMENT_RECORD",   "source_id": "PAY-1001",   "timestamp": "2026-09-25T10:32:00Z",   "authority": "PAYMENT_SYSTEM" }
+[TABLE 23]
+1. Authoritative financial records              ↓ 2. Bank / payment-provider records              ↓ 3. Merchant records              ↓ 4. Versioned policies / rules              ↓ 5. AI interpretation
+[TABLE 24]
+policy_id version effective_from effective_to source source_url rule_text jurisdiction applies_to priority
+[TABLE 25]
+Applicable Law / Regulatory Requirement                 ↓ Payment Network / Provider Requirement                 ↓ Platform Rules                 ↓ Merchant Policy                 ↓ Internal Operational Rules                 ↓ Agent Permission
+[TABLE 26]
+Dimension | What It Captures
+Financial Risk | Amount at risk, potential loss, revenue leakage, settlement discrepancy, refund exposure
+Fraud Risk | Suspicious patterns, repeated anomalies, conflicting records, possible fabricated information
+Operational Risk | Repeated exceptions, long-unresolved tickets, systemic failures, rising issue frequency
+Compliance Risk | Potential policy conflict, missing required evidence, applicable-rule uncertainty
+Customer / Merchant Impact | Number of affected transactions, merchant impact, repeated reports
+[TABLE 27]
+RISK ASSESSMENT   Financial Risk       HIGH Fraud Risk           MEDIUM Operational Risk     HIGH Compliance Risk      LOW Customer Impact      HIGH   Risk Factors:   ✓ ₹25,000 discrepancy ✓ Reported 4 times ✓ Ticket unresolved ✓ Conflicting settlement records ✓ 2 related exceptions
+[TABLE 28]
+09:00  LOW 11:30  MEDIUM   Reason: repeated report 14:00  HIGH     Reason: + increased financial exposure                         + unresolved ticket                         + conflicting records
+[TABLE 29]
+Financial exposure > configured threshold        → HIGH Repeated issue count > threshold                  → OPERATIONAL RISK Conflicting authoritative records                 → INVESTIGATION RISK Suspicious transaction pattern                     → FRAUD RISK
+[TABLE 30]
+LOW        → Normal workflow MEDIUM     → Priority review HIGH       → Department escalation CRITICAL   → Specialized risk / fraud workflow
+[TABLE 31]
+DETECTED    ↓ INVESTIGATING    ↓ EVIDENCE_READY    ↓ POLICY_CHECK    ↓ RISK_ASSESSED    ↓ DECISION_READY    │    ├── AUTO_APPROVE    │    ├── REJECT    │    ├── FRAUD_ESCALATE    │    └── DEPARTMENT_ESCALATE
+[TABLE 32]
+if (     evidence_sufficient     and all_required_rules_pass     and authority_allows_action     and agent_permission_granted     and risk_within_limit     and action_is_allowed     and no_authoritative_conflict ):     decision = "AUTO_APPROVE"
+[TABLE 33]
+Requested action       ↓ Applicable rule       ↓ Clear violation       ↓ REJECT
+[TABLE 34]
+Possible fraud       ↓ Evidence collection       ↓ Risk assessment       ↓ FRAUD_ESCALATE       ↓ Fraud / Risk Department Ticket
+[TABLE 35]
+DEPARTMENT_ESCALATE        ↓ CREATE TICKET        ↓ ASSIGN DEPARTMENT        ↓ TRACK        ↓ REMIND        ↓ RESOLVE
+[TABLE 36]
+SYSTEM MERCHANT FINANCE_MANAGER PLATFORM_OPERATOR FRAUD_DEPARTMENT COMPLIANCE_DEPARTMENT FACILITY_PROVIDER BANK CARD_NETWORK NPCI REGULATOR UNKNOWN
+[TABLE 37]
+EXCEPTION ID        EXC-2026-000184 Company              ABC Technologies Pvt Ltd Contact               finance@abc.example Issue Type           Settlement Mismatch Date Raised          25 Sep 2026 Times Reported       4 Current Status       ESCALATED Risk                  HIGH Assigned Department  Settlement Operations Ticket                RZ-INC-82931
+[TABLE 38]
+09:12 — DETECTED 09:14 — INVESTIGATING 09:18 — RISK_ASSESSED 09:20 — ESCALATED 09:21 — TICKET_CREATED 10:21 — REMINDER_SENT 12:21 — REMINDER_SENT 13:04 — DEPARTMENT_RESPONDED 13:10 — RESOLVED 13:11 — VERIFIED
+[TABLE 39]
+Ticket ID:        RZ-INC-82931 Exception:        EXC-2026-000184 Department:       Settlement Operations Priority:         HIGH Issue:            ₹250 settlement discrepancy   Investigation:   Payment           = ₹10,000   Fees              = ₹250   Expected          = ₹9,750   Actual settlement = ₹9,500   Unexplained diff  = ₹250   Risk:             Financial = HIGH Decision:         DEPARTMENT_ESCALATE Reason:           Available authoritative records do not                    explain the remaining discrepancy. Evidence:         EV-001, EV-002, EV-003 Sources:          Payment Record, Fee Record,                    Settlement Record, Applicable Policy
+[TABLE 40]
+Important The system does not hard-code or assume a specific organization's internal structure. Departments are configurable queues; the routing engine assigns a case based on configured issue type, risk, authority, and policy.
+[TABLE 41]
+Queue | Handles
+Settlement Operations | Settlement mismatch, missing settlement, timing exception, settlement adjustment, bank-to-settlement discrepancy
+Refund Operations | Refund discrepancy, refund pending, refund status conflict
+Risk / Fraud | Possible fraud, suspicious activity, repeated anomalous patterns, high-risk cases
+Compliance | Policy conflict, regulatory uncertainty, required-evidence issues
+Support / Merchant Operations | Merchant-reported issues, repeated complaints, operational issues
+Technical / Platform Operations | API/data inconsistency, system-generated mismatch, sync failures
+[TABLE 42]
+Ticket Created        ↓ Waiting for department        ↓ Response window reached?        │        ├── YES → Reminder        │        └── NO  → Continue waiting
+[TABLE 43]
+Reminder #1      ↓ Still unresolved      ↓ Reminder #2      ↓ Still unresolved      ↓ Escalation
+[TABLE 44]
+AI Initial Finding:   UNKNOWN Department Finding:   ADJUSTMENT_IDENTIFIED Evidence:             ADJ-1092 Changed By:           Settlement Analyst Timestamp:            ...
+[TABLE 45]
+Before:   Expected settlement = ₹9,750   Actual              = ₹9,500   Department correction:   Adjustment = ₹250   After:   Expected = ₹9,750   Actual   = ₹9,750   Verification = PASS
+[TABLE 46]
+RESOLVED    ↓ VERIFIED    ↓ CLOSED
+[TABLE 47]
+Why This Matters “Resolved” does not automatically mean the issue is actually fixed. Only an independent recalculation that confirms expected equals actual allows a case to move to CLOSED.
+[TABLE 48]
+AUD-001   Exception detected AUD-002   Evidence retrieved AUD-003   Rule evaluated AUD-004   Risk calculated AUD-005   Decision generated AUD-006   Ticket created AUD-007   Reminder sent AUD-008   Department response received AUD-009   Resolution recorded AUD-010   Resolution verified
+[TABLE 49]
+actor timestamp action input evidence source rule decision result
+[TABLE 50]
+🤖 AI Agent            Detected exception 🤖 AI Agent            Collected evidence 🤖 AI Agent            Recommended escalation 👤 Settlement Analyst  Reviewed evidence 👤 Settlement Analyst  Identified adjustment ⚙  System              Verified reconciliation ⚙  System              Closed case
+[TABLE 51]
+{   "exception_id": "EXC-2026-000184",     "merchant": {     "merchant_id": "MRC-1008",     "company_name": "ABC Technologies Pvt Ltd",     "contact": "finance@example.com"   },     "issue": {     "type": "SETTLEMENT_MISMATCH",     "date_detected": "2026-09-25",     "description": "Settlement amount differs from expected amount",     "times_reported": 4   },     "investigation": {     "status": "COMPLETED",     "root_cause": "UNKNOWN",     "timeline": [],     "calculations": []   },     "evidence": [], "rules": [],     "risk": { "financial": "HIGH", "fraud": "MEDIUM", "operational": "HIGH", "compliance": "LOW" },     "decision": { "type": "DEPARTMENT_ESCALATE", "authority": "SETTLEMENT_OPERATIONS",                 "reason": "Insufficient authoritative evidence" },     "ticket": { "ticket_id": "RZ-INC-82931", "department": "SETTLEMENT_OPERATIONS",               "status": "WAITING_RESPONSE", "reminders_sent": 2 },     "resolution": { "status": "PENDING" },   "audit": [] }
+[TABLE 52]
+Group | Tables
+Identity & Access | users, roles, permissions, departments
+Commercial Entities | merchants, customers, orders
+Financial Events | payments, refunds, fees, settlements, adjustments, bank_records, financial_events
+Exception Lifecycle | exceptions, exception_reports, investigations
+Evidence | evidence, evidence_claims, evidence_conflicts
+Governance | policies, policy_versions, rules
+Risk | risk_assessments, risk_factors
+Decisions | decisions, decision_conditions
+Ticketing | tickets, ticket_assignments, ticket_comments, reminders
+Closure | resolutions, verifications
+Audit & Notification | audit_events, state_transitions, notifications
+[TABLE 53]
+Exception:      OPEN Investigation:  COMPLETE Risk:           HIGH Decision:       ESCALATED Ticket:         WAITING_RESPONSE Resolution:     PENDING Verification:   NOT_STARTED
+[TABLE 54]
+exception_id, ticket_id, merchant_id, company_name, transaction_id, payment_id, settlement_id, refund_id, issue_type, risk_level, status, department, created_at
+[TABLE 55]
+LLM Handles | Deterministic Code Handles
+Natural-language interpretation | Money calculations
+Investigation planning | Rule evaluation
+Evidence summarization | Permission checks
+Root-cause reasoning | Risk thresholds
+Issue description | Ticket state transitions
+Ticket generation | SLA calculations
+Human-readable explanation | Idempotency & audit records
+[TABLE 56]
+LLM               │         "What happened?"               │               ▼          Evidence               │               ▼        Deterministic Engine               │         "What is allowed?"
+[TABLE 57]
+Agent | Input | Output
+Investigation Planner | Exception ID, type, initial records | Ordered investigation steps (e.g. retrieve payment, retrieve settlement, compare expected)
+Evidence Agent | Planned steps | Claim → Evidence → Source → Verification status, via controlled tools only
+Root Cause Agent | Verified evidence | Root cause, or explicit UNKNOWN / CONFLICTING_EVIDENCE when unsupported
+Risk Agent | Exception, evidence, history | Financial / fraud / operational / compliance risk with linked factors
+Decision Generator | Evidence + rules + risk | Structured recommendation passed to the deterministic Decision Engine
+[TABLE 58]
+AI  ↓ Tool Request  ↓ Permission Check  ↓ Policy Check  ↓ Risk Check  ↓ Action Validation  ↓ Execution
+[TABLE 59]
+get_payment()                 get_settlement() get_order()                   get_adjustment() get_refund()                  get_bank_record() get_fee()                     find_related_transactions() build_transaction_timeline()  calculate_expected_amount() get_policy()                  get_policy_version() collect_evidence()            validate_evidence() assess_risk()                 create_decision() create_ticket()               schedule_reminder() update_ticket()               verify_resolution() write_audit_event()
+[TABLE 60]
+Role | Focus
+Finance Analyst | Investigate exceptions, review evidence, search, create/escalate tickets
+Finance Manager | High-risk exceptions, financial exposure, team workload, approvals
+Risk / Fraud Analyst | Fraud escalations, suspicious patterns, related cases, risk history
+Compliance User | Rule violations, policy conflicts, regulatory cases, audit history
+Auditor | Read-only access to evidence, decisions, rules, sources, actions, audit trail
+[TABLE 61]
+Investigation Agent ✓ Read payment       ✓ Calculate discrepancy ✓ Read settlement     ✓ Create ticket ✓ Read refund         ✓ Generate report   ✗ Execute refund ✗ Modify settlement ✗ Delete transaction ✗ Override policy
+[TABLE 62]
+External Data      ↓ UNTRUSTED      ↓ Parser      ↓ Evidence      ↓ LLM context      ↓ Policy engine remains authoritative
+[TABLE 63]
+UNKNOWN INSUFFICIENT_EVIDENCE CONFLICTING_EVIDENCE POLICY_UNAVAILABLE AUTHORITY_UNKNOWN TOOL_FAILURE EXECUTION_FAILURE VERIFICATION_FAILURE
+[TABLE 64]
+Role | Primary View
+Finance Analyst | Investigate, review evidence, search, escalate, track resolution
+Finance Manager | High-risk cases, financial exposure, team workload, approvals, trends
+Risk / Fraud Analyst | Fraud escalations, suspicious patterns, related cases, risk history
+Compliance User | Rule violations, policy conflicts, regulatory cases, audit history
+Auditor | Read-only evidence, decisions, rules, sources, actions, ticket history
+[TABLE 65]
+Open Exceptions | High Risk Exceptions | Escalated Tickets | Unresolved Tickets
+128 | 17 | 24 | 12
+[TABLE 66]
+Priority | Case | Summary | Action
+HIGH | EXC-10291 | High-risk settlement discrepancy — Rs 25,000 exposure, investigation complete | Review
+MED | RZ-82931 | Department response overdue — Settlement Operations, reminder due | Open Ticket
+MED | EXC-10321 | Evidence conflict detected — requires manual review | Investigate
+[TABLE 67]
+Section | Answers
+Issue | What happened?
+Timeline | What happened and when?
+Evidence | What proves it?
+Rules | Which rules apply?
+Risk | Why is it risky?
+Decision | What should happen, and why?
+Ticket | Who is handling it?
+Reminders | Has anyone responded?
+Resolution | What fixed it?
+Verification | Is it actually fixed?
+Audit | What happened throughout the lifecycle?
+[TABLE 68]
+WHY THIS DECISION?   1. Payment record verified 2. Fee record verified 3. Settlement amount verified 4. Expected amount calculated 5. ₹250 discrepancy remains 6. No authoritative record explains the discrepancy 7. Automatic resolution is therefore not permitted   Decision: DEPARTMENT_ESCALATE
+[TABLE 69]
+⚠ REPEATED ISSUE This issue has been reported 5 times. First reported: 20 Sep 2026    Latest report: 25 Sep 2026 Related cases: 4
+[TABLE 70]
+LOGIN → DASHBOARD → NEEDS YOUR ATTENTION → OPEN EXCEPTION   → ISSUE SUMMARY → FINANCIAL TIMELINE → EVIDENCE → RULES   → RISK → DECISION EXPLANATION → TAKE AUTHORIZED ACTION   → (IF ESCALATED) TRACK TICKET → REMINDER/UPDATE   → REVIEW NEW EVIDENCE → VERIFY RESOLUTION → CLOSE
+[TABLE 71]
+UX Principle The employee should never feel they must investigate everything themselves. The system has already investigated the case, gathered evidence, applied rules, assessed risk, and — for escalations — created and is tracking the ticket. The employee reviews and acts only where their judgment is genuinely required.
+[TABLE 72]
+Open Cases | High Risk | Overdue | Unassigned
+42 | 8 | 5 | 7
+[TABLE 73]
+Section | Content
+Case Summary | Merchant, exception, issue, expected vs. actual, times reported, risk, AI decision and reason
+AI Investigation Report | What the AI already found, including explicit UNKNOWN root causes
+Evidence Workspace | Every evidence item with status (Verified / Unverified / Conflicting) and source provenance
+Rules & Policy | Rules checked, PASS / FAIL / UNKNOWN, source and version, with a link to the underlying policy
+Risk | Financial / Fraud / Operational / Compliance / Customer Impact, each with clickable factors
+Related Cases | Other exceptions for the same merchant, to reveal systemic vs. isolated issues
+Department Findings | Human-added findings that can confirm, extend, or correct the AI's investigation
+Resolution | Root cause, corrective evidence, resolution proposal
+Verification | Independent recalculation confirming expected equals actual before closure
+Audit | Complete, attributed history of AI, human, and system actions
+[TABLE 74]
+[ Investigate Further ]     [ Add Finding ] [ Request Evidence ]        [ Update Risk ] [ Resolve ]                 [ Escalate ] [ Reject Case ]             [ Request Approval ] [ Reassign ]                [ Add Internal Note ]   [ Execute Refund 🔒 ]   Requires: Finance Manager approval
+[TABLE 75]
+Type | Visibility
+Internal note | Visible only to authorized department users
+Merchant-facing communication | Approved communication intended for the merchant
+Audit note | Immutable system record
+[TABLE 76]
+Side | Core Question
+AI System | What evidence, rules, risk, and authority determine what should happen?
+Employee Experience | What happened, and what do I need to know or do?
+Department Experience | How do we investigate, act, resolve, and formally close the case?
+[TABLE 77]
+Why the Separation Matters This separation prevents the product from becoming a generic “AI dashboard.” It becomes a genuine financial-operations workflow system, where the AI prepares the case, employees understand it, and authorized departments resolve it — with every step connected through the same evidence-backed case record.
+[TABLE 78]
+Layer | Technology
+Frontend | Next.js, TypeScript
+UI | Tailwind CSS, shadcn/ui
+Charts | Recharts
+Backend | Python, FastAPI
+Validation | Pydantic
+Database | PostgreSQL (system of record)
+ORM | SQLAlchemy
+Cache / Queue | Redis, Redis Streams / Celery
+Vector Search | pgvector (or a standalone vector DB later)
+Object Storage | S3-compatible storage
+AI Orchestration | Python agent layer with a controlled tool registry
+LLM | Configurable model gateway
+Embeddings | Configurable embedding model
+Search | PostgreSQL full-text search + pgvector
+Auth | JWT / OAuth
+Containerization | Docker
+Reverse Proxy | Nginx / managed gateway
+Monitoring | OpenTelemetry + Prometheus / Grafana
+Logs | Structured JSON logs
+CI/CD | GitHub Actions
+[TABLE 79]
+Simplification for v1 PostgreSQL + pgvector can serve both relational and semantic-retrieval needs for the first version, avoiding the operational overhead of a separate vector database until scale requires it.
+[TABLE 80]
+backend/app/   api/            exceptions, investigations, evidence, risks,                   policies, decisions, tickets, reminders,                   resolutions, verification, search, audit   domain/         exceptions, investigation, evidence, risk,                   policy, decision, ticket, resolution, verification   ai/             investigator, planner, evidence_agent,                   root_cause, explanation, orchestrator   engines/        exception_detector, reconciliation, policy_engine,                   risk_engine, decision_engine, verification_engine   workers/        investigation_worker, risk_worker, reminder_worker,                   verification_worker, ingestion_worker   repositories/   models/   security/   audit/
+[TABLE 81]
+ai-financial-exception-system/ ├── frontend/            (Next.js: dashboard, exceptions, risk, │                         tickets, search, audit) ├── backend/             (FastAPI app, tests, migrations) ├── data/                (synthetic records, policies, merchants) ├── infrastructure/      (docker, nginx, postgres, redis) ├── docs/                (architecture, api, data-model, security) ├── docker-compose.yml ├── .env.example └── README.md
+[TABLE 82]
+ExceptionDetected → InvestigationStarted → EvidenceCollected → RiskAssessed → DecisionGenerated → TicketCreated / AutoAction → ReminderDue → DepartmentResponded → ResolutionSubmitted → ResolutionVerified → ExceptionClosed
+[TABLE 83]
+Situation | System Response
+Missing data | UNKNOWN → Department escalation
+Conflicting records | CONFLICT → Department escalation
+Possible fraud | FRAUD SIGNAL → Fraud ticket, never an autonomous action
+Invalid request | CLEAR POLICY VIOLATION → Reject, with rule and evidence attached
+LLM hallucination risk | Unsupported claim → Evidence validation fails → Claim excluded
+API timeout | No reliable response → Do not execute → Retry with idempotency
+Duplicate request | Idempotency check → Prevent duplicate action or ticket
+[TABLE 84]
+The System's Fundamental Contract The system must never make a financial decision merely because the AI thinks it is correct. It must establish the relevant evidence, identify the applicable rule, determine the decision authority, assess risk, verify that the requested action is permitted, and then either execute within its bounded authority, reject a clearly invalid request, or escalate the case to the appropriate department. Every decision, ticket, reminder, action, and resolution must remain traceable to its evidence and source.
+[TABLE 85]
+PAY-1001  ₹50,000 payment         ↓ Settlement expected: ₹48,750     Actual: ₹47,750         ↓ EXC-001 CREATED   (₹1,000 unexplained difference)         ↓ Investigation Agent finds payment + fee + settlement + bank record         ↓ Evidence Engine verifies 3 records: EV-001, EV-002, EV-003         ↓ Policy Engine: R-001 ✓   R-002 ✓   R-003 ?  (unverifiable)         ↓ Risk Engine: Financial HIGH · Operational MEDIUM · Fraud LOW         ↓ Decision Engine → DEPARTMENT_ESCALATE  (evidence incomplete)         ↓ Ticket RZ-1001 → Settlement Operations, Priority HIGH         ↓ No response → Reminder #1 → No response → Reminder #2         ↓ Department responds: missing Adjustment = ₹1,000 found         ↓ Re-investigation: ₹50,000 − ₹1,250 fee − ₹1,000 adjustment = ₹47,750         ↓ Expected = Actual  →  Verification PASS         ↓ STATUS = RESOLVED → VERIFIED → CLOSED         ↓ Complete audit trail preserved: detection, investigation, evidence, rules, risk, decision, ticket, reminders, department response, resolution, verification.
+[TABLE 86]
+Total Exceptions              Open Exceptions High-Risk Exceptions          Fraud Escalations Department Escalations        Rejected Cases Resolved Cases                Unresolved Tickets Overdue Tickets                Pending Reminders Average Resolution Time       Average Investigation Time
+[TABLE 87]
+Total Amount at Risk Amount Resolved Amount Under Investigation Amount Associated With Escalations
+[TABLE 88]
+Risk \ Impact | LOW | MEDIUM | HIGH
+LOW | — | 12 | 4
+MEDIUM | 15 | 8 | 7
+HIGH | 2 | 6 | 17
+[TABLE 89]
+60–100 synthetic financial records + 20–30 injected exceptions + known ground truth     10 settlement mismatches      5 duplicate transactions    5 refund exceptions          5 suspicious / fraud cases    5 fee discrepancies          5 timing issues                                  5 bank mismatches
+[TABLE 90]
+Stage | Metrics
+Detection | Precision, Recall, F1
+Investigation | Root-cause accuracy, evidence accuracy, timeline reconstruction accuracy
+Decision | Decision accuracy, false resolution rate, false rejection rate, escalation accuracy
+Risk | Risk classification accuracy, false-positive cost, fraud escalation precision
+Operations | Throughput, average investigation time, average resolution time, ticket response time
+[TABLE 91]
+Evidence → Source → Rule → Risk → Authority → Decision → Action → Verification
+[TABLE 92]
+Guiding Principle No unsupported decision. No unexplained risk. No untracked escalation. No silent failure.
+[TABLE 93]
+Detect → Investigate → Prove → Risk-Assess → Decide → Route → Resolve → Verify → Audit
+[TABLE 94]
+Design Rule Carried Throughout This Report AI can investigate and recommend, but evidence, deterministic rules, permissions, authority, and human review control every consequential financial action.

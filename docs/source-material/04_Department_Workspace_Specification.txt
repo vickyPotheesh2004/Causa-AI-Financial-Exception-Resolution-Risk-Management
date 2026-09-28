@@ -1,0 +1,1653 @@
+Absolutely. This is the **third major perspective** we should finalize: the **Department Side**.
+
+The employee side answers **“What is happening and what do I need to do?”**  
+The department side answers **“Which cases have been assigned to us, what evidence do we have, what decision/action is required, what has already been done, and what remains unresolved?”**
+
+The department interface should therefore be a **case-resolution workspace**, not simply another dashboard.
+
+> **Important architecture point:** your system should not hard-code or claim knowledge of Razorpay's internal organizational structure. Instead, define **configurable department queues** such as Settlement Operations, Refund Operations, Risk/Fraud, Compliance, Support, etc. The routing engine assigns a case according to configured issue type, risk, authority, and policy.
+
+# 1. Department-Side Architecture
+
+```text
+                         EMPLOYEE / AI
+                              │
+                              ▼
+                     EXCEPTION DETECTED
+                              │
+                              ▼
+                     DECISION ENGINE
+                              │
+               ┌──────────────┼──────────────┐
+               │              │              │
+               ▼              ▼              ▼
+           APPROVE          REJECT        ESCALATE
+                                             │
+                                             ▼
+                                  ┌────────────────────┐
+                                  │ DEPARTMENT ROUTER  │
+                                  └─────────┬──────────┘
+                                            │
+                   ┌────────────────────────┼─────────────────────┐
+                   │                        │                     │
+                   ▼                        ▼                     ▼
+            SETTLEMENT                 RISK / FRAUD          COMPLIANCE
+               QUEUE                     QUEUE                  QUEUE
+                   │                        │                     │
+                   └────────────────────────┼─────────────────────┘
+                                            ▼
+                                  ┌────────────────────┐
+                                  │ DEPARTMENT QUEUE  │
+                                  └─────────┬──────────┘
+                                            ▼
+                                  ┌────────────────────┐
+                                  │ CASE INVESTIGATION │
+                                  └─────────┬──────────┘
+                                            ▼
+                                  ┌────────────────────┐
+                                  │ DEPARTMENT ACTION  │
+                                  └─────────┬──────────┘
+                                            ▼
+                                  ┌────────────────────┐
+                                  │ RESOLUTION /       │
+                                  │ ESCALATION         │
+                                  └─────────┬──────────┘
+                                            ▼
+                                  ┌────────────────────┐
+                                  │ VERIFICATION       │
+                                  └─────────┬──────────┘
+                                            ▼
+                                      AUDIT TRAIL
+```
+
+---
+
+# 2. What the Department Receives
+
+When the AI escalates an issue, the department should **not receive a blank ticket saying**:
+
+> “Please investigate settlement issue.”
+
+That would simply move the manual work from one employee to another.
+
+Instead, the department receives a **fully prepared investigation package**.
+
+For example:
+
+```text
+TICKET: RZ-INC-82931
+
+Issue:
+Settlement discrepancy
+
+Merchant:
+ABC Technologies Pvt Ltd
+
+Exception:
+EXC-2026-000184
+
+Financial impact:
+₹250 unexplained discrepancy
+
+Risk:
+HIGH
+
+Decision:
+DEPARTMENT_ESCALATE
+
+Reason:
+Authoritative records do not currently explain
+the remaining discrepancy.
+
+Evidence:
+EV-001
+EV-002
+EV-003
+
+Rules checked:
+RZ-001
+RZ-002
+
+Investigation:
+Completed
+
+AI recommendation:
+Review settlement adjustment records.
+
+Action already performed by AI:
+NONE
+```
+
+So the department starts with **context**, not from zero.
+
+---
+
+# 3. Department Types
+
+I recommend configuring departments around **case ownership**, rather than assuming a particular real-world organizational chart.
+
+Example:
+
+### Settlement Operations
+
+Handles:
+
+```text
+Settlement mismatch
+Missing settlement
+Settlement timing exception
+Settlement adjustment
+Bank-to-settlement discrepancy
+```
+
+### Refund Operations
+
+Handles:
+
+```text
+Refund discrepancy
+Refund pending
+Refund status conflict
+Refund-related exceptions
+```
+
+### Risk / Fraud
+
+Handles:
+
+```text
+Possible fraud
+Suspicious activity
+Repeated anomalous patterns
+High-risk financial cases
+```
+
+### Compliance
+
+Handles:
+
+```text
+Policy conflict
+Regulatory uncertainty
+Required evidence issues
+Compliance-sensitive cases
+```
+
+### Support / Merchant Operations
+
+Handles:
+
+```text
+Merchant-reported issues
+Repeated merchant complaints
+Operational issues
+Cases requiring merchant communication
+```
+
+### Technical / Platform Operations
+
+Handles:
+
+```text
+API/data inconsistency
+System-generated mismatch
+Webhook/data synchronization issue
+Technical processing failure
+```
+
+These are **configurable queues**.
+
+---
+
+# 4. Department Login
+
+When a department employee logs in, their dashboard is different from the general employee dashboard.
+
+```text
+┌──────────────────────────────────────────────────────────┐
+│ FINANCIAL OPERATIONS — SETTLEMENT OPERATIONS             │
+│                                                          │
+│  Queue: Settlement Operations             👤 Employee    │
+└──────────────────────────────────────────────────────────┘
+
+Dashboard
+My Queue
+Unassigned
+High Risk
+Overdue
+Escalations
+Search
+Reports
+Audit
+```
+
+The user sees **their department's workload**.
+
+---
+
+# 5. Department Dashboard
+
+The first thing the department sees:
+
+```text
+┌─────────────────────────────────────────────────────────┐
+│ SETTLEMENT OPERATIONS                                   │
+├──────────────┬──────────────┬──────────────┬────────────┤
+│ Open Cases   │ High Risk    │ Overdue      │ Unassigned │
+│              │              │              │            │
+│ 42           │ 8            │ 5            │ 7          │
+├──────────────┴──────────────┴──────────────┴────────────┤
+│                                                         │
+│ Financial Exposure Under Investigation                  │
+│ ₹18.4 L                                                │
+│                                                         │
+├─────────────────────────────────────────────────────────┤
+│ NEEDS IMMEDIATE ATTENTION                               │
+│                                                         │
+│ 🔴 RZ-82931  ₹25,000   High Risk   Overdue             │
+│ 🔴 RZ-82942  ₹80,000   High Risk   Fraud Signal        │
+│ 🟠 RZ-82951  ₹12,000   Medium      Evidence Conflict   │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+# 6. Department Queue
+
+This is the department's main working screen.
+
+```text
+┌─────────────────────────────────────────────────────────────┐
+│ MY DEPARTMENT QUEUE                                        │
+├────────┬────────────┬────────┬────────┬──────────┬─────────┤
+│ Ticket │ Issue      │ Risk   │ Amount │ Status   │ Age     │
+├────────┼────────────┼────────┼────────┼──────────┼─────────┤
+│ RZ-829 │ Settlement │ 🔴HIGH │ ₹25K   │ Overdue  │ 8h      │
+│ RZ-830 │ Settlement │ 🟠MED  │ ₹8K    │ Open     │ 3h      │
+│ RZ-831 │ Bank       │ 🔴HIGH │ ₹50K   │ Review   │ 2h      │
+│ RZ-832 │ Adjustment │ 🟢LOW  │ ₹2K    │ Open     │ 1h      │
+└────────┴────────────┴────────┴────────┴──────────┴─────────┘
+```
+
+---
+
+# 7. Queue Prioritization
+
+The department should not have to manually decide which case to open first.
+
+The system can sort by:
+
+```text
+1. Critical/high risk
+2. High financial exposure
+3. Overdue cases
+4. Fraud-related cases
+5. Repeated issues
+6. Oldest unresolved cases
+```
+
+But this should be presented as **system-configured priority**, not as an AI's arbitrary opinion.
+
+---
+
+# 8. Department Case Workspace
+
+When the department opens:
+
+**RZ-INC-82931**
+
+they get a much deeper workspace.
+
+```text
+┌───────────────────────────────────────────────────────────┐
+│ RZ-INC-82931                                              │
+│ Settlement Investigation                                  │
+│                                                           │
+│ 🔴 HIGH RISK       OVERDUE       UNASSIGNED               │
+└───────────────────────────────────────────────────────────┘
+```
+
+Below it:
+
+```text
+Case
+Evidence
+Investigation
+Risk
+Rules
+Timeline
+Communication
+Actions
+Resolution
+Audit
+```
+
+---
+
+# 9. Case Summary
+
+The first section gives the department the entire situation in 10 seconds.
+
+```text
+CASE SUMMARY
+
+Merchant:
+ABC Technologies Pvt Ltd
+
+Exception:
+EXC-2026-000184
+
+Issue:
+₹250 settlement discrepancy
+
+Expected:
+₹9,750
+
+Actual:
+₹9,500
+
+Unexplained:
+₹250
+
+Times Reported:
+4
+
+Risk:
+HIGH
+
+AI Decision:
+DEPARTMENT_ESCALATE
+
+Reason:
+Required authoritative adjustment evidence unavailable.
+```
+
+This prevents the department from having to read the entire case before understanding it.
+
+---
+
+# 10. AI Investigation Report
+
+The department can see what the AI already investigated.
+
+```text
+AI INVESTIGATION
+
+Finding:
+
+Payment of ₹10,000 was captured.
+
+A ₹250 fee was identified.
+
+Expected settlement:
+₹9,750
+
+Actual settlement:
+₹9,500
+
+Remaining discrepancy:
+₹250
+
+Root cause:
+UNKNOWN
+
+Reason:
+No authoritative adjustment record was found
+during automated investigation.
+```
+
+The department can then decide:
+
+> **Is the AI investigation sufficient?**
+
+---
+
+# 11. Evidence Workspace
+
+This should be one of the strongest department features.
+
+```text
+EVIDENCE
+
+EV-001
+Payment Record
+₹10,000
+✓ VERIFIED
+
+EV-002
+Fee Record
+₹250
+✓ VERIFIED
+
+EV-003
+Settlement Record
+₹9,500
+✓ VERIFIED
+
+EV-004
+Adjustment Record
+NOT FOUND
+```
+
+The department can:
+
+```text
+[View]
+[Verify]
+[Mark Conflict]
+[Request Additional Evidence]
+```
+
+depending on permissions.
+
+---
+
+# 12. Source Provenance
+
+When the department clicks an evidence item:
+
+```text
+EV-003
+
+Claim:
+Settlement amount = ₹9,500
+
+Source:
+Settlement Record
+
+Record ID:
+SET-83921
+
+Created:
+25 Sep 2026 14:30
+
+Retrieved:
+25 Sep 2026 14:35
+
+Source System:
+Settlement Database
+
+Status:
+VERIFIED
+```
+
+The department knows exactly **where the AI got the information**.
+
+---
+
+# 13. Rule & Policy Workspace
+
+The department can see:
+
+```text
+RULES CHECKED
+
+RZ-001
+Settlement validation
+PASS
+
+RZ-002
+Merchant policy
+PASS
+
+RZ-003
+Adjustment validation
+UNKNOWN
+
+Source:
+Policy Registry
+
+Version:
+2026-09
+
+Effective:
+01 Sep 2026
+```
+
+They can click:
+
+**View Source**
+
+to inspect the underlying policy document or official source configured in the system.
+
+This is important because the department should be able to challenge the AI's reasoning.
+
+---
+
+# 14. Risk Workspace
+
+The department sees:
+
+```text
+RISK ASSESSMENT
+
+Financial Risk:
+🔴 HIGH
+
+Fraud Risk:
+🟡 MEDIUM
+
+Operational Risk:
+🔴 HIGH
+
+Compliance Risk:
+🟢 LOW
+
+Customer Impact:
+🟡 MEDIUM
+```
+
+Then:
+
+### Risk factors
+
+```text
+₹25,000 total exposure
++
+4 previous reports
++
+Unresolved ticket
++
+Conflicting financial records
+```
+
+Each factor is clickable.
+
+---
+
+# 15. Related Cases
+
+The department can see whether this is an isolated problem.
+
+```text
+RELATED CASES
+
+EXC-2026-000141
+Same merchant
+Settlement mismatch
+RESOLVED
+
+EXC-2026-000155
+Same merchant
+Adjustment discrepancy
+OPEN
+
+EXC-2026-000172
+Related settlement issue
+ESCALATED
+```
+
+This can reveal:
+
+> **This may not be a single transaction problem.**
+
+That is valuable for risk management.
+
+---
+
+# 16. Issue Frequency
+
+Department users see:
+
+```text
+ISSUE FREQUENCY
+
+Merchant reports:
+4
+
+Similar exceptions:
+3
+
+Last 30 days:
+7
+
+Last 7 days:
+4
+
+Trend:
+↑ Increasing
+```
+
+This feeds operational risk.
+
+---
+
+# 17. Department Action Panel
+
+The department gets controlled actions.
+
+```text
+ACTIONS
+
+[ Investigate Further ]
+
+[ Request Evidence ]
+
+[ Add Finding ]
+
+[ Update Risk ]
+
+[ Resolve ]
+
+[ Escalate ]
+
+[ Reject Case ]
+
+[ Request Approval ]
+
+[ Reassign ]
+
+[ Add Internal Note ]
+```
+
+Not every department gets every action.
+
+Permissions determine what appears.
+
+---
+
+# 18. Request Additional Evidence
+
+Suppose the department needs an adjustment record.
+
+They select:
+
+**Request Evidence**
+
+```text
+REQUEST ADDITIONAL EVIDENCE
+
+Required:
+Adjustment record
+
+Reason:
+Current settlement records do not explain
+₹250 discrepancy.
+
+Requested From:
+Settlement Data System
+
+Priority:
+High
+
+[Send Request]
+```
+
+The request becomes part of the audit trail.
+
+---
+
+# 19. Department Investigation Notes
+
+Department employees can add structured findings.
+
+```text
+INVESTIGATION NOTE
+
+Finding:
+Additional adjustment identified.
+
+Adjustment ID:
+ADJ-1092
+
+Amount:
+₹250
+
+Source:
+Settlement Adjustment System
+
+Verified:
+YES
+
+Employee:
+Department Analyst
+
+Timestamp:
+25 Sep 2026 16:22
+```
+
+The system should distinguish:
+
+```text
+AI Finding
+```
+
+from:
+
+```text
+Human Department Finding
+```
+
+This is important for accountability.
+
+---
+
+# 20. Department Can Correct AI
+
+This is a major feature.
+
+Suppose the AI says:
+
+```text
+Root cause:
+UNKNOWN
+```
+
+The department finds:
+
+```text
+Adjustment ADJ-1092
+₹250
+```
+
+They can add:
+
+```text
+ROOT CAUSE IDENTIFIED
+
+Settlement adjustment was applied but
+was not available in the initial dataset.
+```
+
+The system records:
+
+```text
+AI Initial Finding:
+UNKNOWN
+
+Department Finding:
+ADJUSTMENT_IDENTIFIED
+
+Evidence:
+ADJ-1092
+
+Changed By:
+Settlement Analyst
+
+Timestamp:
+...
+```
+
+The AI is therefore **assistive, not authoritative**.
+
+---
+
+# 21. Department Resolution
+
+Once the department has enough evidence:
+
+```text
+RESOLUTION
+
+Root Cause:
+Settlement adjustment not included in
+initial reconciliation dataset.
+
+Resolution:
+Adjustment record verified.
+
+Financial Difference:
+₹250
+
+Final Expected:
+₹9,500
+
+Actual:
+₹9,500
+```
+
+Then:
+
+```text
+[Submit Resolution]
+```
+
+---
+
+# 22. Verification Before Closure
+
+The department cannot simply press:
+
+> "Solved"
+
+and make the case disappear.
+
+The system asks:
+
+```text
+VERIFY RESOLUTION
+
+Expected:
+₹9,500
+
+Actual:
+₹9,500
+
+Difference:
+₹0
+
+Evidence:
+ADJ-1092 ✓
+
+Verification:
+PASS
+```
+
+Then:
+
+```text
+[Close Case]
+```
+
+---
+
+# 23. Department Response to Ticket
+
+The department's response becomes part of the original case.
+
+```text
+TICKET RESPONSE
+
+Department:
+Settlement Operations
+
+Finding:
+₹250 adjustment identified.
+
+Evidence:
+ADJ-1092
+
+Resolution:
+Settlement reconciled.
+
+Status:
+RESOLVED
+```
+
+The employee who raised the original case can see the update.
+
+---
+
+# 24. Fraud Department Experience
+
+For a fraud escalation, the interface changes slightly.
+
+```text
+FRAUD INVESTIGATION
+
+Ticket:
+RZ-FRD-82942
+
+Risk:
+🔴 HIGH
+
+Signal:
+Suspicious transaction pattern
+
+Evidence:
+7 related transactions
+3 repeated anomalies
+2 conflicting records
+
+AI conclusion:
+Possible fraud
+
+Final determination:
+PENDING SPECIALIST REVIEW
+```
+
+The fraud analyst sees:
+
+```text
+Transaction Graph
+Related Accounts
+Transaction History
+Risk Factors
+Evidence
+Previous Cases
+Timeline
+AI Investigation
+```
+
+The system should **not present the AI's suspicion as a final fraud finding**.
+
+---
+
+# 25. Fraud Investigation Graph
+
+For example:
+
+```text
+Merchant A
+     │
+     ├── PAY-001
+     ├── PAY-002
+     ├── PAY-003
+     │
+     └── Account Pattern
+            │
+            ├── PAY-004
+            ├── PAY-005
+            └── PAY-006
+```
+
+The analyst can identify relationships the individual exception screen might not reveal.
+
+---
+
+# 26. Fraud Department Actions
+
+Depending on permissions:
+
+```text
+[Mark for Investigation]
+
+[Request Evidence]
+
+[Link Related Cases]
+
+[Add Finding]
+
+[Escalate]
+
+[Request Compliance Review]
+
+[Resolve]
+
+[Close]
+```
+
+Financial actions remain separately permission-controlled.
+
+---
+
+# 27. Compliance Department Experience
+
+Compliance users see:
+
+```text
+COMPLIANCE CASE
+
+Issue:
+Policy conflict
+
+Applicable Rule:
+POL-001
+
+Source:
+Configured regulatory/policy source
+
+Evidence:
+EV-001
+EV-002
+
+Risk:
+Compliance HIGH
+
+AI Decision:
+ESCALATE
+
+Reason:
+Applicable requirement cannot be conclusively
+resolved from available evidence.
+```
+
+They can:
+
+```text
+Review policy
+Review evidence
+Add interpretation
+Request clarification
+Escalate
+Resolve
+```
+
+---
+
+# 28. Department Ticket Communication
+
+Avoid unstructured email-like conversations as the primary workflow.
+
+Instead use structured communication:
+
+```text
+CASE UPDATE
+
+From:
+Settlement Operations
+
+Message:
+Adjustment record located.
+
+Evidence:
+ADJ-1092
+
+Action:
+Reconciliation completed.
+
+Status:
+Ready for verification
+```
+
+Every communication is attached to the case.
+
+---
+
+# 29. Internal vs External Notes
+
+Very important.
+
+The system should distinguish:
+
+### Internal note
+
+```text
+Visible only to authorized department users.
+```
+
+### Merchant-facing communication
+
+```text
+Approved communication intended for merchant.
+```
+
+### Audit note
+
+```text
+Immutable system record.
+```
+
+These should never be mixed.
+
+---
+
+# 30. Department Reminder Interface
+
+The department sees:
+
+```text
+MY OVERDUE CASES
+
+🔴 RZ-82931
+8 hours overdue
+
+🔴 RZ-82942
+4 hours overdue
+
+🟠 RZ-82951
+2 hours until reminder
+```
+
+The department manager sees:
+
+```text
+TEAM OVERDUE
+
+5 cases overdue
+
+3 High Risk
+2 Medium Risk
+```
+
+---
+
+# 31. Reassignment
+
+If the ticket was incorrectly routed:
+
+```text
+CURRENT:
+Settlement Operations
+
+Correct Department:
+Risk / Fraud
+
+Reason:
+Evidence indicates suspicious activity.
+```
+
+The user selects:
+
+```text
+[Reassign]
+```
+
+The system records:
+
+```text
+Previous owner:
+Settlement Operations
+
+New owner:
+Risk/Fraud
+
+Reason:
+Fraud-related risk identified
+
+Changed by:
+Employee ID
+
+Timestamp:
+...
+```
+
+---
+
+# 32. Department Escalation
+
+If the department cannot resolve the issue:
+
+```text
+ESCALATE CASE
+
+Reason:
+Authoritative records conflict.
+
+Escalate to:
+Senior Settlement Operations
+
+Priority:
+HIGH
+
+Evidence:
+EV-001
+EV-002
+EV-003
+
+Required decision:
+Determine correct settlement state.
+```
+
+The next team receives the complete case package.
+
+They don't start from zero.
+
+---
+
+# 33. Department Workload Dashboard
+
+Managers should have:
+
+```text
+TEAM PERFORMANCE
+
+Open Cases                 42
+Resolved Today             19
+Overdue                     5
+High Risk                   8
+Average Resolution Time    4.2h
+Average Investigation      1.4h
+Escalation Rate            18%
+```
+
+This should be based on actual system events.
+
+---
+
+# 34. Root Cause Analytics
+
+Over time the department can see:
+
+```text
+TOP ROOT CAUSES
+
+Settlement adjustment       34%
+Data synchronization        22%
+Fee configuration           16%
+Timing mismatch             11%
+Duplicate transaction        9%
+Unknown                      8%
+```
+
+This turns the system from merely **resolving issues** into helping identify **systemic operational problems**.
+
+---
+
+# 35. Recurring Issue Detection
+
+Suppose:
+
+```text
+Settlement mismatch
+Merchant A
+7 cases
+30 days
+```
+
+The system can flag:
+
+```text
+⚠ RECURRING ISSUE
+
+7 similar exceptions detected.
+
+Possible systemic issue:
+Settlement adjustment synchronization.
+
+Review related cases.
+```
+
+This should be a **risk/operations signal**, not an unsupported causal claim.
+
+---
+
+# 36. Department Search
+
+Department employees get a more powerful search.
+
+```text
+Search:
+_________________________________________
+
+Filters:
+
+Merchant
+Issue Type
+Risk
+Ticket
+Status
+Assigned Employee
+Date
+Amount
+Root Cause
+Department
+```
+
+Example:
+
+> `Show high-risk settlement cases above ₹50,000 that are overdue.`
+
+Result:
+
+```text
+3 cases found
+```
+
+---
+
+# 37. Department Audit View
+
+A department employee can see:
+
+```text
+CASE AUDIT
+
+AI:
+Investigation performed
+
+AI:
+Evidence collected
+
+AI:
+Risk assessed
+
+AI:
+Decision = Escalate
+
+Department:
+Evidence requested
+
+Department:
+Adjustment found
+
+Department:
+Resolution submitted
+
+System:
+Verification passed
+
+System:
+Case closed
+```
+
+This makes the division of responsibility obvious.
+
+---
+
+# 38. Human vs AI Attribution
+
+This is **very important** for your project.
+
+Every action should show who performed it.
+
+Example:
+
+```text
+🤖 AI Agent
+Detected exception
+
+🤖 AI Agent
+Collected evidence
+
+🤖 AI Agent
+Recommended escalation
+
+👤 Settlement Analyst
+Reviewed evidence
+
+👤 Settlement Analyst
+Identified adjustment
+
+⚙ System
+Verified reconciliation
+
+⚙ System
+Closed case
+```
+
+The department can therefore distinguish:
+
+**AI work vs human work vs system work.**
+
+---
+
+# 39. Department Data Model
+
+A department case can contain:
+
+```json
+{
+  "ticket_id": "RZ-INC-82931",
+
+  "exception_id": "EXC-2026-000184",
+
+  "department": {
+    "department_id": "SETTLEMENT_OPS",
+    "name": "Settlement Operations"
+  },
+
+  "assignment": {
+    "assigned_to": "EMP-1092",
+    "assigned_at": "...",
+    "priority": "HIGH"
+  },
+
+  "issue": {
+    "type": "SETTLEMENT_MISMATCH",
+    "amount": "250.00"
+  },
+
+  "investigation": {
+    "ai_status": "COMPLETED",
+    "human_status": "UNDER_REVIEW"
+  },
+
+  "evidence": [],
+
+  "risk": {},
+
+  "rules": [],
+
+  "ai_decision": {
+    "type": "DEPARTMENT_ESCALATE",
+    "reason": "Insufficient evidence"
+  },
+
+  "department_findings": [],
+
+  "communications": [],
+
+  "reminders": [],
+
+  "resolution": {},
+
+  "verification": {},
+
+  "audit_events": []
+}
+```
+
+---
+
+# 40. Department Permission Model
+
+Different department users should have different capabilities.
+
+### Department Analyst
+
+```text
+✓ View cases
+✓ Investigate
+✓ Add evidence
+✓ Add notes
+✓ Request evidence
+✓ Recommend resolution
+
+✗ Final high-risk approval
+✗ Change policy
+✗ Override audit
+```
+
+### Department Manager
+
+```text
+✓ Everything above
+✓ Assign cases
+✓ Reassign cases
+✓ Approve configured actions
+✓ Escalate
+✓ Close authorized cases
+```
+
+### Risk/Fraud Specialist
+
+```text
+✓ Fraud investigations
+✓ Risk updates
+✓ Related-case linking
+✓ Evidence review
+✓ Specialist escalation
+```
+
+### Auditor
+
+```text
+✓ Read-only evidence
+✓ Read-only decisions
+✓ Read-only audit trail
+
+✗ Modify operational records
+```
+
+---
+
+# 41. What the Department Should NOT Receive
+
+The system should **not** dump the entire AI context into the department.
+
+For example, don't show:
+
+```text
+50 pages of LLM reasoning
+```
+
+Instead show:
+
+```text
+Finding
+Evidence
+Rule
+Risk
+Decision
+Reason
+Required Action
+```
+
+The department gets **decision-relevant information**, with the ability to drill deeper.
+
+---
+
+# 42. Department Experience: Complete Flow
+
+Here is the final department journey:
+
+```text
+                    NEW CASE
+                       │
+                       ▼
+              DEPARTMENT QUEUE
+                       │
+                       ▼
+                CASE SUMMARY
+                       │
+                       ▼
+               AI INVESTIGATION
+                       │
+          ┌────────────┼────────────┐
+          ▼            ▼            ▼
+       EVIDENCE       RISK         RULES
+          │            │            │
+          └────────────┼────────────┘
+                       ▼
+                 HUMAN REVIEW
+                       │
+          ┌────────────┼────────────┐
+          ▼            ▼            ▼
+       RESOLVE      REQUEST       REASSIGN
+                    EVIDENCE
+          │            │
+          │            ▼
+          │        INVESTIGATE
+          │            │
+          └────────────┤
+                       ▼
+                 FINDING ADDED
+                       │
+                       ▼
+                RESOLUTION
+                       │
+                       ▼
+                 VERIFICATION
+                       │
+                       ▼
+                    CLOSED
+```
+
+---
+
+# 43. Department's "Single Case Truth"
+
+The department should have one central case containing:
+
+```text
+┌──────────────────────────────────────────────────┐
+│ CASE                                             │
+├──────────────────────────────────────────────────┤
+│ Exception                                       │
+│ Merchant                                        │
+│ Financial impact                                │
+│ Issue                                           │
+├──────────────────────────────────────────────────┤
+│ AI INVESTIGATION                                │
+│ Timeline                                        │
+│ Findings                                        │
+├──────────────────────────────────────────────────┤
+│ EVIDENCE                                        │
+│ Sources                                         │
+│ Records                                         │
+├──────────────────────────────────────────────────┤
+│ RULES                                           │
+│ Policies                                        │
+│ Versions                                        │
+├──────────────────────────────────────────────────┤
+│ RISK                                            │
+│ Financial                                       │
+│ Fraud                                           │
+│ Operational                                     │
+│ Compliance                                      │
+├──────────────────────────────────────────────────┤
+│ DEPARTMENT WORK                                 │
+│ Notes                                           │
+│ Evidence requests                               │
+│ Findings                                        │
+├──────────────────────────────────────────────────┤
+│ RESOLUTION                                      │
+│ Action                                          │
+│ Verification                                    │
+├──────────────────────────────────────────────────┤
+│ AUDIT                                           │
+│ Complete history                                │
+└──────────────────────────────────────────────────┘
+```
+
+---
+
+# 44. The most important department-side principle
+
+The department should **never receive just a problem**.
+
+It should receive:
+
+> **Problem + Context + Investigation + Evidence + Sources + Applicable Rules + Risk + AI Decision + Required Action.**
+
+And when the department finishes:
+
+> **Department Finding + New Evidence + Resolution + Verification**
+
+gets added back to the same case.
+
+---
+
+# 45. Complete three-sided architecture
+
+Now your project has **three connected experiences**:
+
+```text
+                  ┌──────────────────────┐
+                  │     AI SYSTEM        │
+                  │                      │
+                  │ Detect               │
+                  │ Investigate          │
+                  │ Gather Evidence      │
+                  │ Apply Rules          │
+                  │ Assess Risk          │
+                  │ Recommend Decision   │
+                  └──────────┬───────────┘
+                             │
+              ┌──────────────┴──────────────┐
+              │                             │
+              ▼                             ▼
+┌────────────────────────┐      ┌────────────────────────┐
+│ EMPLOYEE EXPERIENCE    │      │ DEPARTMENT EXPERIENCE  │
+│                        │      │                        │
+│ Dashboard              │      │ Department Queue       │
+│ Exceptions             │      │ Case Workspace         │
+│ Search                 │      │ Evidence               │
+│ Risk                   │      │ Investigation          │
+│ Decision               │      │ Risk                   │
+│ Tickets                │      │ Rules                  │
+│ Reminders              │      │ Findings               │
+│ Resolution             │      │ Resolution             │
+│ Audit                  │      │ Verification            │
+└───────────┬────────────┘      └────────────┬───────────┘
+            │                                │
+            └──────────────┬─────────────────┘
+                           ▼
+                 ┌─────────────────────┐
+                 │ SINGLE CASE RECORD  │
+                 │                     │
+                 │ Evidence            │
+                 │ Decision            │
+                 │ Risk                │
+                 │ Ticket              │
+                 │ Resolution          │
+                 │ Audit               │
+                 └─────────────────────┘
+```
+
+## The key difference
+
+### Employee side
+
+**"What happened and what do I need to know/do?"**
+
+### AI system
+
+**"What evidence, rules, risk and authority determine what should happen?"**
+
+### Department side
+
+**"How do we investigate, act, resolve and formally close the case?"**
+
+That separation is important because it prevents the application from becoming a generic "AI dashboard." It becomes a genuine **financial operations workflow system** where the AI prepares the case, employees understand it, and authorized departments resolve it—with every step connected through the same evidence-backed case record.

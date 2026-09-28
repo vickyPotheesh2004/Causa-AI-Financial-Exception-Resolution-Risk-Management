@@ -1,0 +1,11 @@
+.git
+.codex-*
+data
+tests
+docs
+legal
+presentations
+reports
+tools
+__pycache__
+*.pyc

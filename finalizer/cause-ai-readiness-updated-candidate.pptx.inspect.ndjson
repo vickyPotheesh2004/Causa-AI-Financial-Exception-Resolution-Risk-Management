@@ -1,0 +1,113 @@
+{"kind":"deck","id":"pr/sbu5er","name":"Deck"}
+{"kind":"layout","layoutId":"/ppt/slideMasters/slideMaster1.xml","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout1.xml","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/y90nupkv","slide":1,"title":"Cause AI","textShapes":4}
+{"kind":"textbox","id":"sh/ts7md4r2","slide":1,"text":"Cause AI","textPreview":"Cause AI","textChars":8,"textLines":1,"bbox":[85,128,700,74]}
+{"kind":"textbox","id":"sh/547294r6","slide":1,"text":"Legal and production readiness review","textPreview":"Legal and production readiness review","textChars":37,"textLines":1,"bbox":[88,219,770,38]}
+{"kind":"shape","id":"sh/k3yl0zql","slide":1,"bbox":[88,286,210,4]}
+{"kind":"textbox","id":"sh/7qp4be9c","slide":1,"text":"Financial exception investigation and risk management","textPreview":"Financial exception investigation and risk management","textChars":53,"textLines":1,"bbox":[88,322,760,35]}
+{"kind":"textbox","id":"sh/65g3298r","slide":1,"text":"Prepared for legal, privacy, security and business review\n26 September 2026","textPreview":"Prepared for legal, privacy, security and business review | 26 September 2026","textChars":75,"textLines":2,"bbox":[88,560,600,52]}
+{"kind":"notes","id":"nt/y90nupkv","slide":1,"text":"Internal review deck. Current implementation evidence and release blockers."}
+{"kind":"slide","id":"sl/hwbqtkby","slide":2,"title":"CAUSE AI","textShapes":12}
+{"kind":"textbox","id":"sh/wjy9sry9","slide":2,"text":"CAUSE AI","textPreview":"CAUSE AI","textChars":8,"textLines":1,"bbox":[72,35,180,25]}
+{"kind":"textbox","id":"sh/9072xkry","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[1160,35,50,25]}
+{"kind":"textbox","id":"sh/ozy1ofad","slide":2,"text":"Application scope","textPreview":"Application scope","textChars":17,"textLines":1,"bbox":[72,83,1080,52]}
+{"kind":"textbox","id":"sh/b29kza94","slide":2,"text":"What Cause AI does today","textPreview":"What Cause AI does today","textChars":24,"textLines":1,"bbox":[72,143,1090,36]}
+{"kind":"shape","id":"sh/a10jqpsj","slide":2,"bbox":[72,196,1136,4]}
+{"kind":"textbox","id":"sh/x4r21kru","slide":2,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[96,235,22,28]}
+{"kind":"textbox","id":"sh/w3i1sfa9","slide":2,"text":"Detects payment-operation exceptions from normalized financial records and preserves evidence references.","textPreview":"Detects payment-operation exceptions from normalized financial records and preserves evidence references.","textChars":105,"textLines":1,"bbox":[124,235,1040,55]}
+{"kind":"textbox","id":"sh/r65knqtk","slide":2,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[96,309,22,28]}
+{"kind":"textbox","id":"sh/q5wjelsz","slide":2,"text":"Creates tenant-scoped cases, investigation tickets and append-only audit events.","textPreview":"Creates tenant-scoped cases, investigation tickets and append-only audit events.","textChars":80,"textLines":1,"bbox":[124,309,1040,55]}
+{"kind":"textbox","id":"sh/ove9o7yd","slide":2,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[96,383,22,28]}
+{"kind":"textbox","id":"sh/9wnqhczy","slide":2,"text":"Uses deterministic rules and explainable risk assessment. Human reviewers retain final authority.","textPreview":"Uses deterministic rules and explainable risk assessment. Human reviewers retain final authority.","textChars":97,"textLines":1,"bbox":[124,383,1040,55]}
+{"kind":"textbox","id":"sh/mtwrmxg7","slide":2,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[96,457,22,28]}
+{"kind":"textbox","id":"sh/nu58f2hs","slide":2,"text":"Runs as an approved synthetic-data demo on local loopback infrastructure.","textPreview":"Runs as an approved synthetic-data demo on local loopback infrastructure.","textChars":73,"textLines":1,"bbox":[124,457,1040,55]}
+{"kind":"notes","id":"nt/hwbqtkby","slide":2,"text":""}
+{"kind":"slide","id":"sl/ofy9wn61","slide":3,"title":"CAUSE AI","textShapes":12}
+{"kind":"textbox","id":"sh/v6l4jq94","slide":3,"text":"CAUSE AI","textPreview":"CAUSE AI","textChars":8,"textLines":1,"bbox":[72,35,180,25]}
+{"kind":"textbox","id":"sh/cza94vmx","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1160,35,50,25]}
+{"kind":"textbox","id":"sh/d0jax03i","slide":3,"text":"Financial data controls","textPreview":"Financial data controls","textChars":23,"textLines":1,"bbox":[72,83,1080,52]}
+{"kind":"textbox","id":"sh/298ryl4v","slide":3,"text":"Controls added around imports and evidence","textPreview":"Controls added around imports and evidence","textChars":42,"textLines":1,"bbox":[72,143,1090,36]}
+{"kind":"shape","id":"sh/3ah8rqlg","slide":3,"bbox":[72,196,1136,4]}
+{"kind":"textbox","id":"sh/obq90bml","slide":3,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[96,235,22,28]}
+{"kind":"textbox","id":"sh/pcjqtg36","slide":3,"text":"Immutable financial-event records include tenant scope, source identity, SHA-256 content hash and ingestion time.","textPreview":"Immutable financial-event records include tenant scope, source identity, SHA-256 content hash and ingestion time.","textChars":113,"textLines":1,"bbox":[124,235,1040,55]}
+{"kind":"textbox","id":"sh/m5cra54z","slide":3,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[96,309,22,28]}
+{"kind":"textbox","id":"sh/n6ls3alk","slide":3,"text":"Changed replay of a source record returns a conflict instead of silently replacing evidence.","textPreview":"Changed replay of a source record returns a conflict instead of silently replacing evidence.","textChars":92,"textLines":1,"bbox":[124,309,1040,55]}
+{"kind":"textbox","id":"sh/n2l4fq98","slide":3,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[96,383,22,28]}
+{"kind":"textbox","id":"sh/m1c3mlsn","slide":3,"text":"The Razorpay connector requires an explicit live-mode flag and tenant match before any read-only import.","textPreview":"The Razorpay connector requires an explicit live-mode flag and tenant match before any read-only import.","textChars":104,"textLines":1,"bbox":[124,383,1040,55]}
+{"kind":"textbox","id":"sh/943mhgre","slide":3,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[96,457,22,28]}
+{"kind":"textbox","id":"sh/83ulovat","slide":3,"text":"Normalized import data excludes raw email and card details from the connector output.","textPreview":"Normalized import data excludes raw email and card details from the connector output.","textChars":85,"textLines":1,"bbox":[124,457,1040,55]}
+{"kind":"notes","id":"nt/ofy9wn61","slide":3,"text":""}
+{"kind":"slide","id":"sl/jyx0ra1s","slide":4,"title":"CAUSE AI","textShapes":12}
+{"kind":"textbox","id":"sh/w72947yt","slide":4,"text":"CAUSE AI","textPreview":"CAUSE AI","textChars":8,"textLines":1,"bbox":[72,35,180,25]}
+{"kind":"textbox","id":"sh/1cj2d8b6","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1160,35,50,25]}
+{"kind":"textbox","id":"sh/0ba143al","slide":4,"text":"Security controls","textPreview":"Security controls","textChars":17,"textLines":1,"bbox":[72,83,1080,52]}
+{"kind":"textbox","id":"sh/rm1k7yt4","slide":4,"text":"Backend behavior verified by automated tests","textPreview":"Backend behavior verified by automated tests","textChars":44,"textLines":1,"bbox":[72,143,1090,36]}
+{"kind":"shape","id":"sh/ql8jytsj","slide":4,"bbox":[72,196,1136,4]}
+{"kind":"textbox","id":"sh/doj29oba","slide":4,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[96,235,22,28]}
+{"kind":"textbox","id":"sh/sna103ap","slide":4,"text":"Tenant isolation, role checks, same-origin writes and immutable audit records protect core workflows.","textPreview":"Tenant isolation, role checks, same-origin writes and immutable audit records protect core workflows.","textChars":101,"textLines":1,"bbox":[124,235,1040,55]}
+{"kind":"textbox","id":"sh/3ihk3et8","slide":4,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[96,309,22,28]}
+{"kind":"textbox","id":"sh/ih8ju9sn","slide":4,"text":"The HTTP layer applies CSP, no-store responses, MIME-sniffing protection and clickjacking protection.","textPreview":"The HTTP layer applies CSP, no-store responses, MIME-sniffing protection and clickjacking protection.","textChars":101,"textLines":1,"bbox":[124,309,1040,55]}
+{"kind":"textbox","id":"sh/kbm987y5","slide":4,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[96,383,22,28]}
+{"kind":"textbox","id":"sh/5cva1cfq","slide":4,"text":"Request-size limits, malformed Content-Length handling, session expiry and login throttling reduce common abuse paths.","textPreview":"Request-size limits, malformed Content-Length handling, session expiry and login throttling reduce common abuse paths.","textChars":118,"textLines":1,"bbox":[124,383,1040,55]}
+{"kind":"textbox","id":"sh/i94r6xgz","slide":4,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[96,457,22,28]}
+{"kind":"textbox","id":"sh/jadsz2xk","slide":4,"text":"Health checks verify database access and report schema version 4.","textPreview":"Health checks verify database access and report schema version 4.","textChars":65,"textLines":1,"bbox":[124,457,1040,55]}
+{"kind":"notes","id":"nt/jyx0ra1s","slide":4,"text":""}
+{"kind":"slide","id":"sl/i107q5of","slide":5,"title":"CAUSE AI","textShapes":12}
+{"kind":"textbox","id":"sh/k7mxovud","slide":5,"text":"CAUSE AI","textPreview":"CAUSE AI","textChars":8,"textLines":1,"bbox":[72,35,180,25]}
+{"kind":"textbox","id":"sh/dgbulwnm","slide":5,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1160,35,50,25]}
+{"kind":"textbox","id":"sh/cf2tcr61","slide":5,"text":"Legal and privacy package","textPreview":"Legal and privacy package","textChars":25,"textLines":1,"bbox":[72,83,1080,52]}
+{"kind":"textbox","id":"sh/z2tcnm5s","slide":5,"text":"Templates require legal completion before publication","textPreview":"Templates require legal completion before publication","textChars":53,"textLines":1,"bbox":[72,143,1090,36]}
+{"kind":"shape","id":"sh/yhkbe1o7","slide":5,"bbox":[72,196,1136,4]}
+{"kind":"textbox","id":"sh/l4bupwny","slide":5,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[96,235,22,28]}
+{"kind":"textbox","id":"sh/032tgr6d","slide":5,"text":"Terms cover authorised access, acceptable use, confidentiality, customer responsibility and service limits.","textPreview":"Terms cover authorised access, acceptable use, confidentiality, customer responsibility and service limits.","textChars":107,"textLines":1,"bbox":[124,235,1040,55]}
+{"kind":"textbox","id":"sh/n6dcr65o","slide":5,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[96,309,22,28]}
+{"kind":"textbox","id":"sh/m5kbi1oj","slide":5,"text":"Privacy notice covers processed data, purpose, sharing, retention, data rights and incident handling.","textPreview":"Privacy notice covers processed data, purpose, sharing, retention, data rights and incident handling.","textChars":101,"textLines":1,"bbox":[124,309,1040,55]}
+{"kind":"textbox","id":"sh/w32dkbuh","slide":5,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[96,383,22,28]}
+{"kind":"textbox","id":"sh/x4vedgvm","slide":5,"text":"India review includes DPDP, RBI payment-data restrictions, localisation requirements and applicable NPCI or UPI obligations.","textPreview":"India review includes DPDP, RBI payment-data restrictions, localisation requirements and applicable NPCI or UPI obligations.","textChars":124,"textLines":1,"bbox":[124,383,1040,55]}
+{"kind":"textbox","id":"sh/ahkvi1cb","slide":5,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[96,457,22,28]}
+{"kind":"textbox","id":"sh/v2twb6dw","slide":5,"text":"The template contains placeholders for the legal entity, privacy contact, processors, retention schedule and jurisdiction terms.","textPreview":"The template contains placeholders for the legal entity, privacy contact, processors, retention schedule and jurisdiction terms.","textChars":128,"textLines":1,"bbox":[124,457,1040,55]}
+{"kind":"notes","id":"nt/i107q5of","slide":5,"text":"Sources: MeitY DPDP Act 2023 and DPDP Rules 2025; RBI card-on-file storage restriction RBI/2022-23/77; RBI payment-system storage FAQ."}
+{"kind":"slide","id":"sl/x8f69ofe","slide":6,"title":"CAUSE AI","textShapes":9}
+{"kind":"textbox","id":"sh/v2tcn650","slide":6,"text":"CAUSE AI","textPreview":"CAUSE AI","textChars":8,"textLines":1,"bbox":[72,35,180,25]}
+{"kind":"textbox","id":"sh/yhg7epsj","slide":6,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1160,35,50,25]}
+{"kind":"textbox","id":"sh/zi98nu94","slide":6,"text":"Production readiness score","textPreview":"Production readiness score","textChars":26,"textLines":1,"bbox":[72,83,1080,52]}
+{"kind":"textbox","id":"sh/87ipkzal","slide":6,"text":"Evidence-based assessment as of 27 September 2026","textPreview":"Evidence-based assessment as of 27 September 2026","textChars":49,"textLines":1,"bbox":[72,143,1090,36]}
+{"kind":"shape","id":"sh/98rqt4r6","slide":6,"bbox":[72,196,1136,4]}
+{"kind":"textbox","id":"sh/ml07i9sv","slide":6,"text":"55","textPreview":"55","textChars":2,"textLines":1,"bbox":[100,255,260,140]}
+{"kind":"textbox","id":"sh/7m98ru9g","slide":6,"text":"out of 100","textPreview":"out of 100","textChars":10,"textLines":1,"bbox":[110,400,190,32]}
+{"kind":"shape","id":"sh/oryp8fah","slide":6,"bbox":[420,280,700,4]}
+{"kind":"textbox","id":"sh/pc76hkr2","slide":6,"text":"The score credits implemented controls, governance gates and 72 passing automated checks.","textPreview":"The score credits implemented controls, governance gates and 72 passing automated checks.","textChars":89,"textLines":1,"bbox":[420,310,700,54]}
+{"kind":"textbox","id":"sh/h4bupgn6","slide":6,"text":"Cross-document implementation is 56 out of 100 against the PDR and project description.","textPreview":"Cross-document implementation is 56 out of 100 against the PDR and project description.","textChars":87,"textLines":1,"bbox":[420,395,700,54]}
+{"kind":"textbox","id":"sh/w32twb6l","slide":6,"text":"Production launch remains blocked until company controls are evidenced.","textPreview":"Production launch remains blocked until company controls are evidenced.","textChars":71,"textLines":1,"bbox":[420,490,700,32]}
+{"kind":"notes","id":"nt/x8f69ofe","slide":6,"text":""}
+{"kind":"slide","id":"sl/gnmp4jqx","slide":7,"title":"CAUSE AI","textShapes":12}
+{"kind":"textbox","id":"sh/n6x0fqlo","slide":7,"text":"CAUSE AI","textPreview":"CAUSE AI","textChars":8,"textLines":1,"bbox":[72,35,180,25]}
+{"kind":"textbox","id":"sh/cb2tkvap","slide":7,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[1160,35,50,25]}
+{"kind":"textbox","id":"sh/dcbud0ra","slide":7,"text":"Release blockers","textPreview":"Release blockers","textChars":16,"textLines":1,"bbox":[72,83,1080,52]}
+{"kind":"textbox","id":"sh/ydkbm5sv","slide":7,"text":"Controls the workspace cannot truthfully claim as complete","textPreview":"Controls the workspace cannot truthfully claim as complete","textChars":58,"textLines":1,"bbox":[72,143,1090,36]}
+{"kind":"shape","id":"sh/zedcfa9g","slide":7,"bbox":[72,196,1136,4]}
+{"kind":"textbox","id":"sh/kzmdova1","slide":7,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[96,230,22,28]}
+{"kind":"textbox","id":"sh/l0vuh0rm","slide":7,"text":"Managed database, encrypted and tested backups, disaster recovery, TLS ingress, WAF, secrets manager and central observability.","textPreview":"Managed database, encrypted and tested backups, disaster recovery, TLS ingress, WAF, secrets manager and central observability.","textChars":127,"textLines":1,"bbox":[124,230,1040,55]}
+{"kind":"textbox","id":"sh/eh0ba1sr","slide":7,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[96,304,22,28]}
+{"kind":"textbox","id":"sh/fi9c369c","slide":7,"text":"Company identity provider, MFA, SSO, lifecycle provisioning and privileged-access administration.","textPreview":"Company identity provider, MFA, SSO, lifecycle provisioning and privileged-access administration.","textChars":97,"textLines":1,"bbox":[124,304,1040,55]}
+{"kind":"textbox","id":"sh/baxkjqlk","slide":7,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[96,378,22,28]}
+{"kind":"textbox","id":"sh/a9ojq5kz","slide":7,"text":"Authorized Razorpay production credentials, webhook verification, settlement and refund sources, plus reconciliation approval.","textPreview":"Authorized Razorpay production credentials, webhook verification, settlement and refund sources, plus reconciliation approval.","textChars":126,"textLines":1,"bbox":[124,378,1040,55]}
+{"kind":"textbox","id":"sh/xcz2l03q","slide":7,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[96,452,22,28]}
+{"kind":"textbox","id":"sh/cbq1sv25","slide":7,"text":"Independent VAPT, penetration testing, load testing, incident exercise, legal approval and signed customer agreements.","textPreview":"Independent VAPT, penetration testing, load testing, incident exercise, legal approval and signed customer agreements.","textChars":118,"textLines":1,"bbox":[124,452,1040,55]}
+{"kind":"notes","id":"nt/gnmp4jqx","slide":7,"text":""}
+{"kind":"slide","id":"sl/fu1gfa1s","slide":8,"title":"CAUSE AI","textShapes":12}
+{"kind":"textbox","id":"sh/0jydkreh","slide":8,"text":"CAUSE AI","textPreview":"CAUSE AI","textChars":8,"textLines":1,"bbox":[72,35,180,25]}
+{"kind":"textbox","id":"sh/18byd4zy","slide":8,"text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[1160,35,50,25]}
+{"kind":"textbox","id":"sh/g72x4zyd","slide":8,"text":"Submission decision","textPreview":"Submission decision","textChars":19,"textLines":1,"bbox":[72,83,1080,52]}
+{"kind":"textbox","id":"sh/ri9g7uhw","slide":8,"text":"Recommended next actions for legal and production owners","textPreview":"Recommended next actions for legal and production owners","textChars":56,"textLines":1,"bbox":[72,143,1090,36]}
+{"kind":"shape","id":"sh/6h0fypgb","slide":8,"bbox":[72,196,1136,4]}
+{"kind":"textbox","id":"sh/tkby9kzm","slide":8,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[96,235,22,28]}
+{"kind":"textbox","id":"sh/sjix0zy1","slide":8,"text":"Legal team completes the company-specific placeholders and approves the Terms, Privacy Notice and DPA.","textPreview":"Legal team completes the company-specific placeholders and approves the Terms, Privacy Notice and DPA.","textChars":102,"textLines":1,"bbox":[124,235,1040,55]}
+{"kind":"textbox","id":"sh/je9g3ahk","slide":8,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[96,309,22,28]}
+{"kind":"textbox","id":"sh/id0fu50z","slide":8,"text":"Security and platform teams implement the required production environment and produce operational evidence.","textPreview":"Security and platform teams implement the required production environment and produce operational evidence.","textChars":107,"textLines":1,"bbox":[124,309,1040,55]}
+{"kind":"textbox","id":"sh/o7ydoret","slide":8,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[96,383,22,28]}
+{"kind":"textbox","id":"sh/98rehwve","slide":8,"text":"Payments owners approve real Razorpay integration scope, credentials, webhook controls and reconciliation rules.","textPreview":"Payments owners approve real Razorpay integration scope, credentials, webhook controls and reconciliation rules.","textChars":112,"textLines":1,"bbox":[124,383,1040,55]}
+{"kind":"textbox","id":"sh/m5gvmhwn","slide":8,"text":"•","textPreview":"•","textChars":1,"textLines":1,"bbox":[96,457,22,28]}
+{"kind":"textbox","id":"sh/n6pwfmd8","slide":8,"text":"Release authority reassesses the score after independent testing and documented control acceptance.","textPreview":"Release authority reassesses the score after independent testing and documented control acceptance.","textChars":99,"textLines":1,"bbox":[124,457,1040,55]}
+{"kind":"notes","id":"nt/fu1gfa1s","slide":8,"text":""}

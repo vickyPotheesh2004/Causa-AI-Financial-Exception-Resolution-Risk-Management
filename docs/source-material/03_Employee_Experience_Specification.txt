@@ -1,0 +1,1506 @@
+Absolutely. Now that the **system-side architecture is finalized**, the user-side experience should feel much simpler than the underlying system.
+
+The employee should **not need to understand agents, RAG, event graphs, policy engines, risk models, or evidence pipelines**. They should experience the product as a powerful **Financial Operations Command Center** that tells them:
+
+> **What happened → Why it happened → What proves it → How risky it is → What decision was made → Who needs to act → What is happening now.**
+
+# AI Financial Exception Resolution & Risk Management System
+## Complete User-Side Experience
+
+---
+
+# 1. User Experience Philosophy
+
+The employee opens the application and should immediately understand:
+
+```text
+What needs my attention?
+        ↓
+What is high risk?
+        ↓
+What is unresolved?
+        ↓
+What needs departmental action?
+        ↓
+What has been resolved?
+```
+
+The UI should therefore prioritize:
+
+**Clarity → Evidence → Risk → Decision → Action → Tracking**
+
+rather than overwhelming the user with technical AI information.
+
+---
+
+# 2. Main User Roles
+
+The same platform can serve different employees with different permissions.
+
+### Finance Analyst
+
+Main activities:
+
+- Investigate exceptions
+- Review evidence
+- Search transactions
+- Review decisions
+- Create/escalate tickets
+- Track resolution
+
+### Finance Manager
+
+Additional visibility:
+
+- High-risk exceptions
+- Financial exposure
+- Team workload
+- unresolved issues
+- escalation trends
+- approval-required cases
+
+### Risk/Fraud Analyst
+
+Focus:
+
+- Fraud escalations
+- suspicious patterns
+- risk history
+- related cases
+- evidence
+- investigation history
+
+### Compliance User
+
+Focus:
+
+- Rule violations
+- policy conflicts
+- evidence
+- regulatory-related cases
+- audit history
+
+### Auditor
+
+Mostly read-only:
+
+- Evidence
+- Decisions
+- Rules
+- Sources
+- Actions
+- Ticket history
+- Audit trail
+
+---
+
+# 3. Login Experience
+
+The employee begins with a secure login.
+
+```text
+┌───────────────────────────────────────┐
+│                                       │
+│       AI FINANCIAL OPERATIONS         │
+│                                       │
+│       Sign in to continue             │
+│                                       │
+│       Email                           │
+│       ┌───────────────────────────┐   │
+│       │ employee@company.com      │   │
+│       └───────────────────────────┘   │
+│                                       │
+│       Password                        │
+│       ┌───────────────────────────┐   │
+│       │ •••••••••••              │   │
+│       └───────────────────────────┘   │
+│                                       │
+│             [ Sign In ]               │
+│                                       │
+└───────────────────────────────────────┘
+```
+
+After authentication:
+
+```text
+Authentication
+      ↓
+Role identification
+      ↓
+Permission loading
+      ↓
+Dashboard
+```
+
+The user sees only the data and actions their role permits.
+
+---
+
+# 4. Main Dashboard
+
+This is the employee's **home screen**.
+
+The dashboard should answer:
+
+> **"What is happening in financial operations right now?"**
+
+### Header
+
+```text
+┌──────────────────────────────────────────────────────────┐
+│ AI FINANCIAL OPERATIONS                    🔔  👤 Lucky │
+└──────────────────────────────────────────────────────────┘
+```
+
+### Navigation
+
+```text
+Dashboard
+Exceptions
+Risk
+Tickets
+Reminders
+Search
+Reports
+Audit
+Settings
+```
+
+---
+
+# 5. Dashboard Overview
+
+At the top:
+
+```text
+┌───────────────────────────────────────────────────────────┐
+│ FINANCIAL OPERATIONS OVERVIEW                            │
+├──────────────┬──────────────┬──────────────┬─────────────┤
+│ Open         │ High Risk    │ Escalated    │ Unresolved  │
+│ Exceptions   │ Exceptions   │ Tickets      │ Tickets     │
+│              │              │              │             │
+│ 128          │ 17           │ 24           │ 12          │
+└──────────────┴──────────────┴──────────────┴─────────────┘
+```
+
+Then:
+
+```text
+Total Amount at Risk
+₹24.8 L
+
+Amount Under Investigation
+₹8.4 L
+
+Amount Resolved
+₹16.4 L
+```
+
+---
+
+# 6. "Needs Your Attention"
+
+This should be one of the most useful dashboard sections.
+
+```text
+┌─────────────────────────────────────────────────────────┐
+│ ⚠ NEEDS YOUR ATTENTION                                  │
+├─────────────────────────────────────────────────────────┤
+│ 🔴 EXC-10291  High-risk settlement discrepancy          │
+│    ₹25,000 exposure • Investigation complete             │
+│    [Review]                                               │
+│                                                         │
+│ 🟠 RZ-82931   Department response overdue                │
+│    Settlement Operations • Reminder due                  │
+│    [Open Ticket]                                          │
+│                                                         │
+│ 🟡 EXC-10321  Evidence conflict detected                │
+│    Requires manual review                                │
+│    [Investigate]                                         │
+└─────────────────────────────────────────────────────────┘
+```
+
+This means the employee doesn't have to manually search through everything.
+
+---
+
+# 7. Exception Queue
+
+Clicking **Exceptions** opens the complete issue tracker.
+
+```text
+┌────────────────────────────────────────────────────────────────┐
+│ EXCEPTIONS                                      🔍 Search       │
+├────────────────────────────────────────────────────────────────┤
+│ Filters: Status | Risk | Type | Department | Date             │
+├────────┬────────────┬────────────┬────────┬──────────┬─────────┤
+│ ID     │ Type       │ Merchant   │ Risk   │ Status   │ Amount  │
+├────────┼────────────┼────────────┼────────┼──────────┼─────────┤
+│ EXC001 │ Settlement │ ABC Tech   │ 🔴High │ Escalated│ ₹25,000 │
+│ EXC002 │ Refund     │ XYZ Ltd    │ 🟢Low  │ Resolved │ ₹2,000  │
+│ EXC003 │ Fraud      │ PQR Ltd    │ 🔴High │ Review   │ ₹50,000 │
+│ EXC004 │ Fee        │ LMN Pvt    │ 🟡Med  │ Open     │ ₹1,200  │
+└────────┴────────────┴────────────┴────────┴──────────┴─────────┘
+```
+
+---
+
+# 8. Search Experience
+
+The search bar should be globally available.
+
+Employee can type:
+
+```text
+"ABC Technologies"
+```
+
+or:
+
+```text
+"EXC-2026-000184"
+```
+
+or:
+
+```text
+"RZ-INC-82931"
+```
+
+or:
+
+```text
+"settlement mismatch"
+```
+
+or:
+
+```text
+"high risk unresolved"
+```
+
+The system returns matching:
+
+```text
+Exceptions
+Tickets
+Transactions
+Merchants
+Investigations
+Audit records
+```
+
+---
+
+# 9. Smart Search
+
+The search should understand business terminology.
+
+For example:
+
+> "Show unresolved high-risk settlement issues."
+
+The system interprets:
+
+```text
+Status = UNRESOLVED
+Risk >= HIGH
+Type = SETTLEMENT
+```
+
+and returns the relevant cases.
+
+This can use semantic search, but the final filtering should remain deterministic.
+
+---
+
+# 10. Opening an Exception
+
+When the employee clicks:
+
+**EXC-2026-000184**
+
+they enter the **Exception Investigation Workspace**.
+
+This is the most important screen in the application.
+
+---
+
+# 11. Exception Header
+
+```text
+┌──────────────────────────────────────────────────────────────┐
+│ EXC-2026-000184                                              │
+│ Settlement Mismatch                                          │
+│                                                              │
+│ 🔴 HIGH RISK        🟠 ESCALATED       Priority: HIGH       │
+│                                                              │
+│ Created: 25 Sep 2026, 14:32                                  │
+│ Updated: 25 Sep 2026, 15:48                                  │
+└──────────────────────────────────────────────────────────────┘
+```
+
+The user immediately knows:
+
+- what the issue is,
+- current risk,
+- current status,
+- priority,
+- when it occurred.
+
+---
+
+# 12. Merchant Information
+
+```text
+┌────────────────────────────────────────────┐
+│ MERCHANT                                    │
+├────────────────────────────────────────────┤
+│ Company: ABC Technologies Pvt Ltd           │
+│ Merchant ID: MRC-1008                       │
+│ Contact: finance@example.com                │
+│                                             │
+│ Previous Reports: 4                         │
+│ Open Issues: 2                              │
+└────────────────────────────────────────────┘
+```
+
+Sensitive information should be displayed according to the employee's permissions.
+
+---
+
+# 13. Issue Summary
+
+The system gives the employee a concise explanation.
+
+```text
+ISSUE SUMMARY
+
+The system detected a ₹250 discrepancy between
+the expected settlement amount and the actual
+settlement amount.
+
+Expected settlement: ₹9,750
+Actual settlement:   ₹9,500
+Difference:          ₹250
+```
+
+This is generated from verified data—not invented by the AI.
+
+---
+
+# 14. Investigation Timeline
+
+This is one of the strongest UX components.
+
+```text
+INVESTIGATION TIMELINE
+
+14:01:22
+Payment captured
+₹10,000
+        │
+        ▼
+14:01:24
+Fee recorded
+₹250
+        │
+        ▼
+14:05:12
+Expected settlement calculated
+₹9,750
+        │
+        ▼
+14:30:18
+Settlement received
+₹9,500
+        │
+        ▼
+14:32:01
+Exception detected
+₹250 discrepancy
+        │
+        ▼
+14:34:21
+AI investigation started
+        │
+        ▼
+14:36:40
+Evidence conflict identified
+        │
+        ▼
+14:38:11
+Department escalation created
+```
+
+The employee can understand the complete story without manually searching multiple systems.
+
+---
+
+# 15. Evidence Panel
+
+The employee can click **Evidence**.
+
+```text
+┌──────────────────────────────────────────────────────────┐
+│ EVIDENCE                                                 │
+├──────────────────────────────────────────────────────────┤
+│ EV-001                                                  │
+│ Payment Record                                           │
+│ ₹10,000 captured                                         │
+│ Source: Payment Database                                 │
+│ Record: PAY-10291                                        │
+│ [View Source]                                            │
+│                                                          │
+│ EV-002                                                  │
+│ Fee Record                                               │
+│ ₹250 fee                                                │
+│ Source: Fee Database                                     │
+│ Record: FEE-10291                                        │
+│ [View Source]                                            │
+│                                                          │
+│ EV-003                                                  │
+│ Settlement Record                                        │
+│ ₹9,500 settled                                           │
+│ Source: Settlement Database                              │
+│ Record: SET-83921                                        │
+│ [View Source]                                            │
+└──────────────────────────────────────────────────────────┘
+```
+
+---
+
+# 16. Evidence status
+
+Each evidence item can show:
+
+```text
+✓ VERIFIED
+? UNVERIFIED
+⚠ CONFLICTING
+✕ INVALID
+```
+
+Example:
+
+```text
+Payment Record        ✓ VERIFIED
+Fee Record            ✓ VERIFIED
+Settlement Record     ⚠ CONFLICTING
+```
+
+This makes uncertainty visible.
+
+---
+
+# 17. Rules & Regulation Panel
+
+The user can open **Rules Applied**.
+
+```text
+RULES APPLIED
+
+RZ-001
+Settlement policy
+✓ PASS
+
+RZ-002
+Refund condition
+N/A
+
+RZ-003
+Applicable merchant policy
+✓ PASS
+
+RZ-004
+Required evidence
+⚠ INCOMPLETE
+```
+
+Each rule has:
+
+```text
+Rule ID
+Rule description
+Status
+Source
+Version
+Effective date
+Evidence used
+```
+
+Example:
+
+```text
+RZ-001
+
+Rule:
+Settlement must be evaluated using the applicable
+settlement records and permitted deductions.
+
+Source:
+Razorpay Terms & Conditions
+
+Version:
+2026-09
+
+[View Source]
+```
+
+---
+
+# 18. Decision Panel
+
+The user should never have to guess why the system made a decision.
+
+```text
+┌─────────────────────────────────────────────────────────┐
+│ DECISION                                                │
+├─────────────────────────────────────────────────────────┤
+│ 🟠 DEPARTMENT ESCALATE                                  │
+│                                                         │
+│ Reason                                                  │
+│ Available authoritative records do not explain the     │
+│ remaining ₹250 discrepancy.                             │
+│                                                         │
+│ Decision authority                                     │
+│ Settlement Operations                                  │
+│                                                         │
+│ Evidence required                                      │
+│ Additional settlement/adjustment record                │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+# 19. "Why this decision?"
+
+This is an important UX feature.
+
+Click:
+
+**Why?**
+
+The system displays:
+
+```text
+WHY THIS DECISION?
+
+1. Payment record verified
+2. Fee record verified
+3. Settlement amount verified
+4. Expected amount calculated
+5. ₹250 discrepancy remains
+6. No authoritative record explains the discrepancy
+7. Automatic resolution is therefore not permitted
+
+Decision:
+DEPARTMENT_ESCALATE
+```
+
+This creates transparency.
+
+---
+
+# 20. Risk Panel
+
+The risk section should be visually prominent.
+
+```text
+┌──────────────────────────────────────────────────────────┐
+│ RISK ASSESSMENT                                          │
+├──────────────────────────────────────────────────────────┤
+│ Financial Risk       🔴 HIGH                              │
+│ Fraud Risk           🟡 MEDIUM                            │
+│ Operational Risk     🔴 HIGH                              │
+│ Compliance Risk      🟢 LOW                               │
+│ Customer Impact      🟡 MEDIUM                            │
+└──────────────────────────────────────────────────────────┘
+```
+
+Then:
+
+### Why is the risk HIGH?
+
+```text
+✓ ₹25,000 financial exposure
+✓ Issue reported 4 times
+✓ Ticket unresolved
+✓ Conflicting records
+✓ Similar exception detected previously
+```
+
+Every factor can be clicked to see its evidence.
+
+---
+
+# 21. Risk History
+
+```text
+RISK HISTORY
+
+09:00
+LOW
+
+11:30
+MEDIUM
+Reason: repeated report
+
+14:00
+HIGH
+Reason:
+Financial exposure increased
++ unresolved ticket
++ conflicting records
+```
+
+This helps employees understand **risk movement over time**.
+
+---
+
+# 22. Ticket Panel
+
+If escalated:
+
+```text
+┌──────────────────────────────────────────────────────────┐
+│ DEPARTMENT TICKET                                        │
+├──────────────────────────────────────────────────────────┤
+│ Ticket ID: RZ-INC-82931                                  │
+│ Department: Settlement Operations                        │
+│ Status: WAITING FOR RESPONSE                             │
+│ Priority: HIGH                                           │
+│ Created: 14:42                                           │
+│ Last Updated: 15:10                                      │
+│ Next Reminder: 16:10                                     │
+└──────────────────────────────────────────────────────────┘
+```
+
+---
+
+# 23. Ticket Contents
+
+The employee can expand:
+
+### Issue
+
+```text
+₹250 unexplained settlement discrepancy.
+```
+
+### Investigation
+
+```text
+Payment = ₹10,000
+Fees = ₹250
+Expected = ₹9,750
+Actual = ₹9,500
+```
+
+### Evidence
+
+```text
+EV-001
+EV-002
+EV-003
+```
+
+### Risk
+
+```text
+Financial: HIGH
+Operational: HIGH
+Fraud: MEDIUM
+```
+
+### Decision
+
+```text
+DEPARTMENT_ESCALATE
+```
+
+Everything is already assembled.
+
+The employee does **not** need to manually prepare the ticket.
+
+---
+
+# 24. Reminder Experience
+
+The employee sees:
+
+```text
+REMINDER STATUS
+
+Ticket: RZ-INC-82931
+
+✓ Ticket created
+✓ Reminder #1 sent
+✓ Reminder #2 scheduled
+
+Next action:
+Department response pending
+```
+
+If the ticket becomes overdue:
+
+```text
+🔴 OVERDUE
+
+Department has not responded within the
+configured response window.
+
+[View Ticket]
+[Escalate]
+```
+
+---
+
+# 25. Ticket History
+
+```text
+TICKET HISTORY
+
+14:42
+Ticket created
+
+15:42
+Reminder #1
+
+17:42
+Reminder #2
+
+19:42
+Escalated to higher-level queue
+
+20:10
+Department responded
+
+20:15
+Investigation updated
+```
+
+This is useful for both operations and auditing.
+
+---
+
+# 26. Resolution Experience
+
+When the department responds:
+
+```text
+RESOLUTION UPDATE
+
+Department provided:
+Adjustment record ADJ-1092
+
+Adjustment:
+₹250
+
+Explanation:
+Additional settlement adjustment identified.
+```
+
+The employee sees:
+
+```text
+NEW EVIDENCE
+
+ADJ-1092
+✓ VERIFIED
+```
+
+---
+
+# 27. Automatic Recalculation
+
+The system updates:
+
+```text
+₹10,000
+- ₹250 Fee
+- ₹250 Adjustment
+----------------
+₹9,500
+```
+
+Then:
+
+```text
+Expected = ₹9,500
+Actual   = ₹9,500
+```
+
+The UI displays:
+
+```text
+✓ FINANCIAL RECORDS MATCH
+```
+
+---
+
+# 28. Verification
+
+The system should show:
+
+```text
+VERIFICATION
+
+Settlement:
+✓ Verified
+
+Expected amount:
+₹9,500
+
+Actual amount:
+₹9,500
+
+Difference:
+₹0
+
+Verification:
+✓ PASSED
+```
+
+Only then should the issue become:
+
+```text
+RESOLVED
+```
+
+and eventually:
+
+```text
+CLOSED
+```
+
+---
+
+# 29. Rejected Case Experience
+
+For a clearly invalid request:
+
+```text
+🔴 REJECTED
+
+Reason:
+The requested operation does not satisfy
+the applicable rule.
+
+Rule:
+RZ-REFUND-001
+
+Evidence:
+EV-001
+EV-002
+
+Source:
+Razorpay Terms & Conditions
+
+Action:
+No financial operation executed.
+```
+
+The user can click:
+
+**View Rule**
+
+and:
+
+**View Evidence**
+
+---
+
+# 30. Fraud Case Experience
+
+For suspected fraud, the interface should be different.
+
+```text
+🔴 FRAUD INVESTIGATION
+
+Status:
+ESCALATED
+
+Risk:
+HIGH
+
+Reason:
+Evidence indicates suspicious activity
+requiring specialist investigation.
+
+Important:
+This is a risk signal, not a final fraud determination.
+```
+
+Then:
+
+```text
+Evidence
+↓
+Risk factors
+↓
+Related transactions
+↓
+Previous reports
+↓
+Investigation
+↓
+Fraud ticket
+```
+
+The system should avoid presenting an AI suspicion as a final legal/fraud finding.
+
+---
+
+# 31. Related Issues
+
+This is a feature I'd strongly recommend.
+
+If the same merchant has related cases:
+
+```text
+RELATED ISSUES
+
+EXC-1001
+Settlement mismatch
+Resolved
+
+EXC-1022
+Settlement mismatch
+Open
+
+EXC-1034
+Adjustment discrepancy
+Escalated
+```
+
+Then:
+
+```text
+3 related exceptions detected
+```
+
+This feeds into the Risk Engine.
+
+---
+
+# 32. "Repeated Issue" indicator
+
+Suppose the same issue has been reported multiple times.
+
+Display:
+
+```text
+⚠ REPEATED ISSUE
+
+This issue has been reported 5 times.
+
+First reported:
+20 Sep 2026
+
+Latest report:
+25 Sep 2026
+
+Related cases:
+4
+```
+
+The employee can click:
+
+**View Report History**
+
+---
+
+# 33. Report History
+
+```text
+REPORT HISTORY
+
+#1
+20 Sep
+Merchant
+
+#2
+21 Sep
+Merchant
+
+#3
+23 Sep
+Support
+
+#4
+24 Sep
+Finance
+
+#5
+25 Sep
+Merchant
+```
+
+This provides operational context.
+
+---
+
+# 34. Employee Actions
+
+Depending on permissions, the employee can see:
+
+```text
+[ Investigate ]
+
+[ View Evidence ]
+
+[ View Rules ]
+
+[ View Risk ]
+
+[ Create Ticket ]
+
+[ Escalate ]
+
+[ Request Approval ]
+
+[ Resolve ]
+
+[ Reject ]
+
+[ Verify ]
+
+[ View Audit ]
+```
+
+But unavailable actions should not merely be disabled silently.
+
+Example:
+
+```text
+[ Execute Refund 🔒 ]
+
+Requires:
+Finance Manager approval
+```
+
+---
+
+# 35. Global Search
+
+From anywhere:
+
+```text
+┌──────────────────────────────────────────────────────┐
+│ 🔍 Search exceptions, tickets, merchants, payments...│
+└──────────────────────────────────────────────────────┘
+```
+
+Results can be grouped:
+
+```text
+EXCEPTIONS
+EXC-001
+EXC-002
+
+TICKETS
+RZ-82931
+
+MERCHANTS
+ABC Technologies
+
+TRANSACTIONS
+PAY-10291
+SET-83921
+```
+
+---
+
+# 36. Risk Dashboard
+
+Click **Risk**.
+
+The employee sees:
+
+```text
+RISK MANAGEMENT
+
+High Risk Exceptions          17
+Fraud Escalations              4
+Financial Exposure         ₹24.8L
+Overdue High Risk              3
+```
+
+Then:
+
+```text
+Risk by Category
+
+Financial        ███████████ HIGH
+Fraud            ███████     MEDIUM
+Operational      █████████   HIGH
+Compliance       ███         LOW
+```
+
+---
+
+# 37. Risk Heatmap
+
+A useful visual:
+
+```text
+                 FINANCIAL IMPACT
+              LOW     MEDIUM     HIGH
+           ┌────────┬─────────┬─────────┐
+LOW        │        │    12   │    4    │
+           ├────────┼─────────┼─────────┤
+MEDIUM     │   15   │    8    │    7    │
+           ├────────┼─────────┼─────────┤
+HIGH       │    2   │    6    │   17    │
+           └────────┴─────────┴─────────┘
+                    RISK
+```
+
+Employees can click a cell to see cases.
+
+---
+
+# 38. Department Work Queue
+
+Each department sees its own workload.
+
+Example for Settlement Operations:
+
+```text
+SETTLEMENT OPERATIONS
+
+Open:                 18
+High Priority:         6
+Overdue:               3
+Waiting Response:      7
+Resolved Today:        9
+```
+
+Then:
+
+```text
+┌──────────┬───────────┬─────────┬───────────┐
+│ Ticket   │ Issue     │ Risk    │ Status    │
+├──────────┼───────────┼─────────┼───────────┤
+│ RZ-1001  │ Settlement│ HIGH    │ Open      │
+│ RZ-1002  │ Settlement│ MEDIUM  │ Waiting   │
+│ RZ-1003  │ Fee       │ HIGH    │ Overdue   │
+└──────────┴───────────┴─────────┴───────────┘
+```
+
+---
+
+# 39. Audit Experience
+
+An auditor opens:
+
+```text
+EXC-2026-000184
+```
+
+and sees:
+
+```text
+AUDIT TIMELINE
+
+14:32 Exception detected
+14:34 Investigation started
+14:35 Payment evidence retrieved
+14:36 Settlement evidence retrieved
+14:37 Rules evaluated
+14:38 Risk assessed
+14:39 Decision generated
+14:42 Ticket created
+15:42 Reminder sent
+17:42 Reminder sent
+19:10 Department response
+19:15 Evidence updated
+19:17 Resolution calculated
+19:18 Verification passed
+19:19 Closed
+```
+
+Each event can be expanded.
+
+---
+
+# 40. "Explain this decision"
+
+This should be available for every important decision.
+
+The employee clicks:
+
+**Explain Decision**
+
+and gets:
+
+```text
+DECISION EXPLANATION
+
+Decision:
+DEPARTMENT_ESCALATE
+
+Why?
+
+1. Payment record was verified.
+2. Settlement record was verified.
+3. Expected settlement was calculated.
+4. A ₹250 discrepancy remains.
+5. No authoritative record currently explains
+   the discrepancy.
+6. Automatic resolution is therefore not supported.
+7. Settlement Operations is the appropriate
+   configured department for investigation.
+
+Evidence:
+EV-001
+EV-002
+EV-003
+
+Rules:
+RZ-001
+RZ-002
+
+Risk:
+Financial HIGH
+Operational HIGH
+```
+
+This is much more valuable than simply showing:
+
+> "AI confidence: 94%."
+
+---
+
+# 41. Employee Notification Center
+
+The employee receives meaningful notifications:
+
+```text
+🔔 Notifications
+
+🔴 High-risk exception assigned to you
+EXC-10291
+
+🟠 Department ticket overdue
+RZ-82931
+
+🟡 Evidence conflict requires review
+EXC-10222
+
+🟢 Exception verified and closed
+EXC-10201
+```
+
+Avoid notification spam.
+
+Only meaningful state changes should generate notifications.
+
+---
+
+# 42. Daily Operations View
+
+At the beginning of the day:
+
+```text
+GOOD MORNING
+
+Your Operations Summary
+
+12 new exceptions
+3 high-risk cases
+2 fraud escalations
+5 unresolved tickets
+3 overdue tickets
+8 cases resolved yesterday
+```
+
+Then:
+
+### Priority queue
+
+```text
+1. 🔴 Fraud investigation
+2. 🔴 High financial exposure
+3. 🔴 Overdue department ticket
+4. 🟠 Evidence conflict
+5. 🟡 Normal investigation
+```
+
+---
+
+# 43. Employee Workflow in One View
+
+The ideal experience is:
+
+```text
+LOGIN
+  ↓
+DASHBOARD
+  ↓
+SEE "NEEDS YOUR ATTENTION"
+  ↓
+OPEN EXCEPTION
+  ↓
+READ ISSUE SUMMARY
+  ↓
+SEE FINANCIAL TIMELINE
+  ↓
+CHECK EVIDENCE
+  ↓
+CHECK APPLICABLE RULES
+  ↓
+CHECK RISK
+  ↓
+READ DECISION EXPLANATION
+  ↓
+TAKE AUTHORIZED ACTION
+  ↓
+IF ESCALATED → TRACK TICKET
+  ↓
+RECEIVE REMINDER/UPDATE
+  ↓
+REVIEW NEW EVIDENCE
+  ↓
+VERIFY RESOLUTION
+  ↓
+CLOSE
+```
+
+The employee should **never have to manually connect these steps**.
+
+---
+
+# 44. The "single source of truth" case page
+
+Ultimately, every exception should become a **single case file**.
+
+```text
+┌───────────────────────────────────────────────────────────┐
+│                    EXCEPTION CASE                         │
+├───────────────────────────────────────────────────────────┤
+│ ID                  EXC-2026-000184                      │
+│ Merchant            ABC Technologies                     │
+│ Issue               Settlement Mismatch                  │
+│ Risk                HIGH                                 │
+│ Status              ESCALATED                            │
+├───────────────────────────────────────────────────────────┤
+│ ISSUE                                                     │
+│ What happened?                                           │
+├───────────────────────────────────────────────────────────┤
+│ TIMELINE                                                  │
+│ What happened and when?                                  │
+├───────────────────────────────────────────────────────────┤
+│ EVIDENCE                                                  │
+│ What proves it?                                          │
+├───────────────────────────────────────────────────────────┤
+│ RULES                                                     │
+│ Which rules apply?                                       │
+├───────────────────────────────────────────────────────────┤
+│ RISK                                                      │
+│ Why is it risky?                                         │
+├───────────────────────────────────────────────────────────┤
+│ DECISION                                                  │
+│ What should happen?                                      │
+├───────────────────────────────────────────────────────────┤
+│ TICKET                                                    │
+│ Who is handling it?                                      │
+├───────────────────────────────────────────────────────────┤
+│ REMINDERS                                                 │
+│ Has anyone responded?                                    │
+├───────────────────────────────────────────────────────────┤
+│ RESOLUTION                                                │
+│ What fixed it?                                           │
+├───────────────────────────────────────────────────────────┤
+│ VERIFICATION                                              │
+│ Is it actually fixed?                                    │
+├───────────────────────────────────────────────────────────┤
+│ AUDIT                                                     │
+│ What happened throughout the lifecycle?                  │
+└───────────────────────────────────────────────────────────┘
+```
+
+---
+
+# 45. What the employee should feel
+
+The employee should **not** feel:
+
+> "I have to investigate everything myself."
+
+Instead:
+
+> **"The system already investigated this. I can see exactly what it found, what evidence supports it, what rules apply, how risky it is, and what I need to do."**
+
+For an escalated case:
+
+> **"The system already created the ticket, attached the investigation and evidence, and will remind the department. I only need to intervene when something requires my attention."**
+
+For a resolved case:
+
+> **"I can see exactly how the issue was resolved and independently verify that the financial records now match."**
+
+---
+
+# 46. Final User Journey
+
+The complete experience becomes:
+
+```text id="j4g7qy"
+┌───────────────┐
+│     LOGIN     │
+└───────┬───────┘
+        ↓
+┌───────────────┐
+│   DASHBOARD   │
+└───────┬───────┘
+        ↓
+┌─────────────────────┐
+│ NEEDS YOUR ATTENTION│
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ EXCEPTION CASE      │
+├─────────────────────┤
+│ Issue               │
+│ Timeline            │
+│ Evidence            │
+│ Rules               │
+│ Risk                │
+│ Decision             │
+└──────────┬──────────┘
+           ↓
+      ┌────┴─────┐
+      ↓          ↓
+  RESOLVE      ESCALATE
+      │          │
+      │     ┌────┴─────┐
+      │     ↓          ↓
+      │   FRAUD     DEPARTMENT
+      │   TICKET      TICKET
+      │     │          │
+      │     └────┬─────┘
+      │          ↓
+      │      TRACKING
+      │          ↓
+      │      REMINDERS
+      │          ↓
+      │      RESPONSE
+      │          ↓
+      └──────┬───┘
+             ↓
+       VERIFICATION
+             ↓
+          RESOLVED
+             ↓
+           CLOSED
+             ↓
+          AUDITED
+```
+
+## The final UX principle
+
+> **One employee → One dashboard → One exception case → One evidence-backed explanation → One risk view → One decision → One ticket when needed → One tracked resolution → One complete audit history.**
+
+That keeps the **complexity inside the system** while giving the employee a clean, understandable experience. The user doesn't need to understand how the AI, rule engine, risk engine, or event graph works—they only need to understand **what happened, why the system reached its decision, what evidence supports it, what action is required, and whether the issue is actually resolved.**
