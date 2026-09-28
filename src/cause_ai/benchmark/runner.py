@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from datetime import datetime, timezone
 from pathlib import Path
 
 from .evaluator import evaluate
@@ -15,6 +16,7 @@ def run(write_files: bool = True) -> dict:
     scenarios, truth = generate()
     result = evaluate(scenarios, truth)
     result["seed"] = SEED
+    result["generated_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     if write_files:
         benchmark_dir = ROOT / "benchmarks"
         benchmark_dir.mkdir(exist_ok=True)
